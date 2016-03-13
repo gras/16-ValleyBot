@@ -1,7 +1,7 @@
 '''
 Created on Mar 13, 2016
 
-@author: DRS
+@author: Dead Robot Society
 -=-=-=-=-=-=-=-=-=-=-=-
 '''
 
