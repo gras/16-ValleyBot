@@ -1,7 +1,8 @@
+#16-ValleyBot servos.py
 '''
 Created on Mar 13, 2016
 
-@author: Botball
+@author: Dead Robot Society
 '''
 import wallaby as w
 import constants as c
