@@ -25,6 +25,7 @@ LINE_FOLLOWER = 0
  
 # servo positions
 UP = 1200 #Arm at 90 degrees up
+MID = 520 #Arm at 30 degrees up
 DOWN = 200 #Arm forward on ground
 OPEN = 1670 #Claw open
 CLOSE = 600 # Claw closed

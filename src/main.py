@@ -13,15 +13,15 @@ def main():
     print "I am ValleyBot\n"
     print "ValleyBot test"
     act.init()
-'''
-    getOutOfStartBox()
-    goToDebris()
-    removeDebris()
-    dumpDebris()
-    goToGate()
-    getGoldPoms()
-    DEBUG()
-'''
+    act.getOutOfStartBox()
+    act.goToDebris()
+    act.removeDebris()
+    act.dumpDebris()
+    act.goToGate()
+    act.goToCube()
+    act.dropOffCube()
+    act.getGoldPoms()
+    return 0
     
     
     
