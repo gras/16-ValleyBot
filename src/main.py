@@ -5,12 +5,9 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 import actions as act
-#import constants as c
-import servos as servo
-import drive as d
 
 def main():
-    print "I am ValleyBot\n"
+    print "I am ValleyBot"
     print "ValleyBot test"
     act.init()
     act.getOutOfStartBox()
@@ -21,9 +18,9 @@ def main():
     act.goToCube()
     act.dropOffCube()
     act.getGoldPoms()
+    act.depositGoldPoms()
     return 0
-    
-    
+
     
 if __name__ == "__main__":
     # set print to unbuffered
