@@ -4,7 +4,7 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
-import wallaby as w
+import wallaby as w  #  need to fix *********************************
 
 # servo ports
 ARM = 0
@@ -24,15 +24,15 @@ LINE_FOLLOWER = 0
 
  
 # servo positions
-UP = 1200 #Arm at 90 degrees up
-MID = 520 #Arm at 30 degrees up
-DOWN = 200 #Arm forward on ground
-OPEN = 1670 #Claw open
-CUBE_CLOSE =1100 # claw cube grab
-CLOSE = 500 # Claw closed
-MID_VALUE = 1000 
-RAISED = 775
-LOWERED = 1600
+armUp = 1200 #Arm at 90 degrees up
+armMid = 520 #Arm at 30 degrees up
+armDown = 200 #Arm forward on ground
+clawOpen = 1670 #Claw open
+clawMid =1100 # claw cube grab
+clawClosed = 500 # Claw closed
+cubeMid = 1000 
+cubeUp = 775
+cubeDown = 1600
 
 isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone    
@@ -40,10 +40,10 @@ isPrime = not isClone
 #define clone values here
 if isClone:
     # servo positions
-    UP = 2000 # Arm at 90 degrees up
-    DOWN = 600 # Arm foward on ground
-    OPEN = 2000 # Claw open
-    CLOSE = 800 # Claw closed
-    MID_VALUE = 1450
-    RAISED = 775
-    LOWERED = 1600
+    armUp = 2000 # Arm at 90 degrees up
+    armDown = 600 # Arm foward on ground
+    clawOpen = 2000 # Claw open
+    clawClosed = 800 # Claw closed
+    cubeMid = 1450
+    cubeUp = 775
+    cubeDown = 1600

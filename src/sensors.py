@@ -4,69 +4,31 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
-import wallaby as w
-import constants as c
-import drive as d
+from wallaby import ao
+from wallaby import msleep
+from wallaby import analog
+from wallaby import digital
+
+from constants import LINE_FOLLOWER
+from constants import cubeMid
+from constants import RIGHT_BUTTON
 
 def crossBlack():
     while not onBlack(): # wait for black
         pass
     while onBlack(): # wait for white
         pass
-    w.ao()
+    ao()
 
-def timedLineFollowLeft(time): 
-    sec = w.seconds() + time
-    while w.seconds() < sec :
-        if onBlack():
-            d.driveTimed(20,90,10)
-        else:
-            d.driveTimed(90,20,10)
-        w.msleep(10)
 
-#Follows black line on right for specified amount of time
-def timedLineFollowRight(time):
-    sec = w.seconds() + time
-    while w.seconds() < sec:
-        if not onBlack():
-            d.driveTimed(20,90,20)
-    
-        else:
-            d.driveTimed(90, 20, 20)
-    
-        w.msleep(10)
-
-def timedLineFollowRightSmooth(time):
-    sec = w.seconds() + time
-    while w.seconds() < sec:
-        if not onBlack():
-            d.driveTimed(20,40,20)
-    
-        else:
-            d.driveTimed(40, 20, 20)
-    
-        w.msleep(10)
-
-def timedLineFollowLeftSmooth(time):
-    sec = w.seconds() + time
-    while w.seconds() < sec:
-        if onBlack():
-            d.driveTimed(20,40,10)
-    
-        else:
-            d.driveTimed(40,20,10)
-    
-        w.msleep(10)
-
-    
 
 def onBlack():
-    return w.analog(c.LINE_FOLLOWER) > c.MID_VALUE 
+    return analog(LINE_FOLLOWER) > cubeMid 
 
 def waitForButton():
     print "Press Button..."
-    while not w.digital(c.RIGHT_BUTTON): 
+    while not digital(RIGHT_BUTTON): 
         pass
-    w.msleep(1)
+    msleep(1)
     print "Pressed"
-    w.msleep(1000)
+    msleep(1000)

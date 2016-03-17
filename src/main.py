@@ -8,7 +8,6 @@ import actions as act
 
 def main():
     print "I am ValleyBot"
-    print "ValleyBot test"
     act.init()
     act.getOutOfStartBox()
     act.goToDebris()
@@ -19,6 +18,7 @@ def main():
     act.dropOffCube()
     act.getGoldPoms()
     act.depositGoldPoms()
+    act.goToValley()
     return 0
 
     
