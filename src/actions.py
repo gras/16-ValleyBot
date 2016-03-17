@@ -1,122 +1,150 @@
-#16-ValleyBot actions.py
+#16-ValleyBot actionpy
 '''
 Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
 
-import wallaby as w 
-import servos as servo
-import drive as d
-import constants as c
-import sensors as s
+from wallaby import ao
+from wallaby import disable_servos
+from wallaby import enable_servos
+from wallaby import msleep
+ 
+from drive import testMotors
+from drive import driveTimed
+from drive import drive
+from drive import timedLineFollowLeft
+from drive import timedLineFollowRight
+from drive import timedLineFollowRightSmooth
 
-#Stops the program for testing
-def DEBUG():
-    w.ao()
-    print"Stopped for debug"
-    exit(0)
+from servos import testServos
+from servos import moveArm
+from servos import moveClaw
+from servos import moveCube
 
+from constants import clawClosed
+from constants import armUp
+from constants import cubeUp
+from constants import armDown
+from constants import clawOpen
+from constants import clawMid
+from constants import armMid
+
+from sensors import waitForButton
+from sensors import onBlack
+from sensors import crossBlack
+
+
+
+
+# Tests all hardware
 def init():
     print "init"
-    servo.testServos()
-    d.testMotors()
-    w.disable_servos()
-    s.waitForButton()
-    w.enable_servos()
-    servo.moveServo(c.CLAW, c.CLOSE, 25)
-    servo.moveServo(c.ARM, c.UP, 25) 
-    return 0
+    testServos()
+    testMotors()
+    disable_servos()
+    waitForButton()
+    enable_servos()
+    moveClaw(clawClosed, 25)
+    moveArm(armUp, 25) 
 
-#Raises cube holder
-#Backs out of start box and turns 
-#Moves backward until black tape
+# Raises cube holder
+# Backs out of start box and turns 
+# Moves backward until black tape
 def getOutOfStartBox():
     print "getOutOfStartBox"
-    servo.moveServo(c.CUBE_HOLDER, c.RAISED, 25)
-    w.msleep(500)
-    d.driveTimed(-100, -100, 1600)
-    d.driveTimed(0, 100, 400)
-    d.driveTimed(70,70,600)
+    moveCube(cubeUp, 25)
+    msleep(500)
+    driveTimed(-100, -100, 1600)
+    driveTimed(0, 100, 400)
+    driveTimed(70,70,600)
 
-#Follows line for 3.5 seconds
-#Moves forward until robot reaches debris
+# Follows line for 3.5 seconds
+# Moves forward until robot reaches debris
 def goToDebris():
     print "goToDebris"
-    s.timedLineFollowLeft(3.5); 
-    d.driveTimed(50, 50, 1000);
+    timedLineFollowLeft(3.5); 
+    driveTimed(50, 50, 1000);
 
-#Moves claw arm down and drives backwards with debris
+# Moves claw arm down and drives backwards with debris
 def removeDebris():
     print "removeDebris"
-    servo.moveServo(c.ARM, c.DOWN, 15); 
-    w.msleep(500);
-    d.driveTimed(-80, -80, 500);
+    moveArm(armDown, 15); 
+    msleep(500);
+    driveTimed(-80, -80, 500);
 
-#Dumps debris next to compost
+# Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    d.driveTimed(0,-100,1000);
-    d.driveTimed(60,70,500);
-    d.driveTimed(90,0,500);
-    d.driveTimed(60,90,225); 
-    d.driveTimed(60,70,650);
-
-#Drives backwards and follows line to reach gate
+    driveTimed(0,-100,1000);
+    driveTimed(60,70,500);
+    driveTimed(90,0,500);
+    driveTimed(60,90,225); 
+    driveTimed(60,70,650);
+    
+# Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
-    servo.moveServo(c.ARM, c.UP, 15);
-    d.driveTimed(-100,-100, 1250);
-    s.timedLineFollowRight(1.3);
-    s.timedLineFollowRightSmooth(3.3);
-
+    moveArm(armUp, 15);
+    driveTimed(-100,-100, 1250);
+    timedLineFollowRight(1.3);
+    timedLineFollowRightSmooth(3.3);
+    
+# Drives to the rift valley cube
 def goToCube():
     print "goToCube"
-    servo.moveServo(c.CLAW, c.OPEN, 15)
-    servo.moveServo(c.ARM, c.DOWN, 15)
-    d.drive(100, 100)
-    while not s.onBlack():
+    moveClaw(clawOpen, 15)
+    moveArm(armDown, 15)
+    drive(100, 100)
+    while not onBlack():
         pass
-    d.drive(0, 0)
-    servo.moveServo(c.CLAW, c.CUBE_CLOSE, 15)
-    servo.moveServo(c.ARM, c.UP, 15)
-    w.msleep(1000)
-    #driveTimed(0, 100, 1500) Work on dropping red block off on own side of board
+    drive(0, 0)
+    moveClaw(clawMid, 15)
+    moveArm(armUp, 15)
+    msleep(1000)
 
-#Turns to drop cube off on our side of the board
+# Turns to drop cube off on our side of the board
 def dropOffCube():
     print"dropOffCube"
-    d.driveTimed(100, 0, 1900)
-    servo.moveServo(c.ARM, c.MID, 15)
-    servo.moveServo(c.CLAW, c.OPEN, 15)
-    w.msleep(500)
-    servo.moveServo(c.ARM, c.UP, 15)
+    driveTimed(100, 0, 1900)
+    moveArm(armMid, 15)
+    moveClaw(clawOpen, 15)
+    msleep(500)
+    moveArm(armUp, 15)
 
-
-#drives to and grabs gold poms
+# drives to and grabs gold poms
 def getGoldPoms():
     print"getGoldPoms"
-    d.driveTimed(-100, 0, 2400)
-    servo.moveServo(c.ARM, c.DOWN, 15)
-    d.driveTimed(80, 80, 600)
-    servo.moveServo(c.CLAW, c.CLOSE, 15)
-    servo.moveServo(c.ARM, c.UP, 15)
+    driveTimed(-100, 0, 2400)
+    moveArm(armDown, 15)
+    driveTimed(80, 80, 600)
+    moveClaw(clawClosed, 15)
+    moveArm(armUp, 15)
     
-#moves gold poms to habitat 
+# moves gold poms to habitat 
 def depositGoldPoms():
     print"depositGoldPoms"
-    d.driveTimed(-80, -80, 250)
-    d.driveTimed(0, -80, 1100)
-    #w.msleep(500)
-    d.driveTimed(-100, -100, 1500)
-    #w.msleep(500)
-    d.drive(-80, 80)
-    w.msleep(500)
-    w.ao()
-    w.msleep(500)
-    d.drive(-30, 30)
-    s.crossBlack()
-    d.driveTimed(100, 80, 300)
-    servo.moveServo(c.ARM, c.DOWN, 15)
-    servo.moveServo(c.CLAW, c.OPEN, 15)
+    driveTimed(-80, -80, 250)
+    driveTimed(0, -80, 1100)
+    driveTimed(-100, -100, 1500)
+    drive(-80, 80)
+    msleep(500)
+    ao()
+    msleep(500)
+    drive(-30, 30)
+    crossBlack()
+    driveTimed(100, 80, 300)
+    moveArm(armDown, 15)
+    moveClaw(clawOpen, 15)
+    
+# Go back to valley
+def goToValley():
+    moveArm(armUp, 15)
+    moveClaw(clawClosed, 15)
+    
+# Stops the program for testing
+def DEBUG():
+    ao()
+    print"Stopped for debug"
+    exit(0)
     
