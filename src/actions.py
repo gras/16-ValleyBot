@@ -76,19 +76,19 @@ def removeDebris():
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    driveTimed(0,-100,1000);
-    driveTimed(60,70,500);
-    driveTimed(90,0,500);
-    driveTimed(60,90,225); 
-    driveTimed(60,70,650);
+    driveTimed(0,-100,1000)
+    driveTimed(60,70,500)
+    driveTimed(90,0,500)
+    driveTimed(60,90,225)
+    driveTimed(60,70,650)
     
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
-    moveArm(armUp, 15);
-    driveTimed(-100,-100, 1250);
-    timedLineFollowRight(1.3);
-    timedLineFollowRightSmooth(3.3);
+    moveArm(armUp, 15)
+    driveTimed(-100,-100, 1250)
+    timedLineFollowRight(1.3)
+    timedLineFollowRightSmooth(3.3)
     
 # Drives to the rift valley cube
 def goToCube():
@@ -115,9 +115,9 @@ def dropOffCube():
 # drives to and grabs gold poms
 def getGoldPoms():
     print"getGoldPoms"
-    driveTimed(-100, 0, 2400)
+    driveTimed(-100, 0, 2350)#was 2400
     moveArm(armDown, 15)
-    driveTimed(80, 80, 600)
+    driveTimed(80, 80, 550)#was 600
     moveClaw(clawClosed, 15)
     moveArm(armUp, 15)
     
@@ -139,8 +139,24 @@ def depositGoldPoms():
     
 # Go back to valley
 def goToValley():
+    print "returnToValley"
     moveArm(armUp, 15)
     moveClaw(clawClosed, 15)
+    driveTimed (-50,-50,230)
+    driveTimed (100,-70,500)
+    drive (40,0)
+    crossBlack()
+    timedLineFollowRightSmooth(1.55)
+    driveTimed(60, 0, 250)
+    driveTimed (80,80,1200)
+    
+# Go to Red Poms
+def getRedPoms():
+    drive(60, 60)
+    while not onBlack():
+        pass
+    drive(0, 0)
+    
     
 # Stops the program for testing
 def DEBUG():
