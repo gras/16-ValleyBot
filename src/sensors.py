@@ -4,14 +4,14 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
+
+import constants as c
+
 from wallaby import ao
 from wallaby import msleep
 from wallaby import analog
 from wallaby import digital
 
-from constants import LINE_FOLLOWER
-from constants import cubeMid
-from constants import RIGHT_BUTTON
 
 def crossBlack():
     while not onBlack(): # wait for black
@@ -23,11 +23,11 @@ def crossBlack():
 
 
 def onBlack():
-    return analog(LINE_FOLLOWER) > cubeMid 
+    return analog(c.LINE_FOLLOWER) > c.cubeMid 
 
 def waitForButton():
     print "Press Button..."
-    while not digital(RIGHT_BUTTON): 
+    while not digital(c.RIGHT_BUTTON): 
         pass
     msleep(1)
     print "Pressed"

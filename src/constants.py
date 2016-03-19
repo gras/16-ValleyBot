@@ -28,8 +28,8 @@ armUp = 1200 #Arm at 90 degrees up
 armMid = 520 #Arm at 30 degrees up
 armDown = 200 #Arm forward on ground
 clawOpen = 1670 #Claw open
-clawMid =1100 # claw cube grab
-clawClosed = 500 # Claw closed
+clawMid =1000 # claw cube grab
+clawClosed = 400 # Claw closed
 cubeMid = 1000 
 cubeUp = 775
 cubeDown = 1600
@@ -37,13 +37,24 @@ cubeDown = 1600
 isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone    
 
-#define clone values here
-if isClone:
-    # servo positions
-    armUp = 2000 # Arm at 90 degrees up
-    armDown = 600 # Arm foward on ground
-    clawOpen = 2000 # Claw open
-    clawClosed = 800 # Claw closed
-    cubeMid = 1450
-    cubeUp = 775
-    cubeDown = 1600
+def setVars():
+    if isClone:
+        #define clone values here
+        print "I am Clone"
+        # servo positions
+        global armUp
+        armUp = 2000 # Arm at 90 degrees up
+        global armDown
+        armDown = 600 # Arm foward on ground
+        global clawOpen
+        clawOpen = 2000 # Claw open
+        global clawClosed
+        clawClosed = 800 # Claw closed
+        global cubeMid
+        cubeMid = 1450
+        global cubeUp
+        cubeUp = 775
+        global cubeDown
+        cubeDown = 1600
+    else:
+        print "I am Prime"

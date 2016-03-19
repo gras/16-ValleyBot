@@ -5,17 +5,13 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 import actions as act
-import constants as c 
 
 def main():
     print "I am ValleyBot"
-    #if c.isClone():
-    #    print "I am Clone"
-    #else: 
-    #    print "I am Prime"
     act.init()
     act.getOutOfStartBox()
     act.goToDebris()
+    act.DEBUG()
     act.removeDebris()
     act.dumpDebris()
     act.goToGate()
@@ -25,6 +21,7 @@ def main():
     act.depositGoldPoms()
     act.goToValley()
     act.getRedPoms()
+
     return 0
 
     

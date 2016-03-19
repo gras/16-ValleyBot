@@ -4,45 +4,40 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
+
+import constants as c
+
 from wallaby import set_servo_position
 from wallaby import enable_servos
 from wallaby import msleep
 from wallaby import get_servo_position
 from wallaby import ao
 
-from constants import CLAW
-from constants import ARM
-from constants import CUBE_HOLDER
-from constants import armUp
-from constants import clawClosed
-from constants import cubeDown
-from constants import armDown
-from constants import clawOpen
-from constants import cubeUp
+
 
 
 def testServos():
-    set_servo_position(ARM, armUp)
-    set_servo_position(CLAW, clawClosed)
-    set_servo_position(CUBE_HOLDER, cubeDown)
+    set_servo_position(c.ARM, c.armUp)
+    set_servo_position(c.CLAW, c.clawClosed)
+    set_servo_position(c.CUBE_HOLDER, c.cubeDown)
     enable_servos()
     msleep(1000)
-    moveArm(armDown, 25)
-    moveClaw(clawOpen, 25) 
+    moveArm(c.armDown, 25)
+    moveClaw(c.clawOpen, 25) 
     msleep(500)
-    moveClaw(clawClosed, 25)
-    moveArm(armUp, 25) 
-    moveCube(cubeUp, 25)
+    moveClaw(c.clawClosed, 25)
+    moveArm(c.armUp, 25) 
+    moveCube(c.cubeUp, 25)
     msleep(1000)
    
 def moveArm( endPos, speed=15 ):
-    _moveServo( ARM, endPos, speed )
+    _moveServo( c.ARM, endPos, speed )
 
 def moveClaw( endPos, speed=15 ):
-    _moveServo( CLAW, endPos, speed )
+    _moveServo( c.CLAW, endPos, speed )
 
 def moveCube( endPos, speed=15 ):
-    _moveServo( CUBE_HOLDER, endPos, speed )
+    _moveServo( c.CUBE_HOLDER, endPos, speed )
     
 # Moves specified servo to specified position at specified speed
 def _moveServo( servo, endPos, speed) :

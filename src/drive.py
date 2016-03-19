@@ -4,15 +4,13 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
+
+import constants as c
+
 from wallaby import motor
 from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
-
-from constants import LMOTOR
-from constants import isPrime
-from constants import RMOTOR
-from constants import cubeDown
 
 from servos import moveCube
 
@@ -24,14 +22,14 @@ def driveTimed( left, right, time):
     ao()
 
 def drive( left, right): 
-    if isPrime: 
+    if c.isPrime: 
         #PRIME motor settings
-        motor(LMOTOR, left)
-        motor(RMOTOR, right)
+        motor(c.LMOTOR, left)
+        motor(c.RMOTOR, right)
     else:
         #CLONE motor settings
-        motor(LMOTOR, left)
-        motor(RMOTOR, right)
+        motor(c.LMOTOR, left)
+        motor(c.RMOTOR, right)
   
 def testMotors():
     drive(-100, -100)
@@ -40,7 +38,7 @@ def testMotors():
     driveTimed(-80, 80, 500)
     driveTimed(80, -80, 500)
     driveTimed(100, 100, 500)
-    moveCube(cubeDown, 25)
+    moveCube(c.cubeDown, 25)
     msleep(1000)
     
 def timedLineFollowLeft(time): 

@@ -4,6 +4,7 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
+import constants as c
 
 from wallaby import ao
 from wallaby import disable_servos
@@ -22,38 +23,29 @@ from servos import moveArm
 from servos import moveClaw
 from servos import moveCube
 
-from constants import clawClosed
-from constants import armUp
-from constants import cubeUp
-from constants import armDown
-from constants import clawOpen
-from constants import clawMid
-from constants import armMid
-
 from sensors import waitForButton
 from sensors import onBlack
 from sensors import crossBlack
 
 
-
-
 # Tests all hardware
 def init():
     print "init"
+    c.setVars()
     testServos()
     testMotors()
     disable_servos()
     waitForButton()
     enable_servos()
-    moveClaw(clawClosed, 25)
-    moveArm(armUp, 25) 
+    moveClaw(c.clawClosed, 25)
+    moveArm(c.armUp, 25) 
 
 # Raises cube holder
 # Backs out of start box and turns 
 # Moves backward until black tape
 def getOutOfStartBox():
     print "getOutOfStartBox"
-    moveCube(cubeUp, 25)
+    moveCube(c.cubeUp, 25)
     msleep(500)
     driveTimed(-100, -100, 1600)
     driveTimed(0, 100, 400)
@@ -63,15 +55,20 @@ def getOutOfStartBox():
 # Moves forward until robot reaches debris
 def goToDebris():
     print "goToDebris"
-    timedLineFollowLeft(3.5); 
-    driveTimed(50, 50, 1000);
+    if c.isPrime:
+        timedLineFollowLeft(3.5) 
+        driveTimed(50, 50, 1000)
+    else:
+        timedLineFollowLeft(4)
+        driveTimed(50, 53, 1000)
+
 
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
     print "removeDebris"
-    moveArm(armDown, 15); 
-    msleep(500);
-    driveTimed(-80, -80, 500);
+    moveArm(c.armDown, 15)
+    msleep(500)
+    driveTimed(-80, -80, 500)
 
 # Dumps debris next to compost
 def dumpDebris():
@@ -85,7 +82,7 @@ def dumpDebris():
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
-    moveArm(armUp, 15)
+    moveArm(c.armUp, 15)
     driveTimed(-100,-100, 1250)
     timedLineFollowRight(1.3)
     timedLineFollowRightSmooth(3.3)
@@ -93,33 +90,34 @@ def goToGate():
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
-    moveClaw(clawOpen, 15)
-    moveArm(armDown, 15)
+    moveClaw(c.clawOpen, 15)
+    moveArm(c.armDown, 15)
     drive(100, 100)
     while not onBlack():
         pass
     drive(0, 0)
-    moveClaw(clawMid, 15)
-    moveArm(armUp, 15)
-    msleep(1000)
+    moveClaw(c.clawMid, 15)
+    moveArm(c.armUp, 15)
+    msleep(500)
 
 # Turns to drop cube off on our side of the board
 def dropOffCube():
     print"dropOffCube"
     driveTimed(100, 0, 1900)
-    moveArm(armMid, 15)
-    moveClaw(clawOpen, 15)
+    moveArm(c.armMid, 15)
+    moveClaw(c.clawOpen, 15)
     msleep(500)
-    moveArm(armUp, 15)
+    moveArm(c.armUp, 15)
 
 # drives to and grabs gold poms
 def getGoldPoms():
     print"getGoldPoms"
-    driveTimed(-100, 0, 2350)#was 2400
-    moveArm(armDown, 15)
+    driveTimed(-100, 0, 2400)#was 2400
+    moveArm(c.armDown, 15)
     driveTimed(80, 80, 550)#was 600
-    moveClaw(clawClosed, 15)
-    moveArm(armUp, 15)
+    moveClaw(c.clawClosed, 15)
+    msleep(500)
+    moveArm(c.armUp, 15)
     
 # moves gold poms to habitat 
 def depositGoldPoms():
@@ -134,14 +132,14 @@ def depositGoldPoms():
     drive(-30, 30)
     crossBlack()
     driveTimed(100, 80, 300)
-    moveArm(armDown, 15)
-    moveClaw(clawOpen, 15)
+    moveArm(c.armDown, 15)
+    moveClaw(c.clawOpen, 15)
     
 # Go back to valley
 def goToValley():
     print "returnToValley"
-    moveArm(armUp, 15)
-    moveClaw(clawClosed, 15)
+    moveArm(c.armUp, 15)
+    moveClaw(c.clawClosed, 15)
     driveTimed (-50,-50,230)
     driveTimed (100,-70,500)
     drive (40,0)
@@ -152,10 +150,15 @@ def goToValley():
     
 # Go to Red Poms
 def getRedPoms():
+    print "getRedPoms"
     drive(60, 60)
     while not onBlack():
         pass
     drive(0, 0)
+    driveTimed(70,0,1200)
+    moveClaw(c.clawOpen, 25)
+    moveArm(c.armDown, 25)
+    driveTimed(80, 80, 700)
     
     
 # Stops the program for testing
