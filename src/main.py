@@ -11,17 +11,19 @@ def main():
     act.init()
     act.getOutOfStartBox()
     act.goToDebris()
-    act.DEBUG()
     act.removeDebris()
     act.dumpDebris()
     act.goToGate()
     act.goToCube()
     act.dropOffCube()
     act.getGoldPoms()
+    act.getOutOfValley()
     act.depositGoldPoms()
     act.goToValley()
     act.getRedPoms()
-
+    act.leaveValley()
+    act.depositRedPoms()
+    
     return 0
 
     

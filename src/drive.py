@@ -57,7 +57,7 @@ def timedLineFollowRight(time):
         if not onBlack():
             driveTimed(20,90,20)
         else:
-            driveTimed(90, 20, 20)
+            driveTimed(90,20,20)
         msleep(10)
 
 def timedLineFollowRightSmooth(time):
@@ -66,16 +66,16 @@ def timedLineFollowRightSmooth(time):
         if not onBlack():
             driveTimed(20,40,20)
         else:
-            driveTimed(40, 20, 20)
+            driveTimed(40,20,20)
         msleep(10)
 
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time
     while seconds() < sec:
         if onBlack():
-            driveTimed(20,40,10)
+            driveTimed(20,40,20)#time was 10
         else:
-            driveTimed(40,20,10)
+            driveTimed(40,20,20)#time was 10 
         msleep(10)
 
     
