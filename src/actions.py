@@ -6,6 +6,8 @@ Created on Mar 13, 2016
 '''
 import constants as c
 
+
+from wallaby import seconds
 from wallaby import ao
 from wallaby import disable_servos
 from wallaby import enable_servos
@@ -27,7 +29,8 @@ from servos import moveCube
 from sensors import waitForButton
 from sensors import onBlack
 from sensors import crossBlack
-
+from sensors import DEBUG
+from constants import clawMid
 
 # Tests all hardware
 def init():
@@ -40,6 +43,7 @@ def init():
     enable_servos()
     moveClaw(c.clawClosed, 25)
     moveArm(c.armUp, 25) 
+    c.startTime = seconds()
 
 # Raises cube holder
 # Backs out of start box and turns 
@@ -75,9 +79,9 @@ def removeDebris():
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    driveTimed(0,-100,1000)
+    driveTimed(0,-100,1100)#1000
     driveTimed(60,70,500)
-    driveTimed(90,0,500)
+    driveTimed(90,0,600)#500
     driveTimed(60,90,225)
     driveTimed(60,70,650)
     
@@ -111,11 +115,60 @@ def dropOffCube():
     msleep(500)
     moveArm(c.armUp, 15)
 
+# Go to Red Poms
+def getRedPoms():
+    print "getRedPoms"
+    driveTimed(-100,0, 600)
+    moveClaw(c.clawOpen, 25)
+    moveArm(c.armDown, 25)
+    driveTimed(80, 80, 700)
+    moveClaw(c.clawClosed, 15) 
+    '''msleep(300)
+    moveClaw(c.clawOpen,15)
+    driveTimed(50,50,400)
+    moveClaw(c.clawClosed, 15)'''
+    moveArm(c.armUp, 15)
+    
+# Exit Valley  
+def leaveValley():
+    print "leaveValley"
+    driveTimed(-80, -80, 550)#1100, 650
+    driveTimed(-70,0,1550)
+    
+# Score Poms   
+def depositRedPoms():
+    print"depositRedPoms"
+    driveTimed(-100, -100, 1400)#1350
+    driveTimed(-80, 80,500)
+    msleep(500)
+    drive(-30, 30)
+    crossBlack()
+    driveTimed(40, -40, 100)
+    driveTimed(100, 80, 850)
+    moveArm(c.armDown, 15)
+    moveClaw(c.clawOpen, 15)
+
+# Get to Valley    
+def goToValley():
+    print "goToValley"
+    moveArm(c.armUp, 15)
+    moveClaw(c.clawClosed, 15)
+    driveTimed (-50,-50,230)
+    driveTimed (100,-70,700)
+    driveTimed (100,0,1000)
+    drive (40,0)
+    crossBlack()
+    timedLineFollowRightSmooth(1.55)
+    driveTimed (80,80,800)#1600
+    drive(70, 70)
+    crossBlack()
+    
 # drives to and grabs gold poms
 def getGoldPoms():
     print"getGoldPoms"
-    driveTimed(-100, 0, 1500)#was 2400
-    driveTimed(-50,50,1200)
+    #driveTimed(-100, 0, 1500)#was 2400
+    driveTimed(-50,50,800)
+    moveClaw(c.clawOpen, 15)
     moveArm(c.armDown, 15)
     driveTimed(60, 60, 550)#was 550
     moveClaw(c.clawClosed, 15)
@@ -126,23 +179,23 @@ def getGoldPoms():
 def getOutOfValley():
     print "getOutOfValley"
     driveTimed(-60,-60,900)
-    driveTimed (50,-50,1000)
+    driveTimed (50,-50,900)
     driveTimed(-80, -80, 250)
     #driveTimed(0, -80, 1100)
 
 def depositGoldPoms():
     print"depositGoldPoms"
     driveTimed(-100, -100, 1350)
-    driveTimed(-80, 80,500)
+    driveTimed(-80, 80,1000)
     msleep(500)
     drive(-30, 30)
     crossBlack()
     driveTimed(100, 80, 650)
-    moveArm(c.armDown, 15)
+    moveArm(c.armMid, 15)
     moveClaw(c.clawOpen, 15)
     
 # Go back to valley
-def goToValley():
+def returnToValley():
     print "returnToValley"
     moveArm(c.armUp, 15)
     moveClaw(c.clawClosed, 15)
@@ -154,7 +207,8 @@ def goToValley():
     driveTimed(60, 0, 250)
     driveTimed (80,80,1200)
     
-# Go to Red Poms
+
+'''# Go to Red Poms
 def getRedPoms():
     print "getRedPoms"
     drive(60, 60)
@@ -171,27 +225,6 @@ def getRedPoms():
     driveTimed(50,50,400)
     moveClaw(c.clawClosed, 15)
     moveArm(c.armUp, 15)
-  
-# Exit Valley  
-def leaveValley():
-    print "leaveValley"
-    driveTimed(-80, -80, 1100)
-    driveTimed(-70,0,1550)
-    
-def depositRedPoms():
-    print"depositRedPoms"
-    driveTimed(-100, -100, 1350)
-    driveTimed(-80, 80,500)
-    msleep(500)
-    drive(-30, 30)
-    crossBlack()
-    driveTimed(100, 80, 750)
-    moveArm(c.armMid, 15)
-    moveClaw(c.clawOpen, 15)
-    
-# Stops the program for testing
-def DEBUG():
-    ao()
-    print"Stopped for debug"
-    exit(0)
+  '''
+
     

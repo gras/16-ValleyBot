@@ -11,7 +11,7 @@ from wallaby import ao
 from wallaby import msleep
 from wallaby import analog
 from wallaby import digital
-
+from wallaby import seconds
 
 def crossBlack():
     while not onBlack(): # wait for black
@@ -32,3 +32,8 @@ def waitForButton():
     msleep(1)
     print "Pressed"
     msleep(1000)
+
+def DEBUG():
+    ao()
+    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
+    exit(0)

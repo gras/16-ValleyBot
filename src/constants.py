@@ -6,6 +6,8 @@ Created on Mar 13, 2016
 '''
 import wallaby as w  #  need to fix *********************************
 
+startTime = -1
+
 # servo ports
 ARM = 0
 CLAW = 1
@@ -28,7 +30,7 @@ armUp = 1200 #Arm at 90 degrees up
 armMid = 520 #Arm at 30 degrees up
 armDown = 200 #Arm forward on ground
 clawOpen = 1670 #Claw open
-clawMid =1000 # claw cube grab
+clawMid = 800 # claw cube grab
 clawClosed = 200 # Claw closed
 cubeMid = 1000 
 cubeUp = 775
