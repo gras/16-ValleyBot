@@ -17,13 +17,13 @@ def main():
     act.goToCube()
     act.dropOffCube()
     act.getRedPoms()
+    act.DEBUG()
     act.leaveValley()
     act.depositRedPoms()
     act.goToValley()
     act.getGoldPoms()
     act.getOutOfValley()
     act.depositGoldPoms()
-    act.DEBUG()
     #act.returnToValley()
     
     return 0

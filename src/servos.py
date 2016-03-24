@@ -18,15 +18,18 @@ from wallaby import ao
 
 def testServos():
     set_servo_position(c.ARM, c.armUp)
-    set_servo_position(c.CLAW, c.clawClosed)
+    set_servo_position(c.CLAW, c.clawClose)
     set_servo_position(c.CUBE_HOLDER, c.cubeDown)
     enable_servos()
     msleep(1000)
     moveArm(c.armDown, 25)
     moveClaw(c.clawOpen, 25) 
+    moveCube(c.cubeDown, 25)
     msleep(500)
-    moveClaw(c.clawClosed, 25)
-    moveArm(c.armUp, 25) 
+    moveClaw(c.clawClose, 25)
+    msleep(500)
+    moveArm(c.armUp, 25)
+    msleep(500) 
     moveCube(c.cubeUp, 25)
     msleep(1000)
    

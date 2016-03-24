@@ -6,7 +6,6 @@ Created on Mar 13, 2016
 '''
 import constants as c
 
-
 from wallaby import seconds
 from wallaby import ao
 from wallaby import disable_servos
@@ -30,18 +29,18 @@ from sensors import waitForButton
 from sensors import onBlack
 from sensors import crossBlack
 from sensors import DEBUG
-from constants import clawMid
+from constants import isPrime
+
 
 # Tests all hardware
 def init():
-    print "init"
-    c.setVars()
+    print "Running Valley"
     testServos()
     testMotors()
     disable_servos()
     waitForButton()
     enable_servos()
-    moveClaw(c.clawClosed, 25)
+    moveClaw(c.clawClose, 25)
     moveArm(c.armUp, 25) 
     c.startTime = seconds()
 
@@ -61,11 +60,12 @@ def getOutOfStartBox():
 def goToDebris():
     print "goToDebris"
     if c.isPrime:
-        timedLineFollowLeft(3.0) #3.5
+        timedLineFollowLeft(3.0) 
         timedLineFollowLeftSmooth(0.75)
         driveTimed(50, 50, 1000)
     else:
-        timedLineFollowLeft(4)
+        timedLineFollowLeft(4.0)
+        timedLineFollowLeftSmooth(0.75)
         driveTimed(50, 53, 1000)
 
 
@@ -74,31 +74,46 @@ def removeDebris():
     print "removeDebris"
     moveArm(c.armDown, 15)
     msleep(500)
-    driveTimed(-80, -80, 500)
+    driveTimed(-80, -80, 1000)
 
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    driveTimed(0,-100,1100)#1000
-    driveTimed(60,70,500)
-    driveTimed(90,0,600)#500
-    driveTimed(60,90,225)
-    driveTimed(60,70,650)
-    
+    if isPrime:
+        driveTimed(0,-100,1100)#1000
+        driveTimed(60,70,500)
+        driveTimed(90,0,600)#500
+        driveTimed(60,90,225)
+        driveTimed(60,70,650)
+    else:
+        driveTimed(0,-100,1100)#1000
+        driveTimed(60,70,500)
+        driveTimed(90,0,500)#600
+        driveTimed(60,90,200)
+        driveTimed(60,70,900)
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
     moveArm(c.armUp, 15)
-    driveTimed(-100,-100, 1250)
-    timedLineFollowRight(1.3)
-    timedLineFollowRightSmooth(3.0) #was 3.3
-    
+    if isPrime:
+        driveTimed(-100,-100, 1250)
+        timedLineFollowRight(1.3)
+        timedLineFollowRightSmooth(3.0) 
+    else:
+        driveTimed(-100,-100, 1300)
+        timedLineFollowRight(2.5)
+        timedLineFollowRightSmooth(3.7) 
+        
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
     moveClaw(c.clawOpen, 15)
     moveArm(c.armDown, 15)
-    drive(100, 100)
+    driveTimed(100,100,500)
+    if isPrime:
+        drive(100, 100)
+    else:
+        drive(90, 100)
     while not onBlack():
         pass
     drive(0, 0)
@@ -118,15 +133,14 @@ def dropOffCube():
 # Go to Red Poms
 def getRedPoms():
     print "getRedPoms"
-    driveTimed(-100,0, 600)
+    if isPrime:
+        driveTimed(-100,0, 600)
+    else:
+        driveTimed(-100,0, 750)
     moveClaw(c.clawOpen, 25)
     moveArm(c.armDown, 25)
     driveTimed(80, 80, 700)
-    moveClaw(c.clawClosed, 15) 
-    '''msleep(300)
-    moveClaw(c.clawOpen,15)
-    driveTimed(50,50,400)
-    moveClaw(c.clawClosed, 15)'''
+    moveClaw(c.clawClose, 15) 
     moveArm(c.armUp, 15)
     
 # Exit Valley  
@@ -152,7 +166,7 @@ def depositRedPoms():
 def goToValley():
     print "goToValley"
     moveArm(c.armUp, 15)
-    moveClaw(c.clawClosed, 15)
+    moveClaw(c.clawClose, 15)
     driveTimed (-50,-50,230)
     driveTimed (100,-70,700)
     driveTimed (100,0,1000)
@@ -171,7 +185,7 @@ def getGoldPoms():
     moveClaw(c.clawOpen, 15)
     moveArm(c.armDown, 15)
     driveTimed(60, 60, 550)#was 550
-    moveClaw(c.clawClosed, 15)
+    moveClaw(c.clawClose, 15)
     msleep(500)
     moveArm(c.armUp, 15)
     
@@ -198,7 +212,7 @@ def depositGoldPoms():
 def returnToValley():
     print "returnToValley"
     moveArm(c.armUp, 15)
-    moveClaw(c.clawClosed, 15)
+    moveClaw(c.clawClose, 15)
     driveTimed (-50,-50,230)
     driveTimed (100,-70,500)
     drive (40,0)
