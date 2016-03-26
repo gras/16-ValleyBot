@@ -29,7 +29,8 @@ RIGHT_BUTTON = 13
 
 # PRIME servo positions
 frontArmUp = 1200 #Arm at 90 degrees up
-frontArmMid = 520 #Arm at 30 degrees up
+frontArmMidCube = 520 #Arm at 30 degrees up
+frontArmMidPom = 700 #Arm at 30 degrees up
 frontArmDown = 200 #Arm forward on ground
 frontClawOpen = 1670 #Claw open
 frontClawMid = 800 # claw cube grab

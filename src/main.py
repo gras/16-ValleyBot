@@ -5,7 +5,6 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 import actions as act
-from actions import DEBUG
 
 def main():
     print "I am ValleyBot"
@@ -19,10 +18,12 @@ def main():
     act.dropOffCube()
     act.getGoldPoms()
     act.getRedPoms()
-    act.DEBUG()
     act.leaveValley()
+    act.goToHabitat()
+    act.depositGoldPoms()
     act.depositRedPoms()
-    act.goToValley()
+    act.getComposter()
+    act.DEBUG()
     act.getOutOfValley()
     act.depositGoldPoms()
     #act.returnToValley()

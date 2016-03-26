@@ -87,7 +87,7 @@ def dumpDebris():
         driveTimed(60,70,500)
         driveTimed(90,0,600)#500
         driveTimed(60,90,225)
-        driveTimed(60,70,1000)
+        driveTimed(60,70,900)#1000
     else:
         driveTimed(0,-100,1100)#1000
         driveTimed(60,70,500)
@@ -100,7 +100,7 @@ def goToGate():
     print "goToGate"
     moveFrontArm(c.frontArmUp, 15)
     if isPrime:
-        driveTimed(-100,-100, 1450)
+        driveTimed(-90,-100, 1450)
         timedLineFollowRight(2.0)
         timedLineFollowRightSmooth(3.0) 
     else:
@@ -129,7 +129,7 @@ def goToCube():
 def dropOffCube():
     print"dropOffCube"
     driveTimed(100, 0, 1900)
-    moveFrontArm(c.frontArmMid, 15)
+    moveFrontArm(c.frontArmMidCube, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
@@ -141,7 +141,9 @@ def getGoldPoms():
     moveBackClaw(backClawOpen, 15)
     moveBackArm(backArmDown, 15)
     driveTimed(-100, -100, 700)
+    drive(-20, -20)
     moveBackClaw(backClawClose, 10)
+    ao()
     moveBackArm(backArmUp, 10)
     
 # Go to Red Poms
@@ -157,44 +159,49 @@ def getRedPoms():
     ao()
     moveFrontArm(c.frontArmDown, 15)
     driveTimed(100, 100, 1000)
-    moveFrontClaw(c.frontClawClose, 10)
+    drive(30, 30)
+    moveFrontClaw(c.frontClawClose, 8)
+    ao()
     moveFrontArm(c.frontArmUp, 10)
     
 # Exit Valley  
 def leaveValley():
     print "leaveValley"
-    driveTimed(-80, -80, 550)#1100, 650
-    driveTimed(-70,0,1550)
+    driveTimed(-80, -80, 720)#1100, 650
+    driveTimed(-70,0, 1650)
     
+# go to Habitat wait to score
+def goToHabitat():
+    driveTimed(-100, -96, 2750)  
+      
+# Score Poms   
+def depositGoldPoms():
+    print"depositGoldPoms"
+    moveBackArm(c.backArmMid, 10)
+    moveBackClaw(c.backClawOpen, 10)
+
 # Score Poms   
 def depositRedPoms():
     print"depositRedPoms"
-    driveTimed(-100, -100, 1400)#1350
-    driveTimed(-80, 80,500)
-    msleep(500)
-    drive(-30, 30)
-    crossBlack()
-    driveTimed(40, -40, 100)
-    driveTimed(100, 80, 850)
-    moveFrontArm(c.armDown, 15)
-    moveFrontClaw(c.clawOpen, 15)
-
+    moveBackArm(c.backArmUp, 10)
+    moveBackClaw(c.backClawClose, 10)   
+    driveTimed(70, 70, 1400)
+    driveTimed(-100, 100, 1200)
+    driveTimed(70, 70, 1400)
+    moveFrontArm(c.frontArmMidPom, 10)
+    moveFrontClaw(c.frontClawOpen, 10)
+    moveFrontArm(c.frontArmUp, 10)
+    moveFrontClaw(c.frontClawClose, 10)
+    
 # Get to Valley    
-def goToValley():
-    print "goToValley"
-    moveFrontArm(c.armUp, 15)
-    moveFrontClaw(c.clawClose, 15)
-    driveTimed (-50,-50,230)
-    driveTimed (100,-70,700)
-    driveTimed (100,0,1000)
-    drive (40,0)
-    crossBlack()
-    timedLineFollowRightSmooth(1.55)
-    driveTimed (80,80,800)#1600
-    drive(70, 70)
-    crossBlack()
-    
-    
+def getComposter():
+    print "getComposter"
+    driveTimed(-100,-100, 800)
+    DEBUG()
+    driveTimed(-100,100, 650)
+    while not onBlack():
+        drive(70,70)
+        
 # moves gold poms to habitat 
 def getOutOfValley():
     print "getOutOfValley"
@@ -203,22 +210,11 @@ def getOutOfValley():
     driveTimed(-80, -80, 250)
     #driveTimed(0, -80, 1100)
 
-def depositGoldPoms():
-    print"depositGoldPoms"
-    driveTimed(-100, -100, 1350)
-    driveTimed(-80, 80,1000)
-    msleep(500)
-    drive(-30, 30)
-    crossBlack()
-    driveTimed(100, 80, 650)
-    moveFrontArm(c.armMid, 15)
-    moveFrontClaw(c.clawOpen, 15)
-    
 # Go back to valley
 def returnToValley():
     print "returnToValley"
-    moveFrontArm(c.armUp, 15)
-    moveFrontClaw(c.clawClose, 15)
+    moveFrontArm(c.frontArmUp, 15)
+    moveFrontClaw(c.frontClawClose, 15)
     driveTimed (-50,-50,230)
     driveTimed (100,-70,500)
     drive (40,0)
