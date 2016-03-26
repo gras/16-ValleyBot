@@ -12,7 +12,7 @@ from wallaby import disable_servos
 from wallaby import enable_servos
 from wallaby import msleep
  
-from drive import testMotors
+from drive import testMotors, driveTimed
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowLeft
@@ -30,7 +30,8 @@ from sensors import waitForButton
 from sensors import onBlack
 from sensors import crossBlack
 from sensors import DEBUG
-from constants import isPrime
+from constants import isPrime, backClawOpen, backArmDown, backClawClose,\
+    backArmUp
 
 
 # Tests all hardware
@@ -86,19 +87,20 @@ def dumpDebris():
         driveTimed(60,70,500)
         driveTimed(90,0,600)#500
         driveTimed(60,90,225)
-        driveTimed(60,70,650)
+        driveTimed(60,70,1000)
     else:
         driveTimed(0,-100,1100)#1000
         driveTimed(60,70,500)
         driveTimed(90,0,500)#600
         driveTimed(60,90,200)
         driveTimed(60,70,900)
+        
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
     moveFrontArm(c.frontArmUp, 15)
     if isPrime:
-        driveTimed(-100,-100, 1250)
+        driveTimed(-100,-100, 1450)
         timedLineFollowRight(2.0)
         timedLineFollowRightSmooth(3.0) 
     else:
@@ -131,19 +133,32 @@ def dropOffCube():
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
-
+    
+# drives to and grabs gold poms
+def getGoldPoms():
+    print"getGoldPoms"
+    driveTimed(-70, 0, 400)
+    moveBackClaw(backClawOpen, 15)
+    moveBackArm(backArmDown, 15)
+    driveTimed(-100, -100, 700)
+    moveBackClaw(backClawClose, 10)
+    moveBackArm(backArmUp, 10)
+    
 # Go to Red Poms
 def getRedPoms():
-    print "getRedPoms"
-    if isPrime:
-        driveTimed(-100,0, 600)
-    else:
-        driveTimed(-100,0, 750)
-    moveFrontClaw(c.clawOpen, 25)
-    moveFrontArm(c.armDown, 25)
-    driveTimed(80, 80, 700)
-    moveFrontClaw(c.clawClose, 15) 
-    moveFrontArm(c.armUp, 15)
+    print "getRedPoms"    
+    drive(0, 40)
+    while not onBlack(): # wait for black
+        pass
+    ao()
+    drive(20, 0)
+    while onBlack(): # wait for black
+        pass
+    ao()
+    moveFrontArm(c.frontArmDown, 15)
+    driveTimed(100, 100, 1000)
+    moveFrontClaw(c.frontClawClose, 10)
+    moveFrontArm(c.frontArmUp, 10)
     
 # Exit Valley  
 def leaveValley():
@@ -179,17 +194,6 @@ def goToValley():
     drive(70, 70)
     crossBlack()
     
-# drives to and grabs gold poms
-def getGoldPoms():
-    print"getGoldPoms"
-    #driveTimed(-100, 0, 1500)#was 2400
-    driveTimed(-50,50,800)
-    moveFrontClaw(c.clawOpen, 15)
-    moveFrontArm(c.armDown, 15)
-    driveTimed(60, 60, 550)#was 550
-    moveFrontClaw(c.clawClose, 15)
-    msleep(500)
-    moveFrontArm(c.armUp, 15)
     
 # moves gold poms to habitat 
 def getOutOfValley():
