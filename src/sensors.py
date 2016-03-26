@@ -23,7 +23,7 @@ def crossBlack():
 
 
 def onBlack():
-    return analog(c.LINE_FOLLOWER) > c.cubeMid 
+    return analog(c.LINE_FOLLOWER) > c.frontLineFollowerGrey 
 
 def waitForButton():
     print "Press Button..."

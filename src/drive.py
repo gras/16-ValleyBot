@@ -12,8 +12,6 @@ from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
 
-from servos import moveCube
-
 from sensors import onBlack
 
 def driveTimed( left, right, time):
@@ -38,7 +36,6 @@ def testMotors():
     driveTimed(-80, 80, 500)
     driveTimed(80, -80, 500)
     driveTimed(100, 100, 500)
-    moveCube(c.cubeDown, 25)
     msleep(1000)
     
 def timedLineFollowLeft(time): 

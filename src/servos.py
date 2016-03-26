@@ -17,30 +17,38 @@ from wallaby import ao
 
 
 def testServos():
-    set_servo_position(c.ARM, c.armUp)
-    set_servo_position(c.CLAW, c.clawClose)
-    set_servo_position(c.CUBE_HOLDER, c.cubeDown)
+    set_servo_position(c.frontArm, c.frontArmUp)
+    set_servo_position(c.frontClaw, c.frontClawClose)
+    set_servo_position(c.backArm, c.backArmUp)
+    set_servo_position(c.backClaw, c.backClawClose)
     enable_servos()
     msleep(1000)
-    moveArm(c.armDown, 25)
-    moveClaw(c.clawOpen, 25) 
-    moveCube(c.cubeDown, 25)
+    moveFrontArm(c.frontArmDown, 25)
+    moveFrontClaw(c.frontClawOpen, 25) 
     msleep(500)
-    moveClaw(c.clawClose, 25)
+    moveBackArm(c.backArmDown, 25)
+    moveBackClaw(c.backClawOpen, 25) 
     msleep(500)
-    moveArm(c.armUp, 25)
+    moveFrontClaw(c.frontClawClose, 25)
+    msleep(500)
+    moveFrontArm(c.frontArmUp, 25)
     msleep(500) 
-    moveCube(c.cubeUp, 25)
+    moveBackClaw(c.backClawClose, 25)
+    msleep(500)
+    moveBackArm(c.backArmUp, 25)
     msleep(1000)
    
-def moveArm( endPos, speed=15 ):
-    _moveServo( c.ARM, endPos, speed )
+def moveFrontArm( endPos, speed=15 ):
+    _moveServo( c.frontArm, endPos, speed )
 
-def moveClaw( endPos, speed=15 ):
-    _moveServo( c.CLAW, endPos, speed )
+def moveFrontClaw( endPos, speed=15 ):
+    _moveServo( c.frontClaw, endPos, speed )
 
-def moveCube( endPos, speed=15 ):
-    _moveServo( c.CUBE_HOLDER, endPos, speed )
+def moveBackArm( endPos, speed=15 ):
+    _moveServo( c.backArm, endPos, speed )
+
+def moveBackClaw( endPos, speed=15 ):
+    _moveServo( c.backClaw, endPos, speed )
     
 # Moves specified servo to specified position at specified speed
 def _moveServo( servo, endPos, speed) :
@@ -49,9 +57,9 @@ def _moveServo( servo, endPos, speed) :
     # speed of 10 is the default
     now = get_servo_position( servo )
     if now > 2048 :
-        PROGRAMMER_ERROR( "Servo setting too large" )
+        PROGRAMMER_ERROR( "Servo setting too large ", servo )
     if now < 0 :
-        PROGRAMMER_ERROR( "Servo setting too small" )
+        PROGRAMMER_ERROR( "Servo setting too small ", servo )
     if now > endPos:
         speed = -speed
     for i in range (now, endPos, speed ):
@@ -63,7 +71,7 @@ def _moveServo( servo, endPos, speed) :
 
 
 
-def PROGRAMMER_ERROR( msg ) :
+def PROGRAMMER_ERROR( msg, value ) :
     ao()
-    print msg
+    print msg, value
     exit()

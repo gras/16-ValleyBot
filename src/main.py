@@ -5,6 +5,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 import actions as act
+from actions import DEBUG
 
 def main():
     print "I am ValleyBot"
@@ -16,6 +17,7 @@ def main():
     act.goToGate()
     act.goToCube()
     act.dropOffCube()
+    DEBUG()
     act.getRedPoms()
     act.DEBUG()
     act.leaveValley()

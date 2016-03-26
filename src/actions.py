@@ -21,9 +21,10 @@ from drive import timedLineFollowRightSmooth
 from drive import timedLineFollowLeftSmooth
 
 from servos import testServos
-from servos import moveArm
-from servos import moveClaw
-from servos import moveCube
+from servos import moveFrontArm
+from servos import moveFrontClaw
+from servos import moveBackClaw
+from servos import moveBackArm
 
 from sensors import waitForButton
 from sensors import onBlack
@@ -40,8 +41,10 @@ def init():
     disable_servos()
     waitForButton()
     enable_servos()
-    moveClaw(c.clawClose, 25)
-    moveArm(c.armUp, 25) 
+    moveFrontClaw(c.frontClawClose, 25)
+    moveFrontArm(c.frontArmUp, 25) 
+    moveBackClaw(c.backClawClose, 25)
+    moveBackArm(c.backArmUp, 25)
     c.startTime = seconds()
 
 # Raises cube holder
@@ -49,7 +52,6 @@ def init():
 # Moves backward until black tape
 def getOutOfStartBox():
     print "getOutOfStartBox"
-    moveCube(c.cubeUp, 25)
     msleep(500)
     driveTimed(-100, -100, 1600)
     driveTimed(0, 100, 400)
@@ -72,7 +74,7 @@ def goToDebris():
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
     print "removeDebris"
-    moveArm(c.armDown, 15)
+    moveFrontArm(c.frontArmDown, 15)
     msleep(500)
     driveTimed(-80, -80, 1000)
 
@@ -94,10 +96,10 @@ def dumpDebris():
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
-    moveArm(c.armUp, 15)
+    moveFrontArm(c.frontArmUp, 15)
     if isPrime:
         driveTimed(-100,-100, 1250)
-        timedLineFollowRight(1.3)
+        timedLineFollowRight(2.0)
         timedLineFollowRightSmooth(3.0) 
     else:
         driveTimed(-100,-100, 1300)
@@ -107,8 +109,8 @@ def goToGate():
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
-    moveClaw(c.clawOpen, 15)
-    moveArm(c.armDown, 15)
+    moveFrontClaw(c.frontClawOpen, 15)
+    moveFrontArm(c.frontArmDown, 15)
     driveTimed(100,100,500)
     if isPrime:
         drive(100, 100)
@@ -117,18 +119,18 @@ def goToCube():
     while not onBlack():
         pass
     drive(0, 0)
-    moveClaw(c.clawMid, 15)
-    moveArm(c.armUp, 15)
+    moveFrontClaw(c.frontClawMid, 15)
+    moveFrontArm(c.frontArmUp, 15)
     msleep(500)
 
 # Turns to drop cube off on our side of the board
 def dropOffCube():
     print"dropOffCube"
     driveTimed(100, 0, 1900)
-    moveArm(c.armMid, 15)
-    moveClaw(c.clawOpen, 15)
+    moveFrontArm(c.frontArmMid, 15)
+    moveFrontClaw(c.frontClawOpen, 15)
     msleep(500)
-    moveArm(c.armUp, 15)
+    moveFrontArm(c.frontArmUp, 15)
 
 # Go to Red Poms
 def getRedPoms():
@@ -137,11 +139,11 @@ def getRedPoms():
         driveTimed(-100,0, 600)
     else:
         driveTimed(-100,0, 750)
-    moveClaw(c.clawOpen, 25)
-    moveArm(c.armDown, 25)
+    moveFrontClaw(c.clawOpen, 25)
+    moveFrontArm(c.armDown, 25)
     driveTimed(80, 80, 700)
-    moveClaw(c.clawClose, 15) 
-    moveArm(c.armUp, 15)
+    moveFrontClaw(c.clawClose, 15) 
+    moveFrontArm(c.armUp, 15)
     
 # Exit Valley  
 def leaveValley():
@@ -159,14 +161,14 @@ def depositRedPoms():
     crossBlack()
     driveTimed(40, -40, 100)
     driveTimed(100, 80, 850)
-    moveArm(c.armDown, 15)
-    moveClaw(c.clawOpen, 15)
+    moveFrontArm(c.armDown, 15)
+    moveFrontClaw(c.clawOpen, 15)
 
 # Get to Valley    
 def goToValley():
     print "goToValley"
-    moveArm(c.armUp, 15)
-    moveClaw(c.clawClose, 15)
+    moveFrontArm(c.armUp, 15)
+    moveFrontClaw(c.clawClose, 15)
     driveTimed (-50,-50,230)
     driveTimed (100,-70,700)
     driveTimed (100,0,1000)
@@ -182,12 +184,12 @@ def getGoldPoms():
     print"getGoldPoms"
     #driveTimed(-100, 0, 1500)#was 2400
     driveTimed(-50,50,800)
-    moveClaw(c.clawOpen, 15)
-    moveArm(c.armDown, 15)
+    moveFrontClaw(c.clawOpen, 15)
+    moveFrontArm(c.armDown, 15)
     driveTimed(60, 60, 550)#was 550
-    moveClaw(c.clawClose, 15)
+    moveFrontClaw(c.clawClose, 15)
     msleep(500)
-    moveArm(c.armUp, 15)
+    moveFrontArm(c.armUp, 15)
     
 # moves gold poms to habitat 
 def getOutOfValley():
@@ -205,14 +207,14 @@ def depositGoldPoms():
     drive(-30, 30)
     crossBlack()
     driveTimed(100, 80, 650)
-    moveArm(c.armMid, 15)
-    moveClaw(c.clawOpen, 15)
+    moveFrontArm(c.armMid, 15)
+    moveFrontClaw(c.clawOpen, 15)
     
 # Go back to valley
 def returnToValley():
     print "returnToValley"
-    moveArm(c.armUp, 15)
-    moveClaw(c.clawClose, 15)
+    moveFrontArm(c.armUp, 15)
+    moveFrontClaw(c.clawClose, 15)
     driveTimed (-50,-50,230)
     driveTimed (100,-70,500)
     drive (40,0)
@@ -230,15 +232,15 @@ def getRedPoms():
         pass
     drive(0, 0)
     driveTimed(70,0,1150)
-    moveClaw(c.clawOpen, 25)
-    moveArm(c.armDown, 25)
+    moveFrontClaw(c.clawOpen, 25)
+    moveFrontArm(c.armDown, 25)
     driveTimed(80, 80, 700)
-    moveClaw(c.clawClosed, 15) 
+    moveFrontClaw(c.clawClosed, 15) 
     msleep(300)
-    moveClaw(c.clawOpen,15)
+    moveFrontClaw(c.clawOpen,15)
     driveTimed(50,50,400)
-    moveClaw(c.clawClosed, 15)
-    moveArm(c.armUp, 15)
+    moveFrontClaw(c.clawClosed, 15)
+    moveFrontArm(c.armUp, 15)
   '''
 
     

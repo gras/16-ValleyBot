@@ -15,9 +15,10 @@ LMOTOR = 0
 RMOTOR = 3
 
 # SERVO ports
-ARM = 0
-CLAW = 1
-CUBE_HOLDER = 2
+frontArm = 0
+frontClaw = 1
+backArm = 2
+backClaw = 3
 
 # ANALOG ports
 LINE_FOLLOWER = 0
@@ -27,15 +28,23 @@ CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 
 # PRIME servo positions
-armUp = 1200 #Arm at 90 degrees up
-armMid = 520 #Arm at 30 degrees up
-armDown = 200 #Arm forward on ground
-clawOpen = 1670 #Claw open
-clawMid = 800 # claw cube grab
-clawClose = 200 # Claw closed
-cubeMid = 1000 
-cubeUp = 775
-cubeDown = 1600
+frontArmUp = 1200 #Arm at 90 degrees up
+frontArmMid = 520 #Arm at 30 degrees up
+frontArmDown = 200 #Arm forward on ground
+frontClawOpen = 1670 #Claw open
+frontClawMid = 800 # claw cube grab
+frontClawClose = 200 # Claw closed
+backClawOpen = 350
+backClawMid = 850
+backClawClose = 1350
+backArmDown = 250
+backArmMid = 600
+backArmUp = 1200
+
+# PRIME analog sensor values
+frontLineFollowerGrey = 1000
+
+
 
 isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone    
@@ -46,12 +55,9 @@ if isPrime:
 else:
     print "running Clone"
     # servo positions
-    armUp = 2000 # Arm at 90 degrees up
-    armDown = 600 # Arm foward on ground
-    clawOpen = 2000 # Claw open
-    clawClose = 800 # Claw closed
-    cubeMid = 1450
-    cubeUp = 775
-    cubeDown = 1600
+    frontArmUp = 2000 # Arm at 90 degrees up
+    frontArmDown = 600 # Arm foward on ground
+    frontClawOpen = 2000 # Claw open
+    frontClawClose = 800 # Claw closed
 
         
