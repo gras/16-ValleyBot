@@ -196,11 +196,17 @@ def depositRedPoms():
 # Get to Valley    
 def getComposter():
     print "getComposter"
-    driveTimed(-100,-100, 800)
+    driveTimed(-100,-100, 400)
+    driveTimed(80, 0, 1410)
+    driveTimed(-100, -100, 550)
+    msleep(400);
+    moveBackClaw(c.backClawOpen,10)
+    moveBackArm(580, 10)
+    moveBackClaw(1050, 10)
+    moveBackArm(c.backArmUp, 10)
+    msleep(3000)
     DEBUG()
-    driveTimed(-100,100, 650)
-    while not onBlack():
-        drive(70,70)
+    
         
 # moves gold poms to habitat 
 def getOutOfValley():
