@@ -21,7 +21,9 @@ backArm = 2
 backClaw = 3
 
 # ANALOG ports
-LINE_FOLLOWER = 0
+FRONT_TOPHAT = 0
+REAR_TOPHAT = 1
+
 
 # DIGITAL ports
 CLONE_SWITCH = 9
@@ -58,7 +60,15 @@ else:
     # servo positions
     frontArmUp = 2000 # Arm at 90 degrees up
     frontArmDown = 600 # Arm foward on ground
+    frontArmMidCube = 1200
+    frontArmMidPom = 1300
     frontClawOpen = 2000 # Claw open
+    frontClawMid = 1500
     frontClawClose = 800 # Claw closed
-
+    backArmUp = 1300
+    backArmDown = 400
+    backArmMid = 1000
+    backClawClose = 1600
+    backClawOpen = 500
+    backClawMid = 1000
         

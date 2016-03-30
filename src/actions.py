@@ -12,7 +12,7 @@ from wallaby import disable_servos
 from wallaby import enable_servos
 from wallaby import msleep
  
-from drive import testMotors, driveTimed
+from drive import testMotors
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowLeft
@@ -27,16 +27,17 @@ from servos import moveBackClaw
 from servos import moveBackArm
 
 from sensors import waitForButton
-from sensors import onBlack
-from sensors import crossBlack
+from sensors import onBlackFront
+from sensors import crossBlackFront
 from sensors import DEBUG
-from constants import isPrime, backClawOpen, backArmDown, backClawClose,\
-    backArmUp
 
 
 # Tests all hardware
 def init():
-    print "Running Valley"
+    if c.isPrime:
+        print "Running Valley - Prime"
+    else:
+        print "Running Valley - Clone"   
     testServos()
     testMotors()
     disable_servos()
@@ -82,14 +83,14 @@ def removeDebris():
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    if isPrime:
+    if c.isPrime:
         driveTimed(0,-100,1100)#1000
         driveTimed(60,70,500)
         driveTimed(90,0,600)#500
         driveTimed(60,90,225)
         driveTimed(60,70,900)#1000
     else:
-        driveTimed(0,-100,1100)#1000
+        driveTimed(0,-100,1000)#1000
         driveTimed(60,70,500)
         driveTimed(90,0,500)#600
         driveTimed(60,90,200)
@@ -99,14 +100,14 @@ def dumpDebris():
 def goToGate():
     print "goToGate"
     moveFrontArm(c.frontArmUp, 15)
-    if isPrime:
+    if c.isPrime:
         driveTimed(-90,-100, 1450)
         timedLineFollowRight(2.0)
         timedLineFollowRightSmooth(3.0) 
     else:
         driveTimed(-100,-100, 1300)
         timedLineFollowRight(2.5)
-        timedLineFollowRightSmooth(3.7) 
+        timedLineFollowRightSmooth(3.2) 
         
 # Drives to the rift valley cube
 def goToCube():
@@ -114,11 +115,11 @@ def goToCube():
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmDown, 15)
     driveTimed(100,100,500)
-    if isPrime:
+    if c.isPrime:
         drive(100, 100)
     else:
         drive(90, 100)
-    while not onBlack():
+    while not onBlackFront():
         pass
     drive(0, 0)
     moveFrontClaw(c.frontClawMid, 15)
@@ -138,23 +139,23 @@ def dropOffCube():
 def getGoldPoms():
     print"getGoldPoms"
     driveTimed(-70, 0, 400)
-    moveBackClaw(backClawOpen, 15)
-    moveBackArm(backArmDown, 15)
+    moveBackClaw(c.backClawOpen, 15)
+    moveBackArm(c.backArmDown, 15)
     driveTimed(-100, -100, 700)
     drive(-20, -20)
-    moveBackClaw(backClawClose, 10)
+    moveBackClaw(c.backClawClose, 10)
     ao()
-    moveBackArm(backArmUp, 10)
+    moveBackArm(c.backArmUp, 10)
     
 # Go to Red Poms
 def getRedPoms():
     print "getRedPoms"    
     drive(0, 40)
-    while not onBlack(): # wait for black
+    while not onBlackFront(): # wait for black
         pass
     ao()
     drive(20, 0)
-    while onBlack(): # wait for black
+    while onBlackFront(): # wait for black
         pass
     ao()
     moveFrontArm(c.frontArmDown, 15)
@@ -224,7 +225,7 @@ def returnToValley():
     driveTimed (-50,-50,230)
     driveTimed (100,-70,500)
     drive (40,0)
-    crossBlack()
+    crossBlackFront()
     timedLineFollowRightSmooth(1.55)
     driveTimed(60, 0, 250)
     driveTimed (80,80,1200)

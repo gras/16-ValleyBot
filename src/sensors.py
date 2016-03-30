@@ -13,17 +13,27 @@ from wallaby import analog
 from wallaby import digital
 from wallaby import seconds
 
-def crossBlack():
-    while not onBlack(): # wait for black
+def crossBlackFront():
+    while not onBlackFront(): # wait for black
         pass
-    while onBlack(): # wait for white
+    while onBlackFront(): # wait for white
+        pass
+    ao()
+    
+def crossBlackBack():
+    while not onBlackBack(): # wait for black
+        pass
+    while onBlackBack(): # wait for white
         pass
     ao()
 
 
 
-def onBlack():
-    return analog(c.LINE_FOLLOWER) > c.frontLineFollowerGrey 
+def onBlackFront():
+    return analog(c.FRONT_TOPHAT) > c.frontLineFollowerGrey 
+
+def onBlackBack():
+    return analog(c.REAR_TOPHAT) > c.frontLineFollowerGrey 
 
 def waitForButton():
     print "Press Button..."

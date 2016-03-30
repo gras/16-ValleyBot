@@ -23,7 +23,6 @@ def main():
     act.depositGoldPoms()
     act.depositRedPoms()
     act.getComposter()
-    act.DEBUG()
     act.getOutOfValley()
     act.depositGoldPoms()
     #act.returnToValley()

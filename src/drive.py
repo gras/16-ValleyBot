@@ -12,7 +12,7 @@ from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
 
-from sensors import onBlack
+from sensors import onBlackFront, onBlackBack
 
 def driveTimed( left, right, time):
     drive(left, right)
@@ -31,17 +31,19 @@ def drive( left, right):
   
 def testMotors():
     drive(-100, -100)
-    while not onBlack(): #wait to see line
+    while not onBlackFront(): #wait to see line
         pass
-    driveTimed(-80, 80, 500)
-    driveTimed(80, -80, 500)
+    drive(-100, 0)
+    while not onBlackBack(): #wait to see line
+        pass
+    driveTimed(100, 0, 650)
     driveTimed(100, 100, 500)
     msleep(1000)
     
 def timedLineFollowLeft(time): 
     sec = seconds() + time
     while seconds() < sec :
-        if onBlack():
+        if onBlackFront():
             driveTimed(20,90,10)
         else:
             driveTimed(90,20,10)
@@ -51,7 +53,7 @@ def timedLineFollowLeft(time):
 def timedLineFollowRight(time):
     sec = seconds() + time
     while seconds() < sec:
-        if not onBlack():
+        if not onBlackFront():
             driveTimed(20,90,20)
         else:
             driveTimed(90,20,20)
@@ -60,7 +62,7 @@ def timedLineFollowRight(time):
 def timedLineFollowRightSmooth(time):
     sec = seconds() + time
     while seconds() < sec:
-        if not onBlack():
+        if not onBlackFront():
             driveTimed(20,40,20)
         else:
             driveTimed(40,20,20)
@@ -69,7 +71,7 @@ def timedLineFollowRightSmooth(time):
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time
     while seconds() < sec:
-        if onBlack():
+        if onBlackFront():
             driveTimed(20,40,20)#time was 10
         else:
             driveTimed(40,20,20)#time was 10 
