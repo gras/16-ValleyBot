@@ -33,13 +33,13 @@ RIGHT_BUTTON = 13
 frontArmUp = 1200 #Arm at 90 degrees up
 frontArmMidCube = 520 #Arm at 30 degrees up
 frontArmMidPom = 700 #Arm at 30 degrees up
-frontArmDown = 200 #Arm forward on ground
+frontArmDown = 100 #Arm forward on ground
 frontClawOpen = 1670 #Claw open
 frontClawMid = 800 # claw cube grab
 frontClawClose = 200 # Claw closed
-backClawOpen = 350
-backClawMid = 850
-backClawClose = 1350
+backClawOpen = 0
+backClawMid = 550
+backClawClose = 1250
 backArmDown = 250
 backArmMid = 600
 backArmUp = 1200
@@ -58,17 +58,17 @@ if isPrime:
 else:
     print "running Clone"
     # servo positions
-    frontArmUp = 2000 # Arm at 90 degrees up
-    frontArmDown = 600 # Arm foward on ground
+    frontArmUp = 1900 # Arm at 90 degrees up
+    frontArmDown = 630 # Arm forward on ground
     frontArmMidCube = 1200
     frontArmMidPom = 1300
     frontClawOpen = 2000 # Claw open
     frontClawMid = 1500
     frontClawClose = 800 # Claw closed
-    backArmUp = 1300
-    backArmDown = 400
+    backArmUp = 1400
+    backArmDown = 440
     backArmMid = 1000
     backClawClose = 1600
     backClawOpen = 500
-    backClawMid = 1000
+    backClawMid = 1100
         

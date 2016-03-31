@@ -30,6 +30,7 @@ from sensors import waitForButton
 from sensors import onBlackFront
 from sensors import crossBlackFront
 from sensors import DEBUG
+from constants import isPrime
 
 
 # Tests all hardware
@@ -42,12 +43,12 @@ def init():
     testMotors()
     disable_servos()
     waitForButton()
+    c.startTime = seconds()
     enable_servos()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
     moveBackClaw(c.backClawClose, 25)
     moveBackArm(c.backArmUp, 25)
-    c.startTime = seconds()
 
 # Raises cube holder
 # Backs out of start box and turns 
@@ -70,7 +71,7 @@ def goToDebris():
     else:
         timedLineFollowLeft(4.0)
         timedLineFollowLeftSmooth(0.75)
-        driveTimed(50, 53, 1000)
+        driveTimed(50, 57, 800)
 
 
 # Moves claw arm down and drives backwards with debris
@@ -90,7 +91,7 @@ def dumpDebris():
         driveTimed(60,90,225)
         driveTimed(60,70,900)#1000
     else:
-        driveTimed(0,-100,1000)#1000
+        driveTimed(0,-100,900)
         driveTimed(60,70,500)
         driveTimed(90,0,500)#600
         driveTimed(60,90,200)
@@ -138,13 +139,21 @@ def dropOffCube():
 # drives to and grabs gold poms
 def getGoldPoms():
     print"getGoldPoms"
-    driveTimed(-70, 0, 400)
+    if isPrime:
+        driveTimed(-70, 0, 400)
+    else:
+        driveTimed(-70, 0, 230)
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
     driveTimed(-100, -100, 700)
-    drive(-20, -20)
-    moveBackClaw(c.backClawClose, 10)
-    ao()
+    if isPrime:
+        drive(-20, -20)
+        moveBackClaw(c.backClawClose, 8)
+        ao()
+    else:
+        drive(-20, -20)
+        moveBackClaw(c.backClawClose, 10)
+        ao()
     moveBackArm(c.backArmUp, 10)
     
 # Go to Red Poms
@@ -169,12 +178,17 @@ def getRedPoms():
 def leaveValley():
     print "leaveValley"
     driveTimed(-80, -80, 720)#1100, 650
-    driveTimed(-70,0, 1650)
-    
+    if isPrime:
+        driveTimed(-70,0, 1800)#1650
+    else:
+        driveTimed(-70, 0, 1500)               
+         
 # go to Habitat wait to score
 def goToHabitat():
-    driveTimed(-100, -96, 2750)  
-      
+    if isPrime:
+        driveTimed(-100, -96, 2750)  
+    else:
+        driveTimed(-100, -98, 3350)
 # Score Poms   
 def depositGoldPoms():
     print"depositGoldPoms"

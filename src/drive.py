@@ -13,6 +13,7 @@ from wallaby import ao
 from wallaby import seconds
 
 from sensors import onBlackFront, onBlackBack
+from constants import isPrime, isClone
 
 def driveTimed( left, right, time):
     drive(left, right)
@@ -33,12 +34,16 @@ def testMotors():
     drive(-100, -100)
     while not onBlackFront(): #wait to see line
         pass
-    drive(-100, 0)
-    while not onBlackBack(): #wait to see line
-        pass
-    driveTimed(100, 0, 650)
+    if isPrime:
+        driveTimed(-70, 70, 500)
+        driveTimed(70, -70, 500)
+    else:
+        drive(-100, 0)
+        while not onBlackBack(): #wait to see line
+            pass
+        driveTimed(100, 0, 650)
     driveTimed(100, 100, 500)
-    msleep(1000)
+    msleep(1000)       
     
 def timedLineFollowLeft(time): 
     sec = seconds() + time
