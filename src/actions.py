@@ -71,7 +71,7 @@ def goToDebris():
     else:
         timedLineFollowLeft(4.0)
         timedLineFollowLeftSmooth(0.75)
-        driveTimed(50, 57, 800)
+        driveTimed(50, 57, 1000)
 
 
 # Moves claw arm down and drives backwards with debris

@@ -6,11 +6,14 @@ Created on Mar 13, 2016
 '''
 import actions as act
 
+from sensors import DEBUG
+
 def main():
     print "I am ValleyBot"
     act.init()
     act.getOutOfStartBox()
     act.goToDebris()
+    DEBUG()
     act.removeDebris()
     act.dumpDebris()
     act.goToGate()
@@ -22,7 +25,7 @@ def main():
     act.goToHabitat()
     act.depositGoldPoms()
     act.depositRedPoms()
-    act.DEBUG()
+    DEBUG()
     act.getComposter()
     act.getOutOfValley()
     act.depositGoldPoms()

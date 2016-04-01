@@ -7,18 +7,20 @@ Created on Mar 13, 2016
 
 import constants as c
 
+from sensors import DEBUG
+
 from wallaby import motor
 from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
 
 from sensors import onBlackFront, onBlackBack
-from constants import isPrime, isClone
+#from constants import isPrime, isClone
 
 def driveTimed( left, right, time):
     drive(left, right)
     msleep(time)
-    ao()
+    drive(0, 0)
 
 def drive( left, right): 
     if c.isPrime: 
@@ -34,16 +36,17 @@ def testMotors():
     drive(-100, -100)
     while not onBlackFront(): #wait to see line
         pass
-    if isPrime:
-        driveTimed(-70, 70, 500)
-        driveTimed(70, -70, 500)
-    else:
-        drive(-100, 0)
-        while not onBlackBack(): #wait to see line
-            pass
-        driveTimed(100, 0, 650)
+    stop()
+    driveTimed(-70, 70, 500)
+    driveTimed(70, -70, 500)
+    drive(-70, 0)
+    while not onBlackBack(): #wait to see line
+        pass
+    stop()
+    msleep(1000)
+    driveTimed(100, 0, 500)
     driveTimed(100, 100, 500)
-    msleep(1000)       
+    msleep(1000)      
     
 def timedLineFollowLeft(time): 
     sec = seconds() + time
@@ -82,4 +85,5 @@ def timedLineFollowLeftSmooth(time):
             driveTimed(40,20,20)#time was 10 
         msleep(10)
 
-    
+def stop():
+    ao()
