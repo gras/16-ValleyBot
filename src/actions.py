@@ -65,12 +65,12 @@ def getOutOfStartBox():
 def goToDebris():
     print "goToDebris"
     if c.isPrime:
-        timedLineFollowLeft(3.0) 
+        timedLineFollowLeft(3.75) 
         timedLineFollowLeftSmooth(0.75)
         driveTimed(50, 50, 1000)
     else:
-        timedLineFollowLeft(4.0)
-        timedLineFollowLeftSmooth(0.75)
+        timedLineFollowLeft(5.0)
+        timedLineFollowLeftSmooth(1.25)
         driveTimed(50, 57, 1000)
 
 
@@ -103,8 +103,8 @@ def goToGate():
     moveFrontArm(c.frontArmUp, 15)
     if c.isPrime:
         driveTimed(-90,-100, 1450)
-        timedLineFollowRight(2.0)
-        timedLineFollowRightSmooth(3.0) 
+        timedLineFollowRight(2.5)
+        timedLineFollowRightSmooth(3.2) 
     else:
         driveTimed(-100,-100, 1300)
         timedLineFollowRight(2.5)
@@ -148,7 +148,7 @@ def getGoldPoms():
     driveTimed(-100, -100, 700)
     if isPrime:
         drive(-20, -20)
-        moveBackClaw(c.backClawClose, 8)
+        moveBackClaw(c.backClawClose, 10)
         ao()
     else:
         drive(-20, -20)
@@ -167,10 +167,11 @@ def getRedPoms():
     while onBlackFront(): # wait for black
         pass
     ao()
+    driveTimed(20, 0, 200)
     moveFrontArm(c.frontArmDown, 15)
-    driveTimed(100, 100, 1000)
+    driveTimed(100, 100, 800)
     drive(30, 30)
-    moveFrontClaw(c.frontClawClose, 8)
+    moveFrontClaw(c.frontClawClose, 6)
     ao()
     moveFrontArm(c.frontArmUp, 10)
     
@@ -211,9 +212,9 @@ def depositRedPoms():
 # Get to Valley    
 def getComposter():
     print "getComposter"
-    driveTimed(-100,-100, 400)
+    driveTimed(-100,-100, 500)
     driveTimed(80, 0, 1410)
-    driveTimed(-100, -100, 550)
+    driveTimed(-100, -100, 670)
     msleep(400);
     moveBackClaw(c.backClawOpen,10)
     moveBackArm(580, 10)

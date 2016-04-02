@@ -37,14 +37,14 @@ def testMotors():
     while not onBlackFront(): #wait to see line
         pass
     stop()
-    driveTimed(-70, 70, 500)
-    driveTimed(70, -70, 500)
+    #driveTimed(-70, 70, 500)
+    #driveTimed(70, -70, 500)
     drive(-70, 0)
     while not onBlackBack(): #wait to see line
         pass
     stop()
     msleep(1000)
-    driveTimed(100, 0, 500)
+    driveTimed(70, 0, 1200)
     driveTimed(100, 100, 500)
     msleep(1000)      
     
@@ -52,9 +52,9 @@ def timedLineFollowLeft(time):
     sec = seconds() + time
     while seconds() < sec :
         if onBlackFront():
-            driveTimed(20,90,10)
+            driveTimed(20,90,20)
         else:
-            driveTimed(90,20,10)
+            driveTimed(90,20,20)
         msleep(10)
 
 #Follows black line on right for specified amount of time
