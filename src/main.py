@@ -23,11 +23,12 @@ def main():
     act.leaveValley()
     act.goToHabitat()
     act.depositGoldPoms()
-    act.depositRedPoms() 
-    act.getComposter()
-    act.getOutOfValley()
     DEBUG()   
+    act.depositRedPoms() 
+    act.getComposter()    
+    act.deliverComposter()    
     act.depositGoldPoms()
+    
     #act.returnToValley()
     
     return 0

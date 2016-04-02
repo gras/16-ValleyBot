@@ -41,7 +41,7 @@ backClawOpen = 0
 backClawMid = 550
 backClawClose = 1250
 backArmDown = 250
-backArmMid = 600
+backArmMid = 730
 backArmUp = 1200
 
 # PRIME analog sensor values

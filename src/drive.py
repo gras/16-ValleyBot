@@ -84,6 +84,15 @@ def timedLineFollowLeftSmooth(time):
         else:
             driveTimed(40,20,20)#time was 10 
         msleep(10)
-
+        
+def timedLineFollowLeftBack(time): 
+    sec = seconds() + time
+    while seconds() < sec :
+        if onBlackBack():
+            driveTimed(-90,-20,20)
+        else:
+            driveTimed(-20,-90,20)
+        msleep(10)
+        
 def stop():
     ao()

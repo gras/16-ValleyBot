@@ -19,6 +19,7 @@ from drive import timedLineFollowLeft
 from drive import timedLineFollowRight
 from drive import timedLineFollowRightSmooth
 from drive import timedLineFollowLeftSmooth
+from drive import timedLineFollowLeftBack
 
 from servos import testServos
 from servos import moveFrontArm
@@ -180,14 +181,18 @@ def leaveValley():
     print "leaveValley"
     driveTimed(-80, -80, 720)#1100, 650
     if isPrime:
-        driveTimed(-70,0, 1800)#1650
+        driveTimed(-70,0, 1900)#1650#1800`
     else:
         driveTimed(-70, 0, 1500)               
          
 # go to Habitat wait to score
 def goToHabitat():
     if isPrime:
-        driveTimed(-100, -96, 2750)  
+        driveTimed(-100, -100, 1000)
+        timedLineFollowLeftBack(3.0)
+        driveTimed(-30, -30, 3000) 
+        driveTimed(0, 0, 200)
+        driveTimed(50, 50, 750) 
     else:
         driveTimed(-100, -98, 3350)
 # Score Poms   
@@ -202,32 +207,37 @@ def depositRedPoms():
     moveBackArm(c.backArmUp, 10)
     moveBackClaw(c.backClawClose, 10)   
     driveTimed(70, 70, 1400)
-    driveTimed(-100, 100, 1200)
-    driveTimed(70, 70, 1400)
+    if isPrime:
+        driveTimed(-50, 50, 2400)
+        timedLineFollowRightSmooth(4)
+        driveTimed(50, 0, 300)
+    else:
+        driveTimed(-100, 100, 1200)
+        driveTimed(70, 70, 1400)
     moveFrontArm(c.frontArmMidPom, 10)
     moveFrontClaw(c.frontClawOpen, 10)
     moveFrontArm(c.frontArmUp, 10)
     moveFrontClaw(c.frontClawClose, 10)
     
+    
 # Get to Valley    
 def getComposter():
     print "getComposter"
     driveTimed(-100,-100, 500)
-    driveTimed(80, 0, 1410)
+    driveTimed(65, 0, 1735)#was 80,0,1410
     driveTimed(-100, -100, 670)
     msleep(400);
     moveBackClaw(c.backClawOpen,10)
     moveBackArm(580, 10)
     moveBackClaw(1050, 10)
     moveBackArm(c.backArmUp, 10)
-    msleep(3000)
-    DEBUG()
+    msleep(1000);
     
         
 # moves gold poms to habitat 
-def getOutOfValley():
+def deliverComposter():
     print "getOutOfValley"
-    driveTimed(-60,-60,900)
+    driveTimed(60,60,900)
     driveTimed (50,-50,900)
     driveTimed(-80, -80, 250)
     #driveTimed(0, -80, 1100)
