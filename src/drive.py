@@ -7,7 +7,7 @@ Created on Mar 13, 2016
 
 import constants as c
 
-from sensors import DEBUG
+#from sensors import DEBUG
 
 from wallaby import motor
 from wallaby import msleep

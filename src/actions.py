@@ -27,7 +27,7 @@ from servos import moveFrontClaw
 from servos import moveBackClaw
 from servos import moveBackArm
 
-from sensors import waitForButton
+from sensors import waitForButton, crossBlackBack
 from sensors import onBlackFront
 from sensors import crossBlackFront
 from sensors import DEBUG
@@ -95,8 +95,8 @@ def dumpDebris():
         driveTimed(0,-100,900)
         driveTimed(60,70,500)
         driveTimed(90,0,500)#600
-        driveTimed(60,90,200)
-        driveTimed(60,70,900)
+        driveTimed(60,90,350)
+        driveTimed(60,70,1000)
         
 # Drives backwards and follows line to reach gate
 def goToGate():
@@ -108,7 +108,7 @@ def goToGate():
         timedLineFollowRightSmooth(3.2) 
     else:
         driveTimed(-100,-100, 1300)
-        timedLineFollowRight(2.5)
+        timedLineFollowRight(2.7)
         timedLineFollowRightSmooth(3.2) 
         
 # Drives to the rift valley cube
@@ -173,7 +173,7 @@ def getRedPoms():
     driveTimed(100, 100, 800)
     drive(30, 30)
     moveFrontClaw(c.frontClawClose, 6)
-    ao()
+    drive(0,0)
     moveFrontArm(c.frontArmUp, 10)
     
 # Exit Valley  
@@ -181,26 +181,34 @@ def leaveValley():
     print "leaveValley"
     driveTimed(-80, -80, 720)#1100, 650
     if isPrime:
-        driveTimed(-70,0, 1900)#1650#1800`
+        driveTimed(-70,0, 1900)
     else:
         driveTimed(-70, 0, 1500)               
          
 # go to Habitat wait to score
 def goToHabitat():
+    print "goToHabitat"
+    driveTimed(-100, -100, 1000) #back through gate
+    driveTimed(-100, 0, 400) #angle robot to find black line
+    drive(-50, -50)
+    crossBlackBack()
     if isPrime:
-        driveTimed(-100, -100, 1000)
         timedLineFollowLeftBack(3.0)
-        driveTimed(-30, -30, 3000) 
-        driveTimed(0, 0, 200)
+    else:
+        timedLineFollowLeftBack(3.0)
+    driveTimed(-30, -30, 3000) 
+    driveTimed(0, 0, 200)
+    if isPrime:
         driveTimed(50, 50, 750) 
     else:
-        driveTimed(-100, -98, 3350)
+        driveTimed(50, 50, 500) 
+
 # Score Poms   
 def depositGoldPoms():
     print"depositGoldPoms"
     moveBackArm(c.backArmMid, 10)
     moveBackClaw(c.backClawOpen, 10)
-
+        
 # Score Poms   
 def depositRedPoms():
     print"depositRedPoms"
@@ -208,11 +216,14 @@ def depositRedPoms():
     moveBackClaw(c.backClawClose, 10)   
     driveTimed(70, 70, 1400)
     if isPrime:
-        driveTimed(-50, 50, 2400)
+        driveTimed(-100, 100, 1000)
+        drive(-50, 50)
+        crossBlackFront()
         timedLineFollowRightSmooth(4)
         driveTimed(50, 0, 300)
     else:
-        driveTimed(-100, 100, 1200)
+        #adjust to match prime? line follow
+        driveTimed(-100, 100, 1200) 
         driveTimed(70, 70, 1400)
     moveFrontArm(c.frontArmMidPom, 10)
     moveFrontClaw(c.frontClawOpen, 10)

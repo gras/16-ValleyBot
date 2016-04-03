@@ -27,8 +27,6 @@ def crossBlackBack():
         pass
     ao()
 
-
-
 def onBlackFront():
     return analog(c.FRONT_TOPHAT) > c.frontLineFollowerGrey 
 

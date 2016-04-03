@@ -13,9 +13,6 @@ from wallaby import msleep
 from wallaby import get_servo_position
 from wallaby import ao
 
-
-
-
 def testServos():
     set_servo_position(c.frontArm, c.frontArmUp)
     set_servo_position(c.frontClaw, c.frontClawClose)
@@ -68,9 +65,6 @@ def _moveServo( servo, endPos, speed) :
     set_servo_position( servo, endPos )
     msleep(10)
     
-
-
-
 def PROGRAMMER_ERROR( msg, value ) :
     ao()
     print msg, value

@@ -63,8 +63,8 @@ else:
     frontArmMidCube = 1200
     frontArmMidPom = 1300
     frontClawOpen = 2000 # Claw open
-    frontClawMid = 1500
-    frontClawClose = 800 # Claw closed
+    frontClawMid = 1300 #1500
+    frontClawClose = 700 # Claw closed     800
     backArmUp = 1400
     backArmDown = 440
     backArmMid = 1000
