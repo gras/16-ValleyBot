@@ -27,7 +27,8 @@ from servos import moveFrontClaw
 from servos import moveBackClaw
 from servos import moveBackArm
 
-from sensors import waitForButton, crossBlackBack
+from sensors import waitForButton
+from sensors import onBlackBack
 from sensors import onBlackFront
 from sensors import crossBlackFront
 from sensors import DEBUG
@@ -115,7 +116,7 @@ def goToGate():
 def goToCube():
     print "goToCube"
     moveFrontClaw(c.frontClawOpen, 15)
-    moveFrontArm(c.frontArmDown, 15)
+    moveFrontArm(c.frontArmMidCube, 15)
     driveTimed(100,100,500)
     if c.isPrime:
         drive(100, 100)
@@ -133,7 +134,7 @@ def dropOffCube():
     print"dropOffCube"
     driveTimed(100, 0, 1900)
     moveFrontArm(c.frontArmMidCube, 15)
-    moveFrontClaw(c.frontClawOpen, 15)
+    moveFrontClaw(c.frontClawOpen, 20)#15
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     
@@ -189,19 +190,22 @@ def leaveValley():
 def goToHabitat():
     print "goToHabitat"
     driveTimed(-100, -100, 1000) #back through gate
-    driveTimed(-100, 0, 400) #angle robot to find black line
-    drive(-50, -50)
-    crossBlackBack()
+    drive(-50, 0) #angle robot to find black line
+    while not onBlackBack():
+        pass
     if isPrime:
-        timedLineFollowLeftBack(3.0)
+        timedLineFollowLeftBack(5.0)
     else:
         timedLineFollowLeftBack(3.0)
-    driveTimed(-30, -30, 3000) 
-    driveTimed(0, 0, 200)
+    driveTimed(-30, -30, 1000)
     if isPrime:
         driveTimed(50, 50, 750) 
     else:
         driveTimed(50, 50, 500) 
+
+#wait For tater bot
+def waitForTater():
+    print "waitForTater"
 
 # Score Poms   
 def depositGoldPoms():
@@ -219,8 +223,8 @@ def depositRedPoms():
         driveTimed(-100, 100, 1000)
         drive(-50, 50)
         crossBlackFront()
-        timedLineFollowRightSmooth(4)
-        driveTimed(50, 0, 300)
+        timedLineFollowLeftSmooth(4)
+        driveTimed(50, 50, 300)
     else:
         #adjust to match prime? line follow
         driveTimed(-100, 100, 1200) 
@@ -235,8 +239,8 @@ def depositRedPoms():
 def getComposter():
     print "getComposter"
     driveTimed(-100,-100, 500)
-    driveTimed(65, 0, 1735)#was 80,0,1410
-    driveTimed(-100, -100, 670)
+    driveTimed(65, 0, 1700)#1735
+    driveTimed(-100, -100, 600) #670
     msleep(400);
     moveBackClaw(c.backClawOpen,10)
     moveBackArm(580, 10)
@@ -247,11 +251,10 @@ def getComposter():
         
 # moves gold poms to habitat 
 def deliverComposter():
-    print "getOutOfValley"
+    print "deliverComposter"
     driveTimed(60,60,900)
-    driveTimed (50,-50,900)
+    driveTimed (50,-50, 1200)
     driveTimed(-80, -80, 250)
-    #driveTimed(0, -80, 1100)
 
 # Go back to valley
 def returnToValley():

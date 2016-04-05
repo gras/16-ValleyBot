@@ -22,12 +22,13 @@ def main():
     act.getRedPoms()
     act.leaveValley()
     act.goToHabitat()
+    act.waitForTater()
     act.depositGoldPoms()  
     act.depositRedPoms() 
-    DEBUG()
     act.getComposter()    
     act.deliverComposter()    
     act.depositGoldPoms()
+    DEBUG()
     
     #act.returnToValley()
     
