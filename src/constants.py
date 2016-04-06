@@ -40,9 +40,13 @@ frontClawClose = 200 # Claw closed
 backClawOpen = 0
 backClawMid = 550
 backClawClose = 1250
+backClawCompGrab = 1050
 backArmDown = 250
+backArmBinGrab = 560 #when the backArm pulls bin
+backArmCompGrab = 580
 backArmMid = 730
 backArmUp = 1200
+
 
 # PRIME analog sensor values
 frontLineFollowerGrey = 1000

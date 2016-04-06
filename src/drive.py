@@ -37,13 +37,13 @@ def testMotors():
     while not onBlackFront(): #wait to see line
         pass
     stop()
-    #driveTimed(-70, 70, 500)
-    #driveTimed(70, -70, 500)
-    drive(-70, 0)
+    
+    drive(100, 100)
     while not onBlackBack(): #wait to see line
         pass
     stop()
-    msleep(1000)
+    
+    driveTimed(-70, 0, 1000)
     driveTimed(70, 0, 1200)
     driveTimed(100, 100, 500)
     msleep(1000)      
