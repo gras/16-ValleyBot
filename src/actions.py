@@ -19,6 +19,7 @@ from drive import timedLineFollowLeft
 from drive import timedLineFollowRight
 from drive import timedLineFollowRightSmooth
 from drive import timedLineFollowLeftSmooth
+from drive import lineFollowRightSmoothCount
 from drive import timedLineFollowLeftBack
 
 from servos import testServos
@@ -45,11 +46,11 @@ def init():
     disable_servos()
     waitForButton()
     c.startTime = seconds()
-    enable_servos()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
-    moveBackClaw(c.backClawClose, 25)
+    moveBackClaw(c.backClawMidSolar, 25)
     moveBackArm(c.backArmUp, 25)
+    enable_servos()
     
 # Raises cube holder
 # Backs out of start box and turns 
@@ -67,7 +68,15 @@ def goToDebris():
     print "goToDebris"
     if c.isPrime:
         timedLineFollowLeft(3.75) 
-        timedLineFollowLeftSmooth(0.75)
+        driveTimed(-70, 70, 750)
+        driveTimed(-50, -50, 1400)
+        moveBackArm(c.backArmDown, 15)
+        moveBackClaw(c.backClawOpen, 15)
+        moveBackArm(c.backArmUp, 15)
+        moveBackClaw(c.backClawClose, 15)
+        driveTimed(50, 50, 1400)
+        driveTimed(70, -70, 750)
+        timedLineFollowLeftSmooth(.75)
         driveTimed(50, 50, 1000)
     else:
         timedLineFollowLeft(5.0)
@@ -105,7 +114,7 @@ def goToGate():
     if c.isPrime:
         driveTimed(-90,-100, 1450)
         timedLineFollowRight(2.5)
-        timedLineFollowRightSmooth(3.2) 
+        lineFollowRightSmoothCount(20) 
     else:
         driveTimed(-100,-100, 1300)
         timedLineFollowRight(2.7)

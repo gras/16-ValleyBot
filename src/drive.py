@@ -45,7 +45,6 @@ def testMotors():
     
     driveTimed(-70, 0, 1000)
     driveTimed(70, 0, 1200)
-    driveTimed(100, 100, 500)
     msleep(1000)      
     
 def timedLineFollowLeft(time): 
@@ -76,13 +75,24 @@ def timedLineFollowRightSmooth(time):
             driveTimed(40,20,20)
         msleep(10)
 
+def lineFollowRightSmoothCount(amount):
+    count = 0
+    while count < amount :
+        if not onBlackFront():
+            driveTimed(20,40,20)#time was 10
+            count = count + 1
+        else:
+            driveTimed(40,20,20)#time was 10
+            count = 0 
+        msleep(10)
+        
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time
-    while seconds() < sec:
+    while seconds() < sec :
         if onBlackFront():
             driveTimed(20,40,20)#time was 10
         else:
-            driveTimed(40,20,20)#time was 10 
+            driveTimed(40,20,20)#time was 10
         msleep(10)
         
 def timedLineFollowLeftBack(time): 

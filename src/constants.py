@@ -39,6 +39,7 @@ frontClawMid = 800 # claw cube grab
 frontClawClose = 200 # Claw closed
 backClawOpen = 0
 backClawMid = 550
+backClawMidSolar = 700
 backClawClose = 1250
 backClawCompGrab = 1050
 backArmDown = 250
