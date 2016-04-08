@@ -79,12 +79,12 @@ def lineFollowRightSmoothCount(amount):
     count = 0
     while count < amount :
         if not onBlackFront():
-            driveTimed(20,40,20)#time was 10
+            driveTimed(10,30,10)#time was 10   was 20, 40
             count = count + 1
         else:
-            driveTimed(40,20,20)#time was 10
+            driveTimed(30,10,10)#time was 10
             count = 0 
-        msleep(10)
+        #msleep(10)
         
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time

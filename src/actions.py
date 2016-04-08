@@ -113,8 +113,9 @@ def goToGate():
     moveFrontArm(c.frontArmUp, 15)
     if c.isPrime:
         driveTimed(-90,-100, 1450)
-        timedLineFollowRight(2.5)
-        lineFollowRightSmoothCount(20) 
+        timedLineFollowRight(3.2)
+        lineFollowRightSmoothCount(15) 
+        driveTimed(25, 0, 300)
     else:
         driveTimed(-100,-100, 1300)
         timedLineFollowRight(2.7)
@@ -292,7 +293,17 @@ def depositComposter():
     moveBackArm(c.backArmUp, 10)
     driveTimed(70, 70, 2000)
    
-    
+# grab botguy
+def grabBotGuy():
+    print "grabBotGuy"
+    while not onBlackFront():
+        drive(100, 100)
+    driveTimed(0, 100, 1700)#1200
+    timedLineFollowLeft(1.5)#4
+    moveFrontClaw(c.frontClawOpen, 20)
+    moveFrontArm(c.frontArmGrabBot, 20)
+    driveTimed(50, 50, 700)
+    moveFrontClaw(c.frontClawClose)
 
 '''# Go to Red Poms
 def getRedPoms():
