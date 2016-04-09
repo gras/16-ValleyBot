@@ -125,7 +125,7 @@ def goToGate():
 def goToCube():
     print "goToCube"
     moveFrontClaw(c.frontClawOpen, 15)
-    moveFrontArm(c.frontArmMidCube, 15)
+    moveFrontArm(c.frontArmDown, 15)
     driveTimed(100,100,500)
     if c.isPrime:
         drive(100, 100)
@@ -134,14 +134,17 @@ def goToCube():
     while not onBlackFront():
         pass
     drive(0, 0)
-    moveFrontClaw(c.frontClawMid, 15)
+    driveTimed(-65, -65, 300)
+    moveFrontArm(c.frontArmMidCube, 15)
+    moveFrontClaw(c.frontClawCube, 15)
     moveFrontArm(c.frontArmUp, 15)
+    driveTimed(80, 80, 400)
     msleep(500)
 
 # Turns to drop cube off on our side of the board
 def dropOffCube():
     print"dropOffCube"
-    driveTimed(100, 0, 1900)
+    driveTimed(100, 0, 2400)
     moveFrontArm(c.frontArmMidCube, 15)
     moveFrontClaw(c.frontClawOpen, 20)#15
     msleep(500)
@@ -154,9 +157,19 @@ def getGoldPoms():
         driveTimed(-70, 0, 400)
     else:
         driveTimed(-70, 0, 230)
+    drive(-70, 0)
+    while not onBlackBack():# turn to black
+        pass
+    ao()
+    
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
-    driveTimed(-100, -100, 700)
+    #driveTimed(-40, 0, 200)#-30,0,200
+    driveTimed(-100,-100,1000)
+    moveBackClaw(c.backClawMidSolar, 15)
+    driveTimed(-100, -100, 100)
+    moveBackClaw(c.backClawOpen, 15)
+    driveTimed(-100, -100, 450)#1000
     if c.isPrime:
         drive(-20, -20)
         moveBackClaw(c.backClawClose, 10)
@@ -295,6 +308,7 @@ def depositComposter():
     moveBackClaw(c.backClawOpen, 10)
     moveBackArm(c.backArmUp, 10)
     driveTimed(70, 70, 2000)
+    DEBUG()
    
 # grab botguy
 def grabBotGuy():

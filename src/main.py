@@ -19,6 +19,7 @@ def main():
     act.goToCube()
     act.dropOffCube()   
     act.getGoldPoms()
+    DEBUG()
     act.getRedPoms()
     act.leaveValley()
     act.waitForTater()
