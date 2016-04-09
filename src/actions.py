@@ -191,17 +191,19 @@ def leaveValley():
     print "leaveValley"
     driveTimed(-80, -80, 720)#1100, 650
     if c.isPrime:
-        driveTimed(-70,0, 1900)
+        driveTimed(-70,0, 1850)#1900#1750#1550
     else:
-        driveTimed(-70, 0, 1500)     
+        driveTimed(-70, 0, 1500)    
     driveTimed(-100, -100, 1000) #back through gate          
          
 # go to Habitat wait to score
 def goToHabitat():
     print "goToHabitat"
-    drive(-50, 0) #angle robot to find black line
-    while not onBlackBack():
-        pass
+    
+    if not onBlackBack():    
+        drive(-50, 0) #angle robot to find black line
+        while not onBlackBack():
+            pass
     if c.isPrime:
         timedLineFollowLeftBack(5.0)
     else:
@@ -216,7 +218,8 @@ def goToHabitat():
 def waitForTater():
     print "waitForTater"
     print "press button to continue..."
-    waitForButton()
+    #waitForButton()
+    msleep(5000)
 
 # Score Poms   
 def depositGoldPoms():
@@ -299,11 +302,15 @@ def grabBotGuy():
     while not onBlackFront():
         drive(100, 100)
     driveTimed(0, 100, 1700)#1200
-    timedLineFollowLeft(1.5)#4
-    moveFrontClaw(c.frontClawOpen, 20)
+    timedLineFollowLeft(1.5)#4#1.5
+    timedLineFollowLeftSmooth(.8)
     moveFrontArm(c.frontArmGrabBot, 20)
-    driveTimed(50, 50, 700)
-    moveFrontClaw(c.frontClawClose)
+    moveFrontClaw(c.frontClawMid, 20)
+    driveTimed(70, 50, 600)
+    moveFrontClaw(c.frontClawOpen, 20)
+    driveTimed(-70, -50, 600)
+    moveFrontArm(c.frontArmDown, 20)
+    moveFrontClaw(c.frontClawMid)
 
 '''# Go to Red Poms
 def getRedPoms():

@@ -21,7 +21,7 @@ def main():
     act.getGoldPoms()
     act.getRedPoms()
     act.leaveValley()
-    #act.waitForTater()
+    act.waitForTater()
     act.goToHabitat()
     act.depositGoldPoms()
     act.depositRedPoms() 

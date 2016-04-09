@@ -95,9 +95,9 @@ def timedLineFollowLeftSmooth(time):
             driveTimed(40,20,20)#time was 10
         msleep(10)
         
-def timedLineFollowLeftBack(time): 
+def timedLineFollowLeftBack(time): # follows on starboard side
     sec = seconds() + time
-    while seconds() < sec :
+    while seconds() < sec : 
         if onBlackBack():
             driveTimed(-90,-20,20)
         else:
