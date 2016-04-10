@@ -33,6 +33,7 @@ from sensors import onBlackBack
 from sensors import onBlackFront
 from sensors import crossBlackFront
 from sensors import DEBUG
+from constants import frontClawCube, frontArmUp
 
 
 # Tests all hardware
@@ -114,8 +115,9 @@ def goToGate():
     if c.isPrime:
         driveTimed(-90,-100, 1450)
         timedLineFollowRight(3.2)
-        lineFollowRightSmoothCount(15) 
-        driveTimed(25, 0, 300)
+        timedLineFollowRightSmooth(1.0)
+        lineFollowRightSmoothCount(7) 
+        #driveTimed(25, 0, 300)
     else:
         driveTimed(-100,-100, 1300)
         timedLineFollowRight(2.7)
@@ -154,7 +156,7 @@ def dropOffCube():
 def getGoldPoms():
     print"getGoldPoms"
     if c.isPrime:
-        driveTimed(-70, 0, 400)
+        driveTimed(-70, 0, 500)#550
     else:
         driveTimed(-70, 0, 230)
     drive(-70, 0)
@@ -164,20 +166,25 @@ def getGoldPoms():
     
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
+    driveTimed(-100,-100,1000)   
+    '''
     #driveTimed(-40, 0, 200)#-30,0,200
     driveTimed(-100,-100,1000)
     moveBackClaw(c.backClawMidSolar, 15)
     driveTimed(-100, -100, 100)
     moveBackClaw(c.backClawOpen, 15)
     driveTimed(-100, -100, 450)#1000
+    
+    
     if c.isPrime:
         drive(-20, -20)
         moveBackClaw(c.backClawClose, 10)
         ao()
-    else:
-        drive(-20, -20)
-        moveBackClaw(c.backClawClose, 10)
-        ao()
+        else:
+        '''
+    drive(-20, -20)
+    moveBackClaw(c.backClawClose, 8)
+    ao()
     moveBackArm(c.backArmUp, 10)
     
 # Go to Red Poms
@@ -186,15 +193,18 @@ def getRedPoms():
     drive(0, 40)
     while not onBlackFront(): # wait for black
         pass
-    ao()
+    #ao()
     drive(20, 0)
-    while onBlackFront(): # wait for black
+    while onBlackFront(): # wait for white
         pass
+    #driveTimed(20, 0, 200)
+    #msleep(100)
     ao()
-    driveTimed(20, 0, 200)
     moveFrontArm(c.frontArmDown, 15)
-    driveTimed(100, 100, 800)
+    driveTimed(100, 100, 850)
     drive(30, 30)
+    msleep(500)
+    
     moveFrontClaw(c.frontClawClose, 6)
     drive(0,0)
     moveFrontArm(c.frontArmUp, 10)
@@ -202,23 +212,23 @@ def getRedPoms():
 # Exit Valley  
 def leaveValley():
     print "leaveValley"
-    driveTimed(-80, -80, 720)#1100, 650
+    driveTimed(-65, -65, 720)#1100, 650
     if c.isPrime:
-        driveTimed(-70,0, 1850)#1900#1750#1550
+        driveTimed(-90,0, 1750)#1900#1750#1550
     else:
         driveTimed(-70, 0, 1500)    
-    driveTimed(-100, -100, 1000) #back through gate          
+    driveTimed(-100, -100, 1000) #back through gate
+    if not onBlackBack():    
+        drive(-50, 0) #angle robot to find black line
+        while not onBlackBack():
+            pass    
+    timedLineFollowLeftBack(2.0)      
          
 # go to Habitat wait to score
 def goToHabitat():
     print "goToHabitat"
-    
-    if not onBlackBack():    
-        drive(-50, 0) #angle robot to find black line
-        while not onBlackBack():
-            pass
     if c.isPrime:
-        timedLineFollowLeftBack(5.0)
+        timedLineFollowLeftBack(3.0)
     else:
         timedLineFollowLeftBack(3.0)
     driveTimed(-30, -30, 1000)
@@ -232,7 +242,7 @@ def waitForTater():
     print "waitForTater"
     print "press button to continue..."
     #waitForButton()
-    msleep(5000)
+    msleep(4000)
 
 # Score Poms   
 def depositGoldPoms():
@@ -304,27 +314,25 @@ def returnToValley():
 # Score poop   
 def depositComposter():
     print"depositComposter"
-    moveBackArm(c.backArmMid, 10)
-    moveBackClaw(c.backClawOpen, 10)
+    moveBackArm(c.backArmCompGrab, 10)
+    moveBackClaw(c.backClawOpenComp, 10)
     moveBackArm(c.backArmUp, 10)
-    driveTimed(70, 70, 2000)
-    DEBUG()
    
-# grab botguy
-def grabBotGuy():
-    print "grabBotGuy"
-    while not onBlackFront():
-        drive(100, 100)
-    driveTimed(0, 100, 1700)#1200
-    timedLineFollowLeft(1.5)#4#1.5
-    timedLineFollowLeftSmooth(.8)
-    moveFrontArm(c.frontArmGrabBot, 20)
-    moveFrontClaw(c.frontClawMid, 20)
-    driveTimed(70, 50, 600)
-    moveFrontClaw(c.frontClawOpen, 20)
-    driveTimed(-70, -50, 600)
-    moveFrontArm(c.frontArmDown, 20)
-    moveFrontClaw(c.frontClawMid)
+def scoreCube():
+    print"scoreCube"
+    driveTimed(50, 50, 500)
+    driveTimed(50, -50, 650)
+    driveTimed(50, 50, 500)
+    moveFrontClaw(c.frontClawOpen, 15)
+    moveFrontArm(c.frontArmMidCube, 15)
+    msleep(100)
+    moveFrontClaw(frontClawCube, 10)
+    moveFrontArm(frontArmUp, 15)
+    msleep(200)
+    driveTimed(-75,75,1450)
+    moveFrontArm(c.frontArmDown, 15)
+    moveFrontClaw(c.frontClawOpen, 15)
+    driveTimed(50, 50, 500)
 
 '''# Go to Red Poms
 def getRedPoms():
