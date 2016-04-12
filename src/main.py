@@ -28,6 +28,7 @@ def main():
     act.getComposter()    
     act.deliverComposter()    
     act.depositComposter()
+    act.goToCube2()
     act.scoreCube()
     DEBUG()
     

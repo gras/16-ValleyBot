@@ -33,7 +33,7 @@ from sensors import onBlackBack
 from sensors import onBlackFront
 from sensors import crossBlackFront
 from sensors import DEBUG
-from constants import frontClawCube, frontArmUp
+
 
 
 # Tests all hardware
@@ -116,9 +116,10 @@ def goToGate():
         driveTimed(-90,-100, 1450)
         timedLineFollowRight(3.2)
         timedLineFollowRightSmooth(1.0)
-        lineFollowRightSmoothCount(7) 
+        lineFollowRightSmoothCount(10)#7 
         #driveTimed(25, 0, 300)
     else:
+        #fix to mirror prime
         driveTimed(-100,-100, 1300)
         timedLineFollowRight(2.7)
         timedLineFollowRightSmooth(3.2) 
@@ -167,21 +168,6 @@ def getGoldPoms():
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
     driveTimed(-100,-100,1000)   
-    '''
-    #driveTimed(-40, 0, 200)#-30,0,200
-    driveTimed(-100,-100,1000)
-    moveBackClaw(c.backClawMidSolar, 15)
-    driveTimed(-100, -100, 100)
-    moveBackClaw(c.backClawOpen, 15)
-    driveTimed(-100, -100, 450)#1000
-    
-    
-    if c.isPrime:
-        drive(-20, -20)
-        moveBackClaw(c.backClawClose, 10)
-        ao()
-        else:
-        '''
     drive(-20, -20)
     moveBackClaw(c.backClawClose, 8)
     ao()
@@ -193,15 +179,12 @@ def getRedPoms():
     drive(0, 40)
     while not onBlackFront(): # wait for black
         pass
-    #ao()
     drive(20, 0)
     while onBlackFront(): # wait for white
         pass
-    #driveTimed(20, 0, 200)
-    #msleep(100)
     ao()
     moveFrontArm(c.frontArmDown, 15)
-    driveTimed(100, 100, 850)
+    driveTimed(100, 100, 1000)#850
     drive(30, 30)
     msleep(500)
     
@@ -214,7 +197,7 @@ def leaveValley():
     print "leaveValley"
     driveTimed(-65, -65, 720)#1100, 650
     if c.isPrime:
-        driveTimed(-90,0, 1750)#1900#1750#1550
+        driveTimed(-90,0, 1750)
     else:
         driveTimed(-70, 0, 1500)    
     driveTimed(-100, -100, 1000) #back through gate
@@ -227,10 +210,7 @@ def leaveValley():
 # go to Habitat wait to score
 def goToHabitat():
     print "goToHabitat"
-    if c.isPrime:
-        timedLineFollowLeftBack(3.0)
-    else:
-        timedLineFollowLeftBack(3.0)
+    timedLineFollowLeftBack(3.0)
     driveTimed(-30, -30, 1000)
     if c.isPrime:
         driveTimed(50, 50, 300) 
@@ -249,16 +229,16 @@ def depositGoldPoms():
     print"depositGoldPoms"
     moveBackArm(c.backArmBinGrab, 10)
     driveTimed(50, 50, 500)
-    msleep(1000)
+    #msleep(1000)
     moveBackArm(c.backArmMid, 10)
-    msleep(1000)
+    #msleep(1000)
     moveBackClaw(c.backClawOpen, 10)
         
 # Score Poms   
 def depositRedPoms():
     print"depositRedPoms"
-    moveBackArm(c.backArmUp, 10)
-    moveBackClaw(c.backClawClose, 10)   
+    moveBackArm(c.backArmUp, 20)#10
+    moveBackClaw(c.backClawClose, 40)#10
     driveTimed(70, 70, 1400)
     if c.isPrime:
         driveTimed(-100, 100, 1000)
@@ -280,25 +260,51 @@ def depositRedPoms():
 def getComposter():
     print "getComposter"
     driveTimed(-100,-100, 500)
-    driveTimed(65, 0, 1690)#1700
+    driveTimed(65, 0, 1690)#1690
     driveTimed(-100, -100, 500) #600
     msleep(400);
     moveBackClaw(c.backClawOpen,10)
     moveBackArm(c.backArmCompGrab, 10)
     moveBackClaw(c.backClawCompGrab, 35)
     moveBackArm(c.backArmUp, 10)
-    msleep(1000);
+    #msleep(1000);
+
     
-        
 # moves composter to potato bin in habitat 
 def deliverComposter():
     print "deliverComposter"
     driveTimed(60,60,900)
-    driveTimed (50,-50, 1200)
+    driveTimed (50,-50, 1300)#1200
     driveTimed(-80, -80, 250)
 
+    
+# Score poop   
+def depositComposter():
+    print"depositComposter"
+    moveBackArm(c.backArmCompGrab, 10)
+    moveBackClaw(c.backClawOpenComp, 10)
+    moveBackArm(c.backArmUp, 10)
+   
+def goToCube2():
+    print"goToCube2"
+    driveTimed(50, 50, 500)
+    driveTimed(50, -50, 500)#600
+    driveTimed(50, 50, 500)
+    moveFrontClaw(c.frontClawOpen, 15)
+    moveFrontArm(c.frontArmMidCube, 15)
+    msleep(100)
+    moveFrontClaw(c.frontClawCube, 10)
+    moveFrontArm(c.frontArmUp, 15)
+    msleep(200)
+    
+def scoreCube():
+    print"scoreCube"
+    driveTimed(-75,75,1575)#1650
+    moveFrontArm(c.frontArmDown, 15)
+    moveFrontClaw(c.frontClawOpen, 15)
+    driveTimed(50, 50, 950)#900
 
-# Go back to valley
+'''# Go back to valley
 def returnToValley():
     print "returnToValley"
     moveFrontArm(c.frontArmUp, 15)
@@ -310,47 +316,5 @@ def returnToValley():
     timedLineFollowRightSmooth(1.55)
     driveTimed(60, 0, 250)
     driveTimed (80,80,1200)
-    
-# Score poop   
-def depositComposter():
-    print"depositComposter"
-    moveBackArm(c.backArmCompGrab, 10)
-    moveBackClaw(c.backClawOpenComp, 10)
-    moveBackArm(c.backArmUp, 10)
-   
-def scoreCube():
-    print"scoreCube"
-    driveTimed(50, 50, 500)
-    driveTimed(50, -50, 650)
-    driveTimed(50, 50, 500)
-    moveFrontClaw(c.frontClawOpen, 15)
-    moveFrontArm(c.frontArmMidCube, 15)
-    msleep(100)
-    moveFrontClaw(frontClawCube, 10)
-    moveFrontArm(frontArmUp, 15)
-    msleep(200)
-    driveTimed(-75,75,1450)
-    moveFrontArm(c.frontArmDown, 15)
-    moveFrontClaw(c.frontClawOpen, 15)
-    driveTimed(50, 50, 500)
-
-'''# Go to Red Poms
-def getRedPoms():
-    print "getRedPoms"
-    drive(60, 60)
-    while not onBlack():
-        pass
-    drive(0, 0)
-    driveTimed(70,0,1150)
-    moveFrontClaw(c.clawOpen, 25)
-    moveFrontArm(c.armDown, 25)
-    driveTimed(80, 80, 700)
-    moveFrontClaw(c.clawClosed, 15) 
-    msleep(300)
-    moveFrontClaw(c.clawOpen,15)
-    driveTimed(50,50,400)
-    moveFrontClaw(c.clawClosed, 15)
-    moveFrontArm(c.armUp, 15)
-  '''
-
+'''
     
