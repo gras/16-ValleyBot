@@ -11,6 +11,8 @@ from wallaby import ao
 from wallaby import disable_servos
 from wallaby import enable_servos
 from wallaby import msleep
+from wallaby import wait_for_light
+from wallaby import shut_down_in
  
 from drive import testMotors
 from drive import driveTimed
@@ -46,6 +48,8 @@ def init():
     testMotors()
     disable_servos()
     waitForButton()
+    shut_down_in(119.9)
+    msleep(1000)
     c.startTime = seconds()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
@@ -222,7 +226,7 @@ def waitForTater():
     print "waitForTater"
     print "press button to continue..."
     #waitForButton()
-    msleep(4000)
+    msleep(3000) #was 4000
 
 # Score Poms   
 def depositGoldPoms():
@@ -244,7 +248,7 @@ def depositRedPoms():
         driveTimed(-100, 100, 1000)
         drive(-50, 50)
         crossBlackFront()
-        timedLineFollowLeftSmooth(4)
+        timedLineFollowLeft(4) #was smooth
         driveTimed(50, 50, 300)
     else:
         #adjust to match prime? line follow

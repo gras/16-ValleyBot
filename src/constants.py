@@ -23,6 +23,7 @@ backClaw = 3
 # ANALOG ports
 FRONT_TOPHAT = 0
 REAR_TOPHAT = 1
+STARTLIGHT = 2
 
 
 # DIGITAL ports
