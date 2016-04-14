@@ -245,11 +245,11 @@ def depositRedPoms():
     #moveBackClaw(c.backClawClose, 50)#10
     driveTimed(70, 70, 400)
     if c.isPrime:
-        driveTimed(-100, 100, 1000)
+        driveTimed(-100, 100, 1200)
         drive(-50, 50)
         #crossBlackFront()
         #timedLineFollowLeft(4) #was smooth
-        driveTimed(50, 50, 100)
+        driveTimed(50, 50, 150)
     else:
         #adjust to match prime? line follow
         driveTimed(-100, 100, 1200) 
