@@ -26,6 +26,7 @@ def main():
     act.goToHabitat()
     act.depositGoldPoms()
     act.depositRedPoms() 
+    DEBUG()
     act.getComposter()    
     act.deliverComposter()    
     act.depositComposter()

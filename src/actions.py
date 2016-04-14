@@ -226,7 +226,7 @@ def waitForTater():
     print "waitForTater"
     print "press button to continue..."
     #waitForButton()
-    msleep(3000) #was 4000
+    msleep(2500) #was 4000
 
 # Score Poms   
 def depositGoldPoms():
@@ -241,15 +241,15 @@ def depositGoldPoms():
 # Score Poms   
 def depositRedPoms():
     print"depositRedPoms"
-    moveBackArm(c.backArmUp, 20)#10
-    moveBackClaw(c.backClawClose, 40)#10
-    driveTimed(70, 70, 1400)
+    moveBackArm(c.backArmUp, 50)#10
+    #moveBackClaw(c.backClawClose, 50)#10
+    driveTimed(70, 70, 400)
     if c.isPrime:
         driveTimed(-100, 100, 1000)
         drive(-50, 50)
-        crossBlackFront()
-        timedLineFollowLeft(4) #was smooth
-        driveTimed(50, 50, 300)
+        #crossBlackFront()
+        #timedLineFollowLeft(4) #was smooth
+        driveTimed(50, 50, 100)
     else:
         #adjust to match prime? line follow
         driveTimed(-100, 100, 1200) 
@@ -257,7 +257,7 @@ def depositRedPoms():
     moveFrontArm(c.frontArmMidPom, 10)
     moveFrontClaw(c.frontClawOpen, 10)
     moveFrontArm(c.frontArmUp, 10)
-    moveFrontClaw(c.frontClawClose, 10)
+    #moveFrontClaw(c.frontClawClose, 10)
     
     
 # Get to Valley    
