@@ -68,16 +68,27 @@ else:
     print "running Clone"
     # servo positions
     frontArmUp = 1900 # Arm at 90 degrees up
-    frontArmDown = 630 # Arm forward on ground
-    frontArmMidCube = 1200
+    frontArmMidCube = 1100 #Arm at 30 degrees up
+    frontArmGrabBot =  1200 #grabs BotGuy well
     frontArmMidPom = 1300
+    frontArmDown = 630 # Arm forward on ground
+    
     frontClawOpen = 2000 # Claw open
     frontClawMid = 1300 #1500
-    frontClawClose = 700 # Claw closed     800
-    backArmUp = 1400
-    backArmDown = 440
-    backArmMid = 1000
-    backClawClose = 1600
+    frontClawCube = 1600
+    frontClawClose = 1200 # Claw closed     700
+    
     backClawOpen = 500
+    backClawOpenComp = 350
     backClawMid = 1100
+    backClawMidSolar = 1300
+    backClawClose = 1600
+    backClawCompGrab = 1550
+    
+    backArmDown = 440
+    backArmBinGrab = 750
+    backArmCompGrab = 780
+    backArmMid = 1000
+    backArmUp = 1400
+    
         
