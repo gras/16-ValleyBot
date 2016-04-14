@@ -11,8 +11,8 @@ from sensors import DEBUG
 def main():
     print "I am ValleyBot"
     act.init()
-    DEBUG()
     act.getOutOfStartBox()
+    DEBUG()
     act.goToDebris()
     act.removeDebris()
     act.dumpDebris()
@@ -26,7 +26,6 @@ def main():
     act.goToHabitat()
     act.depositGoldPoms()
     act.depositRedPoms() 
-    DEBUG()
     act.getComposter()    
     act.deliverComposter()    
     act.depositComposter()
