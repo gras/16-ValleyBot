@@ -11,6 +11,7 @@ from sensors import DEBUG
 def main():
     print "I am ValleyBot"
     act.init()
+    DEBUG()
     act.getOutOfStartBox()
     act.goToDebris()
     act.removeDebris()
