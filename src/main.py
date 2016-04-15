@@ -12,7 +12,6 @@ def main():
     print "I am ValleyBot"
     act.init()
     act.getOutOfStartBox()
-    DEBUG()
     act.goToDebris()
     act.removeDebris()
     act.dumpDebris()
@@ -31,6 +30,7 @@ def main():
     act.depositComposter()
     act.goToCube2()
     act.scoreCube()
+    act.returnToValley()
     DEBUG()
     
     #act.returnToValley()

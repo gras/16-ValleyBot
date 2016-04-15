@@ -7,6 +7,9 @@ Created on Mar 13, 2016
 '''
 import wallaby as w  
 
+# Start light threshold
+startLightThresh = 2000
+
 # TIME
 startTime = -1
 

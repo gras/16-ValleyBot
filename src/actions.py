@@ -11,7 +11,6 @@ from wallaby import ao
 from wallaby import disable_servos
 from wallaby import enable_servos
 from wallaby import msleep
-from wallaby import wait_for_light
 from wallaby import shut_down_in
  
 from drive import testMotors
@@ -30,12 +29,11 @@ from servos import moveFrontClaw
 from servos import moveBackClaw
 from servos import moveBackArm
 
-from sensors import waitForButton
-from sensors import onBlackBack
-from sensors import onBlackFront
-from sensors import crossBlackFront
-from sensors import DEBUG
 
+from sensors import onBlackBack, crossBlackFront
+from sensors import onBlackFront
+#from sensors import DEBUG
+from sensors import wait4light
 
 
 # Tests all hardware
@@ -47,9 +45,8 @@ def init():
     testServos()
     testMotors()
     disable_servos()
-    waitForButton()
+    wait4light()
     shut_down_in(119.9)
-    msleep(1000)
     c.startTime = seconds()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
@@ -307,18 +304,19 @@ def scoreCube():
     moveFrontArm(c.frontArmDown, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     driveTimed(50, 50, 950)#900
-
-'''# Go back to valley
+    
 def returnToValley():
     print "returnToValley"
+    driveTimed(-50, -50, 500)
     moveFrontArm(c.frontArmUp, 15)
-    moveFrontClaw(c.frontClawClose, 15)
-    driveTimed (-50,-50,230)
-    driveTimed (100,-70,500)
-    drive (40,0)
+    drive (50, -50)
     crossBlackFront()
-    timedLineFollowRightSmooth(1.55)
-    driveTimed(60, 0, 250)
-    driveTimed (80,80,1200)
-'''
+    driveTimed (100, 85, 1000)
+    drive (65, 50)
+    crossBlackFront()
+    drive (-50, 50)
+    crossBlackFront()
+    timedLineFollowLeft(2.0)
+    ao()
+        
     
