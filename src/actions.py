@@ -198,7 +198,7 @@ def leaveValley():
     print "leaveValley"
     driveTimed(-65, -65, 720)#1100, 650
     if c.isPrime:
-        driveTimed(-90,0, 1750)
+        driveTimed(-90,0, 1650) #1750
     else:
         driveTimed(-70, 0, 1500)    
     driveTimed(-100, -100, 1000) #back through gate
@@ -316,7 +316,11 @@ def returnToValley():
     crossBlackFront()
     drive (-50, 50)
     crossBlackFront()
-    timedLineFollowLeft(2.0)
+    timedLineFollowLeft(3.5)
+    drive(-30, 30)
+    while onBlackFront():
+        pass
     ao()
+    moveFrontArm(c.frontArmGrabBot, 15)
         
     
