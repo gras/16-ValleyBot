@@ -69,14 +69,11 @@ def getOutOfStartBox():
 # Moves forward until robot reaches debris
 def goToDebris():
     print "goToDebris"
-    if c.isPrime:
-        timedLineFollowLeft(3.75)
-    else:
-        timedLineFollowLeft(4.75)
+    timedLineFollowLeft(3.75)
     driveTimed(-70, 70, 750)
     driveTimed(-50, -50, 1400)
     moveBackArm(c.backArmDown, 15)
-    moveBackClaw(c.backClawOpen, 15)
+    moveBackClaw(c.backClawOpen, 15) #DELIVERS SOLAR ARRAYS
     moveBackArm(c.backArmUp, 15)
     moveBackClaw(c.backClawClose, 15)
     driveTimed(50, 50, 1400)
@@ -105,28 +102,21 @@ def dumpDebris():
 def goToGate():
     print "goToGate"
     moveFrontArm(c.frontArmUp, 15)
-    if c.isPrime:
-        driveTimed(-90,-100, 1450)
-        timedLineFollowRight(3.2)
-        timedLineFollowRightSmooth(1.0)
-        lineFollowRightSmoothCount(10)#7 
-        #driveTimed(25, 0, 300)
-    else:
-        #fix to mirror prime
-        driveTimed(-100,-100, 1300)
-        timedLineFollowRight(2.7)
-        timedLineFollowRightSmooth(3.2) 
-        
+    driveTimed(-90,-100, 1450)
+    timedLineFollowRight(3.2)
+    timedLineFollowRightSmooth(1.0)
+    lineFollowRightSmoothCount(10)#7 
+    
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmDown, 15)
-    driveTimed(100,100,500)
     if c.isPrime:
-        drive(100, 100)
-    else:
-        drive(90, 100)
+        driveTimed(100,100,500)
+    else: 
+        driveTimed(100, 90, 500)
+    drive(100, 100)
     while not onBlackFront():
         pass
     drive(0, 0)
@@ -149,10 +139,7 @@ def dropOffCube():
 # drives to and grabs gold poms
 def getGoldPoms():
     print"getGoldPoms"
-    if c.isPrime:
-        driveTimed(-70, 0, 500)#550
-    else:
-        driveTimed(-70, 0, 230)
+    driveTimed(-70, 0, 500)
     drive(-70, 0)
     while not onBlackBack():# turn to black
         pass
@@ -192,7 +179,7 @@ def leaveValley():
     if c.isPrime:
         driveTimed(-90,0, 1650) #1750
     else:
-        driveTimed(-70, 0, 1500)    
+        driveTimed(-90, 0, 1650) # -90, 0, 1500    
     driveTimed(-100, -100, 1000) #back through gate
     if not onBlackBack():    
         drive(-50, 0) #angle robot to find black line

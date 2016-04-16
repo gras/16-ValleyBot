@@ -76,16 +76,16 @@ else:
     frontArmMidPom = 1300
     frontArmDown = 630 # Arm forward on ground
     
-    frontClawOpen = 2000 # Claw open
-    frontClawMid = 1300 #1500
-    frontClawCube = 1600
-    frontClawClose = 1200 # Claw closed     700
+    frontClawOpen = 1400 # Claw open
+    frontClawMid = 600 #1500
+    frontClawCube = 500
+    frontClawClose = 200 # Claw closed     
     
-    backClawOpen = 500
+    backClawOpen = 100
     backClawOpenComp = 350
-    backClawMid = 1100
+    backClawMid = 700
     backClawMidSolar = 1300
-    backClawClose = 1600
+    backClawClose = 1275
     backClawCompGrab = 1550
     
     backArmDown = 440
