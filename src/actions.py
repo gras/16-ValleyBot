@@ -35,6 +35,7 @@ from sensors import crossBlackFront
 from sensors import onBlackFront
 from sensors import wait4light
 from sensors import testSensors
+from sensors import DEBUG
 
 # Tests all hardware
 def init():
@@ -109,8 +110,7 @@ def goToGate():
         driveTimed(-90,-100, 1450)
         timedLineFollowRight(3.2)
         timedLineFollowRightSmooth(1.0)
-        lineFollowRightSmoothCount(10)#7 
-        #driveTimed(25, 0, 300)
+        lineFollowRightSmoothCount(10)#7  
     else:
         #fix to mirror prime
         driveTimed(-100,-100, 1300)
@@ -214,7 +214,6 @@ def goToHabitat():
 def waitForTater():
     print "waitForTater"
     print "press button to continue..."
-    #waitForButton()
     msleep(2500) #was 4000
 
 # Score Poms   
@@ -231,23 +230,17 @@ def depositGoldPoms():
 def depositRedPoms():
     print"depositRedPoms"
     moveBackArm(c.backArmUp, 50)#10
-    #moveBackClaw(c.backClawClose, 50)#10
     driveTimed(70, 70, 400)
     if c.isPrime:
         driveTimed(-100, 100, 1200)
         drive(-50, 50)
-        #crossBlackFront()
-        #timedLineFollowLeft(4) #was smooth
-        driveTimed(50, 50, 150)
+        driveTimed(50, 50, 200) #was 150
     else:
-        #adjust to match prime? line follow
         driveTimed(-100, 100, 1200) 
         driveTimed(70, 70, 1400)
     moveFrontArm(c.frontArmMidPom, 10)
     moveFrontClaw(c.frontClawOpen, 10)
     moveFrontArm(c.frontArmUp, 10)
-    #moveFrontClaw(c.frontClawClose, 10)
-    
     
 # Get to Valley    
 def getComposter():
@@ -260,7 +253,7 @@ def getComposter():
     moveBackArm(c.backArmCompGrab, 10)
     moveBackClaw(c.backClawCompGrab, 35)
     moveBackArm(c.backArmUp, 10)
-    #msleep(1000);
+
 
     
 # moves composter to potato bin in habitat 
@@ -321,8 +314,6 @@ def deliverBotGuy():
     driveTimed(70, 0, 900)
     msleep(500)
     driveTimed(60, 60, 1200)
-    driveTimed(0, 100, 550)
-    driveTimed(100, 100, 1000)
-    driveTimed(0, 100, 1000)
-        
+    driveTimed(0, 100, 1200)
+    msleep(5000)    
     
