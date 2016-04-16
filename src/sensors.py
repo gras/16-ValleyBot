@@ -43,6 +43,17 @@ def waitForButton():
     print "Pressed"
     msleep(1000)
 
+def testSensors():
+    if onBlackFront():
+        print "Problem with front tophat."
+        print "Check for unplugged tophat or bad robot setup"
+        DEBUG()
+    if onBlackBack():
+        print "Problem with back tophat."
+        print "Check for unplugged tophat or bad robot setup"
+
+        DEBUG()
+
 def DEBUG():
     ao()
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime

@@ -32,10 +32,8 @@ def main():
     act.goToCube2()
     act.scoreCube()
     act.returnToValley()
-    DEBUG()
-    
-    #act.returnToValley()
-    
+    act.deliverBotGuy()
+    DEBUG()    
     return 0
 
     

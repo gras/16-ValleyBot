@@ -30,11 +30,11 @@ from servos import moveBackClaw
 from servos import moveBackArm
 
 
-from sensors import onBlackBack, crossBlackFront
+from sensors import onBlackBack 
+from sensors import crossBlackFront
 from sensors import onBlackFront
-from sensors import DEBUG
 from sensors import wait4light
-
+from sensors import testSensors
 
 # Tests all hardware
 def init():
@@ -42,6 +42,7 @@ def init():
         print "Running Valley - Prime"
     else:
         print "Running Valley - Clone"   
+    testSensors()
     testServos()
     testMotors()
     disable_servos()
@@ -302,16 +303,20 @@ def returnToValley():
     moveFrontArm(c.frontArmUp, 15)
     drive (50, -50)
     crossBlackFront()
-    driveTimed (100, 85, 1000)
-    drive (65, 50)
+    driveTimed (100, 85, 1300)
+    drive(100, 100)
     crossBlackFront()
-    drive (-50, 50)
-    crossBlackFront()
-    timedLineFollowLeft(3.5)
-    drive(-30, 30)
-    while onBlackFront():
-        pass
+    timedLineFollowRight(2.8)
+    timedLineFollowRightSmooth(1.0)
+    driveTimed(0, 50, 150)
     ao()
+    
+def deliverBotGuy():
     moveFrontArm(c.frontArmGrabBot, 15)
+    msleep(1000)
+    moveFrontClaw(c.frontClawClose, 2000)
+    msleep(10000)
+    moveFrontArm(c.frontArmUp, 15)
+    msleep(5000)
         
     
