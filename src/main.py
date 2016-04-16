@@ -17,7 +17,6 @@ def main():
     act.dumpDebris()
     act.goToGate() 
     act.goToCube()
-    DEBUG()
     act.dropOffCube()   
     act.getGoldPoms()
     act.getRedPoms()

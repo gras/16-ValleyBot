@@ -313,10 +313,16 @@ def returnToValley():
     
 def deliverBotGuy():
     moveFrontArm(c.frontArmGrabBot, 15)
-    msleep(1000)
+    msleep(500)
     moveFrontClaw(c.frontClawClose, 2000)
-    msleep(10000)
+    msleep(500)
     moveFrontArm(c.frontArmUp, 15)
-    msleep(5000)
+    msleep(500)
+    driveTimed(70, 0, 900)
+    msleep(500)
+    driveTimed(60, 60, 1200)
+    driveTimed(0, 100, 550)
+    driveTimed(100, 100, 1000)
+    driveTimed(0, 100, 1000)
         
     
