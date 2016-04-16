@@ -25,8 +25,7 @@ def testServos():
     moveFrontArm(c.frontArmUp, 25)
     moveFrontClaw(c.frontClawOpen, 25) 
     msleep(500)
-    moveFrontClaw(c.frontClawClose, 25)
-    
+    moveFrontClaw(c.frontClawClose, 25)    
     moveBackArm(c.backArmDown, 25)
     msleep(500)
     moveBackArm(c.backArmUp, 25)
