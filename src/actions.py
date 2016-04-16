@@ -145,7 +145,6 @@ def getGoldPoms():
     while not onBlackBack():# turn to black
         pass
     ao()
-    
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
     driveTimed(-100,-100,1000)   
