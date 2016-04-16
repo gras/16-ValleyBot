@@ -32,7 +32,7 @@ from servos import moveBackArm
 
 from sensors import onBlackBack, crossBlackFront
 from sensors import onBlackFront
-#from sensors import DEBUG
+from sensors import DEBUG
 from sensors import wait4light
 
 
@@ -69,22 +69,19 @@ def getOutOfStartBox():
 def goToDebris():
     print "goToDebris"
     if c.isPrime:
-        timedLineFollowLeft(3.75) 
-        driveTimed(-70, 70, 750)
-        driveTimed(-50, -50, 1400)
-        moveBackArm(c.backArmDown, 15)
-        moveBackClaw(c.backClawOpen, 15)
-        moveBackArm(c.backArmUp, 15)
-        moveBackClaw(c.backClawClose, 15)
-        driveTimed(50, 50, 1400)
-        driveTimed(70, -70, 750)
-        timedLineFollowLeftSmooth(.75)
-        driveTimed(50, 50, 1000)
+        timedLineFollowLeft(3.75)
     else:
-        timedLineFollowLeft(5.0)
-        timedLineFollowLeftSmooth(1.25)
-        driveTimed(50, 57, 1000)
-
+        timedLineFollowLeft(4.75)
+    driveTimed(-70, 70, 750)
+    driveTimed(-50, -50, 1400)
+    moveBackArm(c.backArmDown, 15)
+    moveBackClaw(c.backClawOpen, 15)
+    moveBackArm(c.backArmUp, 15)
+    moveBackClaw(c.backClawClose, 15)
+    driveTimed(50, 50, 1400)
+    driveTimed(70, -70, 750)
+    timedLineFollowLeftSmooth(.75)
+    driveTimed(50, 50, 1000)
 
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
@@ -96,18 +93,12 @@ def removeDebris():
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    if c.isPrime:
-        driveTimed(0,-100,1100)#1000
-        driveTimed(60,70,500)
-        driveTimed(90,0,600)#500
-        driveTimed(60,90,225)
-        driveTimed(60,70,900)#1000
-    else:
-        driveTimed(0,-100,900)
-        driveTimed(60,70,500)
-        driveTimed(90,0,500)#600
-        driveTimed(60,90,350)
-        driveTimed(60,70,1000)
+    driveTimed(0,-100,1100)
+    driveTimed(60,70,500)
+    driveTimed(90,0,600)
+    driveTimed(60,90,225)
+    driveTimed(60,70,900)
+    
         
 # Drives backwards and follows line to reach gate
 def goToGate():
