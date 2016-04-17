@@ -164,10 +164,9 @@ def getRedPoms():
         pass
     ao()
     moveFrontArm(c.frontArmDown, 15)
-    driveTimed(100, 100, 1000)#850
+    driveTimed(93, 100, 1000)
     drive(30, 30)
     msleep(500)
-    
     moveFrontClaw(c.frontClawClose, 6)
     drive(0,0)
     moveFrontArm(c.frontArmUp, 10)
@@ -176,32 +175,32 @@ def getRedPoms():
 def leaveValley():
     print "leaveValley"
     driveTimed(-65, -65, 720)#1100, 650
-    if c.isPrime:
-        driveTimed(-90,0, 1650) #1750
-    else:
-        driveTimed(-90, 0, 1650) # -90, 0, 1500    
+    driveTimed(-90,0, 1650) #1750  
     driveTimed(-100, -100, 1000) #back through gate
     if not onBlackBack():    
-        drive(-50, 0) #angle robot to find black line
+        drive(-50, -30) #angle robot to find black line
         while not onBlackBack():
-            pass    
-    timedLineFollowLeftBack(2.0)      
+            pass
+    drive(-50, -30) 
+    while onBlackBack():
+        pass   
+    timedLineFollowLeftBack(2.0) 
+    
+#wait For tater bot
+def waitForTater():
+    print "waitForTater"
+    print "press button to continue..."
+    msleep(2500) #was 4000     
          
 # go to Habitat wait to score
 def goToHabitat():
     print "goToHabitat"
-    timedLineFollowLeftBack(3.0)
+    timedLineFollowLeftBack(2.0)#was 3.0
     driveTimed(-30, -30, 1000)
     if c.isPrime:
         driveTimed(50, 50, 300) 
     else:
         driveTimed(50, 50, 500) 
-
-#wait For tater bot
-def waitForTater():
-    print "waitForTater"
-    print "press button to continue..."
-    msleep(2500) #was 4000
 
 # Score Poms   
 def depositGoldPoms():
@@ -220,8 +219,8 @@ def depositRedPoms():
     driveTimed(70, 70, 400)
     if c.isPrime:
         driveTimed(-100, 100, 1200)
-        drive(-50, 50)
-        driveTimed(50, 50, 200) #was 150
+        #drive(-50, 50)
+        driveTimed(50, 50, 350) #was 200
     else:
         driveTimed(-100, 100, 1200) 
         driveTimed(70, 70, 1400)
@@ -233,7 +232,7 @@ def depositRedPoms():
 def getComposter():
     print "getComposter"
     driveTimed(-100,-100, 500)
-    driveTimed(65, 0, 1690)#1690
+    driveTimed(65, 0, 1620)#1690
     driveTimed(-100, -100, 500) #600
     msleep(400);
     moveBackClaw(c.backClawOpen,10)
@@ -261,7 +260,7 @@ def depositComposter():
 def goToCube2():
     print"goToCube2"
     driveTimed(50, 50, 500)
-    driveTimed(50, -50, 500)#600
+    driveTimed(50, -50, 450)#600
     driveTimed(50, 50, 500)
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmMidCube, 15)
@@ -292,15 +291,40 @@ def returnToValley():
     ao()
     
 def deliverBotGuy():
+    print "deliverBotGuy"
     moveFrontArm(c.frontArmGrabBot, 15)
     msleep(500)
     moveFrontClaw(c.frontClawClose, 2000)
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     msleep(500)
-    driveTimed(70, 0, 900)
-    msleep(500)
-    driveTimed(60, 60, 1200)
-    driveTimed(0, 100, 1200)
-    msleep(5000)    
+    driveTimed(60, 60, 3000)#was 2300
+    driveTimed(-50, 50, 1450)
+    driveTimed(50, 50, 1500)
+    moveFrontArm(c.frontArmGrabBot, 15)
+    #moveFrontClaw(c.frontClawOpen, 15)
+    #moveFrontArm(c.frontArmUp, 30)
+    msleep(500)   
+    
+def crabDance():
+    print "crabDance"
+    moveBackArm(c.backArmUp, 15)
+    moveBackClaw(c.backClawOpen, 15)
+    msleep(200)
+    moveFrontClaw(c.frontClawOpen, 15)
+    msleep(200)
+    moveBackClaw(c.backClawClose, 15)
+    msleep(200)
+    moveFrontClaw(c.frontClawClose, 15)
+    msleep(200)
+    moveBackClaw(c.backClawOpen, 15)
+    msleep(200)
+    moveFrontClaw(c.frontClawOpen, 15)
+    msleep(200)
+    moveBackClaw(c.backClawClose, 15)
+    msleep(200)
+    moveFrontClaw(c.frontClawClose, 15)
+    msleep(200)
+    
+    
     

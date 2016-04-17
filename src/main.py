@@ -27,7 +27,6 @@ def main():
     act.depositRedPoms()
     act.getComposter()  
     act.deliverComposter()   
-    DEBUG()   
     act.depositComposter()
     act.goToCube2()
     act.scoreCube()
