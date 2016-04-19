@@ -67,7 +67,8 @@ def wait4light():
 def calibrate(port):
     print "Press A button with light on"
     while not a_button_clicked():
-        pass
+        if digital(c.RIGHT_BUTTON):
+            DEBUG()
     lightOn = analog(port)
     print "On value =", lightOn
     if lightOn > 200:
@@ -76,7 +77,8 @@ def calibrate(port):
     
     print "Press B button with light off"
     while not b_button_clicked():
-        pass
+        if digital(c.RIGHT_BUTTON):
+            DEBUG()
     lightOff = analog(port)
     print "Off value =", lightOff
     if lightOff < 3000:
