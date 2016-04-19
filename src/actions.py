@@ -76,11 +76,11 @@ def goToDebris():
     else:
         driveTimed(-70, 70, 700)
     driveTimed(-50, -50, 1400)
-    moveBackArm(c.backArmDown, 15)
     if c.isPrime:
         pass
     else:
-        driveTimed(20, -20, 600)
+        driveTimed(-20, 20, 200)
+    moveBackArm(c.backArmDown, 15)
     moveBackClaw(c.backClawOpen, 15) #DELIVERS SOLAR ARRAYS
     moveBackArm(c.backArmUp, 15)
     moveBackClaw(c.backClawClose, 15)
@@ -313,7 +313,7 @@ def deliverBotGuy():
     msleep(500)
     driveTimed(70, 60, 3500)#was 2300
     driveTimed(-50, 50, 1450)
-    driveTimed(50, 50, 1500)
+    driveTimed(50, 50, 1000)
     moveFrontArm(c.frontArmGrabBot, 15)
     #moveFrontClaw(c.frontClawOpen, 15)
     #moveFrontArm(c.frontArmUp, 30)
