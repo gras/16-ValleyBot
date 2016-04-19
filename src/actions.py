@@ -311,7 +311,7 @@ def deliverBotGuy():
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     msleep(500)
-    driveTimed(70, 60, 3500)#was 2300
+    driveTimed(70, 60, 3400)#was 3500
     driveTimed(-50, 50, 1450)
     driveTimed(50, 50, 1500)
     moveFrontArm(c.frontArmGrabBot, 15)
