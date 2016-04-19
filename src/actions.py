@@ -71,9 +71,16 @@ def getOutOfStartBox():
 def goToDebris():
     print "goToDebris"
     timedLineFollowLeft(3.75)
-    driveTimed(-70, 70, 750)
+    if c.isPrime:
+        driveTimed(-70, 70, 750)
+    else:
+        driveTimed(-70, 70, 700)
     driveTimed(-50, -50, 1400)
     moveBackArm(c.backArmDown, 15)
+    if c.isPrime:
+        pass
+    else:
+        driveTimed(20, -20, 600)
     moveBackClaw(c.backClawOpen, 15) #DELIVERS SOLAR ARRAYS
     moveBackArm(c.backArmUp, 15)
     moveBackClaw(c.backClawClose, 15)
@@ -96,8 +103,8 @@ def dumpDebris():
     driveTimed(60,70,500)
     driveTimed(90,0,600)
     driveTimed(60,90,225)
-    driveTimed(60,70,900)
-    
+    driveTimed(60,70,800)#900
+#####Clone debugged to here!    
         
 # Drives backwards and follows line to reach gate
 def goToGate():
@@ -175,7 +182,10 @@ def getRedPoms():
 def leaveValley():
     print "leaveValley"
     driveTimed(-65, -65, 720)#1100, 650
-    driveTimed(-90,0, 1650) #1750  
+    if c.isPrime:
+        driveTimed(-90,0, 1650) #1750
+    else:
+        driveTimed(-90, 0, 1550)  
     driveTimed(-100, -100, 1000) #back through gate
     if not onBlackBack():    
         drive(-50, -30) #angle robot to find black line
@@ -206,7 +216,10 @@ def goToHabitat():
 def depositGoldPoms():
     print"depositGoldPoms"
     moveBackArm(c.backArmBinGrab, 10)
-    driveTimed(50, 50, 500)
+    if c.isPrime:
+        driveTimed(50, 50, 500)
+    else:
+        driveTimed(50, 50, 250)
     #msleep(1000)
     moveBackArm(c.backArmMid, 10)
     #msleep(1000)
@@ -298,7 +311,7 @@ def deliverBotGuy():
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     msleep(500)
-    driveTimed(60, 60, 3000)#was 2300
+    driveTimed(70, 60, 3500)#was 2300
     driveTimed(-50, 50, 1450)
     driveTimed(50, 50, 1500)
     moveFrontArm(c.frontArmGrabBot, 15)
