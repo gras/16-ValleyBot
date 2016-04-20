@@ -298,8 +298,8 @@ def returnToValley():
     driveTimed (100, 85, 1300)
     drive(100, 100)
     crossBlackFront()
-    timedLineFollowRight(2.8)
-    timedLineFollowRightSmooth(1.0)
+    timedLineFollowRight(2.5)#was 2.8
+    timedLineFollowRightSmooth(1.0)#was 0.8
     driveTimed(0, 50, 150)
     ao()
     
@@ -307,7 +307,7 @@ def deliverBotGuy():
     print "deliverBotGuy"
     moveFrontArm(c.frontArmGrabBot, 15)
     msleep(500)
-    moveFrontClaw(c.frontClawClose, 2000)
+    moveFrontClaw(c.frontClawClose, 2000)#grab botguy
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     msleep(500)
