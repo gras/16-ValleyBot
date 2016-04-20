@@ -79,7 +79,7 @@ def goToDebris():
     if c.isPrime:
         pass
     else:
-        driveTimed(-20, 20, 200)
+        driveTimed(-20, 20, 190)
     moveBackArm(c.backArmDown, 15)
     moveBackClaw(c.backClawOpen, 15) #DELIVERS SOLAR ARRAYS
     moveBackArm(c.backArmUp, 15)
@@ -259,7 +259,7 @@ def getComposter():
 def deliverComposter():
     print "deliverComposter"
     driveTimed(60,60,900)
-    driveTimed (50,-50, 1300)#1200
+    driveTimed (50,-50, 1300)
     driveTimed(-80, -80, 250)
 
     
@@ -273,7 +273,7 @@ def depositComposter():
 def goToCube2():
     print"goToCube2"
     driveTimed(50, 50, 500)
-    driveTimed(50, -50, 500)#600
+    driveTimed(50, -50, 500)
     driveTimed(50, 50, 500)
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmMidCube, 15)
@@ -284,10 +284,10 @@ def goToCube2():
     
 def scoreCube():
     print"scoreCube"
-    driveTimed(-75,75,1575)#1650
+    driveTimed(-75,75,1575)
     moveFrontArm(c.frontArmDown, 15)
     moveFrontClaw(c.frontClawOpen, 15)
-    driveTimed(50, 50, 950)#900
+    driveTimed(50, 50, 1000)
     
 def returnToValley():
     print "returnToValley"
