@@ -1,4 +1,4 @@
-#16-ValleyBot sensors.py
+# 16-ValleyBot sensors.py
 '''
 Created on Mar 13, 2016
 
@@ -16,16 +16,16 @@ from wallaby import a_button_clicked
 from wallaby import b_button_clicked
 
 def crossBlackFront():
-    while not onBlackFront(): # wait for black
+    while not onBlackFront():  # wait for black
         pass
-    while onBlackFront(): # wait for white
+    while onBlackFront():  # wait for white
         pass
     ao()
     
 def crossBlackBack():
-    while not onBlackBack(): # wait for black
+    while not onBlackBack():  # wait for black
         pass
-    while onBlackBack(): # wait for white
+    while onBlackBack():  # wait for white
         pass
     ao()
 
@@ -51,7 +51,6 @@ def testSensors():
     if onBlackBack():
         print "Problem with back tophat."
         print "Check for unplugged tophat or bad robot setup"
-
         DEBUG()
 
 def DEBUG():
@@ -88,7 +87,7 @@ def calibrate(port):
     if (lightOff - lightOn) < 2000:
         print "Bad calibration"
         return False
-    c.startLightThresh = (lightOff - lightOn)/2
+    c.startLightThresh = (lightOff - lightOn) / 2
     print "Good calibration! ", c.startLightThresh 
     return True
 

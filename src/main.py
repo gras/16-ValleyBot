@@ -15,7 +15,7 @@ def main():
     act.goToDebris()
     act.removeDebris()
     act.dumpDebris()
-    DEBUG()
+    #DEBUG()
     act.goToGate() 
     act.goToCube()
     act.dropOffCube()  
@@ -35,7 +35,6 @@ def main():
     act.deliverBotGuy()
     DEBUG()    
     return 0
-
     
 if __name__ == "__main__":
     # set print to unbuffered

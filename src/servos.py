@@ -1,4 +1,4 @@
-#16-ValleyBot servos.py
+# 16-ValleyBot servos.py
 '''
 Created on Mar 13, 2016
 
@@ -34,37 +34,37 @@ def testServos():
     moveBackClaw(c.backClawClose, 25)
     msleep(1000)
    
-def moveFrontArm( endPos, speed=15 ):
-    _moveServo( c.frontArm, endPos, speed )
+def moveFrontArm(endPos, speed=15):
+    _moveServo(c.frontArm, endPos, speed)
 
-def moveFrontClaw( endPos, speed=15 ):
-    _moveServo( c.frontClaw, endPos, speed )
+def moveFrontClaw(endPos, speed=15):
+    _moveServo(c.frontClaw, endPos, speed)
 
-def moveBackArm( endPos, speed=15 ):
-    _moveServo( c.backArm, endPos, speed )
+def moveBackArm(endPos, speed=15):
+    _moveServo(c.backArm, endPos, speed)
 
-def moveBackClaw( endPos, speed=15 ):
-    _moveServo( c.backClaw, endPos, speed )
+def moveBackClaw(endPos, speed=15):
+    _moveServo(c.backClaw, endPos, speed)
     
 # Moves specified servo to specified position at specified speed
-def _moveServo( servo, endPos, speed) :
+def _moveServo(servo, endPos, speed) :
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default
-    now = get_servo_position( servo )
+    now = get_servo_position(servo)
     if now > 2048 :
-        PROGRAMMER_ERROR( "Servo setting too large ", servo )
+        PROGRAMMER_ERROR("Servo setting too large ", servo)
     if now < 0 :
-        PROGRAMMER_ERROR( "Servo setting too small ", servo )
+        PROGRAMMER_ERROR("Servo setting too small ", servo)
     if now > endPos:
         speed = -speed
-    for i in range (now, endPos, speed ):
-        set_servo_position( servo, i)
+    for i in range (now, endPos, speed):
+        set_servo_position(servo, i)
         msleep(10)
-    set_servo_position( servo, endPos )
+    set_servo_position(servo, endPos)
     msleep(10)
     
-def PROGRAMMER_ERROR( msg, value ) :
+def PROGRAMMER_ERROR(msg, value) :
     ao()
     print msg, value
     exit()

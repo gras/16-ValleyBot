@@ -1,4 +1,4 @@
-#16-ValleyBot actionpy
+# 16-ValleyBot actionpy
 '''
 Created on Mar 13, 2016
 
@@ -28,7 +28,6 @@ from servos import moveFrontArm
 from servos import moveFrontClaw
 from servos import moveBackClaw
 from servos import moveBackArm
-
 
 from sensors import onBlackBack 
 from sensors import crossBlackFront
@@ -62,9 +61,9 @@ def init():
 def getOutOfStartBox():
     print "getOutOfStartBox"
     msleep(500)
-    driveTimed(-100, -100, 2300)#2600
+    driveTimed(-100, -100, 2300)
     driveTimed(0, 100, 400)
-    driveTimed(70,70,600)
+    driveTimed(70, 70, 600)
 
 # Follows line for 3.5 seconds
 # Moves forward until robot reaches debris
@@ -81,7 +80,7 @@ def goToDebris():
     else:
         driveTimed(-20, 20, 190)
     moveBackArm(c.backArmDown, 15)
-    moveBackClaw(c.backClawOpen, 15) #DELIVERS SOLAR ARRAYS
+    moveBackClaw(c.backClawOpen, 15)  # DELIVERS SOLAR ARRAYS
     moveBackArm(c.backArmUp, 15)
     moveBackClaw(c.backClawClose, 15)
     driveTimed(50, 50, 1400)
@@ -99,21 +98,20 @@ def removeDebris():
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
-    driveTimed(0,-100,1100)
-    driveTimed(60,70,500)
-    driveTimed(90,0,600)
-    driveTimed(60,90,225)
-    driveTimed(60,70,800)#900
-#####Clone debugged to here!    
+    driveTimed(0, -100, 1100)
+    driveTimed(60, 70, 500)
+    driveTimed(90, 0, 600)
+    driveTimed(60, 90, 225)
+    driveTimed(60, 70, 800)
         
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
     moveFrontArm(c.frontArmUp, 15)
-    driveTimed(-90,-100, 1450)
+    driveTimed(-90, -100, 1450)
     timedLineFollowRight(3.2)
     timedLineFollowRightSmooth(1.0)
-    lineFollowRightSmoothCount(10)#7 
+    lineFollowRightSmoothCount(10)
     
 # Drives to the rift valley cube
 def goToCube():
@@ -121,7 +119,7 @@ def goToCube():
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmDown, 15)
     if c.isPrime:
-        driveTimed(100,100,500)
+        driveTimed(100, 100, 500)
     else: 
         driveTimed(100, 90, 500)
     drive(100, 100)
@@ -140,7 +138,7 @@ def dropOffCube():
     print"dropOffCube"
     driveTimed(100, 0, 2400)
     moveFrontArm(c.frontArmMidCube, 15)
-    moveFrontClaw(c.frontClawOpen, 20)#15
+    moveFrontClaw(c.frontClawOpen, 20)
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     
@@ -149,12 +147,12 @@ def getGoldPoms():
     print"getGoldPoms"
     driveTimed(-70, 0, 500)
     drive(-70, 0)
-    while not onBlackBack():# turn to black
+    while not onBlackBack():  # turn to black
         pass
     ao()
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
-    driveTimed(-100,-100,1000)   
+    driveTimed(-100, -100, 1000)   
     drive(-20, -20)
     moveBackClaw(c.backClawClose, 8)
     ao()
@@ -164,31 +162,31 @@ def getGoldPoms():
 def getRedPoms():
     print "getRedPoms"    
     drive(0, 40)
-    while not onBlackFront(): # wait for black
+    while not onBlackFront():  # wait for black
         pass
     drive(20, 0)
-    while onBlackFront(): # wait for white
+    while onBlackFront():  # wait for white
         pass
     ao()
     moveFrontArm(c.frontArmDown, 15)
-    driveTimed(93, 100, 1000)
+    driveTimed(95, 100, 1000)
     drive(30, 30)
     msleep(500)
     moveFrontClaw(c.frontClawClose, 6)
-    drive(0,0)
+    drive(0, 0)
     moveFrontArm(c.frontArmUp, 10)
     
 # Exit Valley  
 def leaveValley():
     print "leaveValley"
-    driveTimed(-65, -65, 720)#1100, 650
+    driveTimed(-65, -65, 720)
     if c.isPrime:
-        driveTimed(-90,0, 1650) #1750
+        driveTimed(-90, 0, 1650) 
     else:
         driveTimed(-90, 0, 1550)  
-    driveTimed(-100, -100, 1000) #back through gate
+    driveTimed(-100, -100, 1000)  # back through gate
     if not onBlackBack():    
-        drive(-50, -30) #angle robot to find black line
+        drive(-50, -30)  # angle robot to find black line
         while not onBlackBack():
             pass
     drive(-50, -30) 
@@ -196,16 +194,16 @@ def leaveValley():
         pass   
     timedLineFollowLeftBack(2.0) 
     
-#wait For tater bot
+# wait For tater bot
 def waitForTater():
     print "waitForTater"
     print "press button to continue..."
-    msleep(2500) #was 4000     
+    msleep(2500)  
          
 # go to Habitat wait to score
 def goToHabitat():
     print "goToHabitat"
-    timedLineFollowLeftBack(2.0)#was 3.0
+    timedLineFollowLeftBack(2.0)
     driveTimed(-30, -30, 1000)
     if c.isPrime:
         driveTimed(50, 50, 300) 
@@ -220,20 +218,17 @@ def depositGoldPoms():
         driveTimed(50, 50, 500)
     else:
         driveTimed(50, 50, 250)
-    #msleep(1000)
     moveBackArm(c.backArmMid, 10)
-    #msleep(1000)
     moveBackClaw(c.backClawOpen, 10)
         
 # Score Poms   
 def depositRedPoms():
     print"depositRedPoms"
-    moveBackArm(c.backArmUp, 50)#10
+    moveBackArm(c.backArmUp, 50)
     driveTimed(70, 70, 400)
     if c.isPrime:
         driveTimed(-100, 100, 1200)
-        #drive(-50, 50)
-        driveTimed(50, 50, 350) #was 200
+        driveTimed(50, 50, 350) 
     else:
         driveTimed(-100, 100, 1200) 
         driveTimed(70, 70, 1400)
@@ -244,24 +239,21 @@ def depositRedPoms():
 # Get to Valley    
 def getComposter():
     print "getComposter"
-    driveTimed(-100,-100, 500)
-    driveTimed(65, 0, 1620)#1690
-    driveTimed(-100, -100, 500) #600
+    driveTimed(-100, -100, 500)
+    driveTimed(65, 0, 1620)
+    driveTimed(-100, -100, 500) 
     msleep(400);
-    moveBackClaw(c.backClawOpen,10)
+    moveBackClaw(c.backClawOpen, 10)
     moveBackArm(c.backArmCompGrab, 10)
     moveBackClaw(c.backClawCompGrab, 35)
     moveBackArm(c.backArmUp, 10)
-
-
     
 # moves composter to potato bin in habitat 
 def deliverComposter():
     print "deliverComposter"
-    driveTimed(60,60,900)
-    driveTimed (50,-50, 1300)
+    driveTimed(60, 60, 900)
+    driveTimed (50, -50, 1300)
     driveTimed(-80, -80, 250)
-
     
 # Score poop   
 def depositComposter():
@@ -284,7 +276,7 @@ def goToCube2():
     
 def scoreCube():
     print"scoreCube"
-    driveTimed(-75,75,1575)
+    driveTimed(-75, 75, 1575)
     moveFrontArm(c.frontArmDown, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     driveTimed(50, 50, 1000)
@@ -298,8 +290,8 @@ def returnToValley():
     driveTimed (100, 85, 1300)
     drive(100, 100)
     crossBlackFront()
-    timedLineFollowRight(2.5)#was 2.8
-    timedLineFollowRightSmooth(1.0)#was 0.8
+    timedLineFollowRight(2.5)
+    timedLineFollowRightSmooth(1.0)
     driveTimed(0, 50, 150)
     ao()
     
@@ -307,16 +299,14 @@ def deliverBotGuy():
     print "deliverBotGuy"
     moveFrontArm(c.frontArmGrabBot, 15)
     msleep(500)
-    moveFrontClaw(c.frontClawClose, 2000)#grab botguy
+    moveFrontClaw(c.frontClawClose, 2000)  # grab botguy
     msleep(500)
     moveFrontArm(c.frontArmUp, 15)
     msleep(500)
-    driveTimed(70, 60, 3400)#was 3500
+    driveTimed(70, 60, 3400)
     driveTimed(-50, 50, 1450)
     driveTimed(50, 50, 1000)
     moveFrontArm(c.frontArmGrabBot, 15)
-    #moveFrontClaw(c.frontClawOpen, 15)
-    #moveFrontArm(c.frontArmUp, 30)
     msleep(500)   
     
 def crabDance():
@@ -338,6 +328,3 @@ def crabDance():
     msleep(200)
     moveFrontClaw(c.frontClawClose, 15)
     msleep(200)
-    
-    
-    

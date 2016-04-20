@@ -28,7 +28,6 @@ FRONT_TOPHAT = 0
 REAR_TOPHAT = 1
 STARTLIGHT = 2
 
-
 # DIGITAL ports
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
@@ -55,15 +54,11 @@ backArmCompGrab = 580
 backArmMid = 730
 backArmUp = 1200
 
-
 # PRIME analog sensor values
 frontLineFollowerGrey = 1000
 
-
-
 isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone    
-
 
 if isPrime:
     print "running Prime"
@@ -77,7 +72,7 @@ else:
     frontArmDown = 630 # Arm forward on ground
     
     frontClawOpen = 1400 # Claw open
-    frontClawMid = 600 #1500
+    frontClawMid = 600 
     frontClawCube = 500
     frontClawClose = 200 # Claw closed     
     
