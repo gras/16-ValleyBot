@@ -273,7 +273,7 @@ def depositComposter():
 def goToCube2():
     print"goToCube2"
     driveTimed(50, 50, 500)
-    driveTimed(50, -50, 450)#600
+    driveTimed(50, -50, 500)#600
     driveTimed(50, 50, 500)
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmMidCube, 15)
