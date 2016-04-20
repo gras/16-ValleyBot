@@ -15,6 +15,7 @@ def main():
     act.goToDebris()
     act.removeDebris()
     act.dumpDebris()
+    DEBUG()
     act.goToGate() 
     act.goToCube()
     act.dropOffCube()  
