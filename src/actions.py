@@ -79,7 +79,7 @@ def goToDebris():
     if c.isPrime:
         pass
     else:
-        driveTimed(-20, 20, 200)
+        driveTimed(-20, 20, 170)
     moveBackArm(c.backArmDown, 15)
     moveBackClaw(c.backClawOpen, 15) #DELIVERS SOLAR ARRAYS
     moveBackArm(c.backArmUp, 15)
