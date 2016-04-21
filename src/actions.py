@@ -198,7 +198,7 @@ def leaveValley():
 def waitForTater():
     print "waitForTater"
     print "press button to continue..."
-    msleep(2500)  
+    msleep(3500)  
          
 # go to Habitat wait to score
 def goToHabitat():
