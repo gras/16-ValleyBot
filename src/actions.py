@@ -204,20 +204,18 @@ def waitForTater():
 def goToHabitat():
     print "goToHabitat"
     timedLineFollowLeftBack(2.0)
-    driveTimed(-30, -30, 1000)
     if c.isPrime:
+        driveTimed(-30, -30, 1000)
         driveTimed(50, 50, 300) 
     else:
-        driveTimed(50, 50, 500) 
+        driveTimed(-30, -30, 1100)
+        driveTimed(50, 50, 200) 
 
 # Score Poms   
 def depositGoldPoms():
     print"depositGoldPoms"
     moveBackArm(c.backArmBinGrab, 10)
-    if c.isPrime:
-        driveTimed(50, 50, 500)
-    else:
-        driveTimed(50, 50, 250)
+    driveTimed(50, 50, 500)
     moveBackArm(c.backArmMid, 10)
     moveBackClaw(c.backClawOpen, 10)
         
@@ -226,11 +224,10 @@ def depositRedPoms():
     print"depositRedPoms"
     moveBackArm(c.backArmUp, 50)
     driveTimed(70, 70, 400)
+    driveTimed(-100, 100, 1200)
     if c.isPrime:
-        driveTimed(-100, 100, 1200)
         driveTimed(50, 50, 350) 
-    else:
-        driveTimed(-100, 100, 1200) 
+    else: 
         driveTimed(70, 70, 1400)
     moveFrontArm(c.frontArmMidPom, 10)
     moveFrontClaw(c.frontClawOpen, 10)
@@ -290,7 +287,10 @@ def returnToValley():
     else:
         drive (30, -30)
     crossBlackFront()
-    driveTimed (100, 85, 1300)
+    if c.isPrime:
+        driveTimed (100, 85, 1300)
+    else:
+        driveTimed (100, 75, 1300)
     drive(100, 100)
     crossBlackFront()
     timedLineFollowRight(2.5)
