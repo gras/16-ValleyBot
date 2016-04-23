@@ -285,7 +285,10 @@ def returnToValley():
     print "returnToValley"
     driveTimed(-50, -50, 500)
     moveFrontArm(c.frontArmUp, 15)
-    drive (50, -50)
+    if c.isPrime:
+        drive (50, -50)
+    else:
+        drive (30, -30)
     crossBlackFront()
     driveTimed (100, 85, 1300)
     drive(100, 100)
