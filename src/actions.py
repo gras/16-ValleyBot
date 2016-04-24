@@ -117,7 +117,7 @@ def goToGate():
 def goToCube():
     print "goToCube"
     moveFrontClaw(c.frontClawOpen, 15)
-    moveFrontArm(c.frontArmDown, 15)
+    moveFrontArm(c.frontArmMidDown, 15)
     if c.isPrime:
         driveTimed(100, 100, 500)
     else: 
@@ -228,7 +228,7 @@ def depositRedPoms():
     if c.isPrime:
         driveTimed(50, 50, 350) 
     else: 
-        driveTimed(70, 70, 1400)
+        driveTimed(70, 70, 400)
     moveFrontArm(c.frontArmMidPom, 10)
     moveFrontClaw(c.frontClawOpen, 10)
     moveFrontArm(c.frontArmUp, 10)
@@ -262,7 +262,7 @@ def depositComposter():
 def goToCube2():
     print"goToCube2"
     driveTimed(50, 50, 500)
-    driveTimed(50, -50, 500)
+    driveTimed(50, -50, 400)#500
     driveTimed(50, 50, 500)
     moveFrontClaw(c.frontClawOpen, 15)
     moveFrontArm(c.frontArmMidCube, 15)
@@ -273,6 +273,7 @@ def goToCube2():
     
 def scoreCube():
     print"scoreCube"
+    driveTimed(50, -50, 100) #added at comp-4:30
     driveTimed(-75, 75, 1575)
     moveFrontArm(c.frontArmDown, 15)
     moveFrontClaw(c.frontClawOpen, 15)

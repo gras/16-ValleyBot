@@ -37,6 +37,7 @@ frontArmUp = 1200 #Arm at 90 degrees up
 frontArmMidCube = 450 #Arm at 30 degrees up
 frontArmGrabBot = 550 #grabs BotGuy well
 frontArmMidPom = 700 #Arm at 30 degrees up
+frontArmMidDown = 325 #added during comp for crease
 frontArmDown = 100 #Arm forward on ground
 frontClawOpen = 2000 #Claw open
 frontClawMid = 1400 # claw cube grab
@@ -70,6 +71,7 @@ else:
     frontArmGrabBot =  1200 #grabs BotGuy well
     frontArmMidPom = 1300
     frontArmDown = 630 # Arm forward on ground
+    frontArmMidDown = 1000 #added during comp for crease
     
     frontClawOpen = 1400 # Claw open
     frontClawMid = 600 
