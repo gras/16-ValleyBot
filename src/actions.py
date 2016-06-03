@@ -29,7 +29,7 @@ from servos import moveFrontClaw
 from servos import moveBackClaw
 from servos import moveBackArm
 
-from sensors import onBlackBack 
+from sensors import onBlackBack , waitForButton
 from sensors import crossBlackFront
 from sensors import onBlackFront
 from sensors import wait4light
@@ -43,10 +43,11 @@ def init():
     else:
         print "Running Valley - Clone"   
     testSensors()
-    testServos()
-    testMotors()
-    disable_servos()
-    wait4light()
+#     testServos()
+#     testMotors()
+#     disable_servos()
+    #wait4light()
+    
     shut_down_in(119.9)
     c.startTime = seconds()
     moveFrontClaw(c.frontClawClose, 25)
@@ -54,14 +55,27 @@ def init():
     moveBackClaw(c.backClawMidSolar, 25)
     moveBackArm(c.backArmUp, 25)
     enable_servos()
+    waitForButton()
+
+    
     
 # Raises cube holder
 # Backs out of start box and turns 
 # Moves backward until black tape
 def getOutOfStartBox():
     print "getOutOfStartBox"
+    moveBackArm(c.backArmMid, 20)
+    moveBackClaw(c.backClawOpen, 15)
     msleep(500)
-    driveTimed(-100, -100, 2300)
+#     driveTimed(-100, -100, 2300)
+    driveTimed(-100, -100, 300)
+    moveBackArm(c.backArmDown, 15)
+    msleep(500)
+    moveBackClaw(c.backClawMidSolar, 15)
+    msleep(500)
+    moveBackArm(c.backArmUp, 15)
+    msleep(500)
+    driveTimed(-100, -100, 2000)
     driveTimed(0, 100, 400)
     driveTimed(70, 70, 600)
 
@@ -69,6 +83,16 @@ def getOutOfStartBox():
 # Moves forward until robot reaches debris
 def goToDebris():
     print "goToDebris"
+    driveTimed(-100, 100, 100)
+    driveTimed(100, 100, 500)
+    moveBackArm(c.backArmUp, 15)
+    moveBackClaw(c.backClawOpen, 15)
+    waitForButton()
+    moveBackArm(c.backArmDown, 15)
+    moveBackClaw(c.backClawMid, 15)
+    moveBackArm(c.backArmUp, 15)
+    msleep(2000)
+    DEBUG()
     timedLineFollowLeft(3.75)
     if c.isPrime:
         driveTimed(-70, 70, 750)
