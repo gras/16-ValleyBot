@@ -13,8 +13,9 @@ def main():
     print "I am ValleyBot"
     act.init()
     act.getOutOfStartBox()
-    act.goToDebris()
+    act.goToComposter()
     act.removeDebris()
+
 #     act.dumpDebris()
 #     #DEBUG()
 #     act.goToGate() 

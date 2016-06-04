@@ -94,41 +94,60 @@ def getOutOfStartBox():
 
 # Follows line for 3.5 seconds
 # Moves forward until robot reaches debris
-def goToDebris():
-    print "goToDebris"
+def goToComposter():
+    print "goToComposter"
     driveTimed(-100, 100, 100)
-    driveTimed(100, 100, 500)
-#     moveBackArm(c.backArmUp, 15)
-#     moveBackClaw(c.backClawOpen, 15)
-#     waitForButton()
-#     moveBackArm(c.backArmDown, 15)
-#     moveBackClaw(c.backClawMid, 15)
-#     moveBackArm(c.backArmUp, 15)
-#     msleep(2000)
-
-    drive(50, 0)
+    msleep(1000)
+    drive(100, 85)
     while not onBlackFront():
         pass
-    stop()
-    moveFrontArm(c.frontArmDown, 20)
+    print "Sees line"
+
+    timedLineFollowLeft(1)
+    timedLineFollowLeftSmooth(3)
+    driveTimed(0, 60, 300)
+    driveTimed(0, -100, 1050)
+    driveTimed(60, 60, 1900)
     moveFrontClaw(c.frontClawClose, 20)
+    moveFrontArm(c.frontArmDown, 20)
     msleep(300)
-    driveTimed(50, 65, 1750)
+    driveTimed(35, 0, 3500)
+    DEBUG()
+
+    drive(50, 0)
+    while onBlackFront():
+        pass
+    stop()
+    driveTimed(100, 0, 400)
+    moveFrontClaw(c.frontClawClose, 20)
+    moveFrontArm(c.frontArmDown, 20)
     msleep(300)
-    driveTimed(35, 0, 6000)
+    driveTimed(50, 50, 1600)
+    driveTimed(35, 0, 3500)
+    
 
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
     print "removeDebris"
     driveTimed(-75, 0, 750)
     moveFrontArm(c.frontArmUp, 20)
-    drive(-75, -75)
+    drive(-95, -75)
     while not onBlackFront():
         pass
+    drive(-30, -30)
+    while onBlackFront():
+        pass
     stop()
-    '''moveFrontArm(c.frontArmDown, 15)
-    msleep(500)
-    driveTimed(-80, -80, 1000)'''
+    driveTimed(-30, 0, 300)
+    timedLineFollowLeft(2)
+    timedLineFollowLeftSmooth(3 )
+#     driveTimed(-60, 0, 500)
+#     driveTimed(50, 50, 1500)
+#     #driveTimed()
+#     moveFrontArm(c.frontArmDown, 15)
+#     DEBUG()
+#     msleep(500)
+#     driveTimed(-80, -80, 1000)
 
 # Dumps debris next to compost
 def dumpDebris():
