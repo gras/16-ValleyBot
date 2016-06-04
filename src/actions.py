@@ -13,7 +13,7 @@ from wallaby import enable_servos
 from wallaby import msleep
 from wallaby import shut_down_in
  
-from drive import testMotors
+from drive import testMotors, stop
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowLeft
@@ -52,29 +52,42 @@ def init():
     c.startTime = seconds()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
-    moveBackClaw(c.backClawMidSolar, 25)
+    #moveBackClaw(c.backClawMidSolar, 25)
     moveBackArm(c.backArmUp, 25)
     enable_servos()
     waitForButton()
+    moveBackClaw(c.backClawOpen, 15)
 
-    
-    
-# Raises cube holder
-# Backs out of start box and turns 
-# Moves backward until black tape
-def getOutOfStartBox():
-    print "getOutOfStartBox"
+
+def grabSolarArrays():
     moveBackArm(c.backArmMid, 20)
     moveBackClaw(c.backClawOpen, 15)
     msleep(500)
-#     driveTimed(-100, -100, 2300)
-    driveTimed(-100, -100, 300)
     moveBackArm(c.backArmDown, 15)
     msleep(500)
     moveBackClaw(c.backClawMidSolar, 15)
     msleep(500)
     moveBackArm(c.backArmUp, 15)
     msleep(500)
+    
+    msleep(1000)
+    
+    moveBackArm(c.backArmDown, 20)
+    msleep(300)
+    moveBackClaw(c.backClawOpen, 20)
+    msleep(300)
+    moveBackArm(c.backArmUp, 20)
+    msleep(300)
+    
+def doALoop():
+    for x in range(0, 9):
+        grabSolarArrays()
+    
+# Raises cube holder
+# Backs out of start box and turns 
+# Moves backward until black tape
+def getOutOfStartBox():
+    print "getOutOfStartBox"
     driveTimed(-100, -100, 2000)
     driveTimed(0, 100, 400)
     driveTimed(70, 70, 600)
@@ -85,39 +98,37 @@ def goToDebris():
     print "goToDebris"
     driveTimed(-100, 100, 100)
     driveTimed(100, 100, 500)
-    moveBackArm(c.backArmUp, 15)
-    moveBackClaw(c.backClawOpen, 15)
-    waitForButton()
-    moveBackArm(c.backArmDown, 15)
-    moveBackClaw(c.backClawMid, 15)
-    moveBackArm(c.backArmUp, 15)
-    msleep(2000)
-    DEBUG()
-    timedLineFollowLeft(3.75)
-    if c.isPrime:
-        driveTimed(-70, 70, 750)
-    else:
-        driveTimed(-70, 70, 700)
-    driveTimed(-50, -50, 1400)
-    if c.isPrime:
+#     moveBackArm(c.backArmUp, 15)
+#     moveBackClaw(c.backClawOpen, 15)
+#     waitForButton()
+#     moveBackArm(c.backArmDown, 15)
+#     moveBackClaw(c.backClawMid, 15)
+#     moveBackArm(c.backArmUp, 15)
+#     msleep(2000)
+
+    drive(50, 0)
+    while not onBlackFront():
         pass
-    else:
-        driveTimed(-20, 20, 190)
-    moveBackArm(c.backArmDown, 15)
-    moveBackClaw(c.backClawOpen, 15)  # DELIVERS SOLAR ARRAYS
-    moveBackArm(c.backArmUp, 15)
-    moveBackClaw(c.backClawClose, 15)
-    driveTimed(50, 50, 1400)
-    driveTimed(70, -70, 750)
-    timedLineFollowLeftSmooth(.75)
-    driveTimed(50, 50, 1000)
+    stop()
+    moveFrontArm(c.frontArmDown, 20)
+    moveFrontClaw(c.frontClawClose, 20)
+    msleep(300)
+    driveTimed(50, 65, 1750)
+    msleep(300)
+    driveTimed(35, 0, 6000)
 
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
     print "removeDebris"
-    moveFrontArm(c.frontArmDown, 15)
+    driveTimed(-75, 0, 750)
+    moveFrontArm(c.frontArmUp, 20)
+    drive(-75, -75)
+    while not onBlackFront():
+        pass
+    stop()
+    '''moveFrontArm(c.frontArmDown, 15)
     msleep(500)
-    driveTimed(-80, -80, 1000)
+    driveTimed(-80, -80, 1000)'''
 
 # Dumps debris next to compost
 def dumpDebris():
@@ -356,3 +367,6 @@ def crabDance():
     msleep(200)
     moveFrontClaw(c.frontClawClose, 15)
     msleep(200)
+
+
+    

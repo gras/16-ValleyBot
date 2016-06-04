@@ -7,13 +7,14 @@ Created on Mar 13, 2016
 import actions as act
 
 from sensors import DEBUG
+from actions import doALoop
 
 def main():
     print "I am ValleyBot"
     act.init()
     act.getOutOfStartBox()
     act.goToDebris()
-#     act.removeDebris()
+    act.removeDebris()
 #     act.dumpDebris()
 #     #DEBUG()
 #     act.goToGate() 
