@@ -7,19 +7,21 @@ Created on Mar 13, 2016
 import actions as act
 
 from sensors import DEBUG
-from actions import doALoop
+from actions import doALoop, dumpSolarArrays
 
 def main():
     print "I am ValleyBot"
     act.init()
+    act.grabSolarArrays()
     act.getOutOfStartBox()
     act.goToComposter()
     act.removeDebris()
 
-#     act.dumpDebris()
-#     #DEBUG()
-#     act.goToGate() 
-#     act.goToCube()
+    act.dumpDebris()
+    act.goToGate()
+    act.dumpSolarArrays() 
+    act.goToCube()
+    act.switch()
 #     act.dropOffCube()  
 #     act.getGoldPoms()
 #     act.getRedPoms()

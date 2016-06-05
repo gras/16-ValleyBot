@@ -39,6 +39,7 @@ frontArmGrabBot = 550 #grabs BotGuy well
 frontArmMidPom = 700 #Arm at 30 degrees up
 frontArmMidDown = 325 #added during comp for crease
 frontArmDown = 100 #Arm forward on ground
+frontArmSwing = 750 #FIX THIS FOR PRIME
 frontClawOpen = 2000 #Claw open
 frontClawMid = 1400 # claw cube grab
 frontClawCube = 1150 
@@ -72,6 +73,7 @@ else:
     frontArmMidPom = 1300
     frontArmDown = 630 # Arm forward on ground
     frontArmMidDown = 1000 #added during comp for crease
+    frontArmSwing = 750
     
     frontClawOpen = 1400 # Claw open
     frontClawMid = 600 
@@ -90,5 +92,8 @@ else:
     backArmCompGrab = 780
     backArmMid = 1000
     backArmUp = 1400
+    
+    frontArmSwitch = 1950
+    backArmSwitch = 2047
     
         

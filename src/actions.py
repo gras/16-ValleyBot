@@ -22,6 +22,8 @@ from drive import timedLineFollowRightSmooth
 from drive import timedLineFollowLeftSmooth
 from drive import lineFollowRightSmoothCount
 from drive import timedLineFollowLeftBack
+from drive import lineFollowUntilEndLeftFront 
+from drive import lineFollowUntilEndRightFront
 
 from servos import testServos
 from servos import moveFrontArm
@@ -52,10 +54,12 @@ def init():
     c.startTime = seconds()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
-    #moveBackClaw(c.backClawMidSolar, 25)
+    moveBackClaw(c.backClawOpen, 25)
     moveBackArm(c.backArmUp, 25)
-    enable_servos()
+    msleep(1000)
+    disable_servos()
     waitForButton()
+    enable_servos()
     moveBackClaw(c.backClawOpen, 15)
 
 
@@ -70,8 +74,7 @@ def grabSolarArrays():
     moveBackArm(c.backArmUp, 15)
     msleep(500)
     
-    msleep(1000)
-    
+def dumpSolarArrays():    
     moveBackArm(c.backArmDown, 20)
     msleep(300)
     moveBackClaw(c.backClawOpen, 20)
@@ -96,34 +99,33 @@ def getOutOfStartBox():
 # Moves forward until robot reaches debris
 def goToComposter():
     print "goToComposter"
-    driveTimed(-100, 100, 100)
-    msleep(1000)
+    driveTimed(-100, 100, 200)
     drive(100, 85)
+    msleep(300)
     while not onBlackFront():
         pass
     print "Sees line"
 
-    timedLineFollowLeft(1)
+    timedLineFollowLeft(1.7)
     timedLineFollowLeftSmooth(3)
-    driveTimed(0, 60, 300)
-    driveTimed(0, -100, 1050)
+#     driveTimed(0, 100, 300)
+    driveTimed(0, -100, 950)
     driveTimed(60, 60, 1900)
     moveFrontClaw(c.frontClawClose, 20)
-    moveFrontArm(c.frontArmDown, 20)
+    moveFrontArm(c.frontArmSwing, 20)
     msleep(300)
     driveTimed(35, 0, 3500)
-    DEBUG()
 
-    drive(50, 0)
-    while onBlackFront():
-        pass
-    stop()
-    driveTimed(100, 0, 400)
-    moveFrontClaw(c.frontClawClose, 20)
-    moveFrontArm(c.frontArmDown, 20)
-    msleep(300)
-    driveTimed(50, 50, 1600)
-    driveTimed(35, 0, 3500)
+#     drive(50, 0)
+#     while onBlackFront():
+#         pass
+#     stop()
+#     driveTimed(100, 0, 400)
+#     moveFrontClaw(c.frontClawClose, 20)
+#     moveFrontArm(c.frontArmDown, 20)
+#     msleep(300)
+#     driveTimed(50, 50, 1600)
+#     driveTimed(35, 0, 3500)
     
 
 # Moves claw arm down and drives backwards with debris
@@ -132,26 +134,18 @@ def removeDebris():
     driveTimed(-75, 0, 750)
     moveFrontArm(c.frontArmUp, 20)
     drive(-95, -75)
-    while not onBlackFront():
+    while not onBlackBack():
         pass
-    drive(-30, -30)
-    while onBlackFront():
-        pass
-    stop()
-    driveTimed(-30, 0, 300)
-    timedLineFollowLeft(2)
-    timedLineFollowLeftSmooth(3 )
-#     driveTimed(-60, 0, 500)
-#     driveTimed(50, 50, 1500)
-#     #driveTimed()
-#     moveFrontArm(c.frontArmDown, 15)
-#     DEBUG()
-#     msleep(500)
-#     driveTimed(-80, -80, 1000)
-
+    drive(-100, 0)
+    crossBlackFront()
+    timedLineFollowLeftSmooth(4.5)
+    moveFrontArm(c.frontArmDown, 15)
+    msleep(500)
+    
 # Dumps debris next to compost
 def dumpDebris():
     print "removeDebris"
+    driveTimed(-100, -100, 100)
     driveTimed(0, -100, 1100)
     driveTimed(60, 70, 500)
     driveTimed(90, 0, 600)
@@ -161,33 +155,67 @@ def dumpDebris():
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
-    moveFrontArm(c.frontArmUp, 15)
-    driveTimed(-90, -100, 1450)
-    timedLineFollowRight(3.2)
-    timedLineFollowRightSmooth(1.0)
-    lineFollowRightSmoothCount(10)
+    moveFrontArm(c.frontArmUp, 20)
+    drive(-95, -75)
+    while not onBlackBack():
+        pass
+    drive(-100, 0)
+    while not onBlackFront():
+        pass
+    timedLineFollowRight(2)
+    moveFrontArm(c.frontArmDown, 15)
+    moveFrontClaw(c.frontClawOpen, 15)
+    msleep(200)
+    lineFollowUntilEndRightFront()
+    
+    
+    
+#     driveTimed(-90, -100, 1450)
+#     timedLineFollowRight(3.2)
+#     timedLineFollowRightSmooth(1.0)
+#     lineFollowRightSmoothCount(10)
     
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
-    moveFrontClaw(c.frontClawOpen, 15)
-    moveFrontArm(c.frontArmMidDown, 15)
-    if c.isPrime:
-        driveTimed(100, 100, 500)
-    else: 
-        driveTimed(100, 90, 500)
-    drive(100, 100)
-    while not onBlackFront():
-        pass
-    drive(0, 0)
-    driveTimed(-65, -65, 300)
-    moveFrontArm(c.frontArmMidCube, 15)
-    moveFrontClaw(c.frontClawCube, 15)
-    moveFrontArm(c.frontArmUp, 15)
-    driveTimed(80, 80, 400)
-    msleep(500)
+    driveTimed(100, 100, 500)
+#     drive(100, 100)
+#     while not onBlackBack():
+#         pass
+    
+    
+#     moveFrontClaw(c.frontClawOpen, 15)
+#     moveFrontArm(c.frontArmMidDown, 15)
+#     if c.isPrime:
+#         driveTimed(100, 100, 500)
+#     else: 
+#         driveTimed(100, 90, 500)
+#     drive(100, 100)
+#     while not onBlackFront():
+#         pass
+#     drive(0, 0)
+#     driveTimed(-65, -65, 300)
+#     moveFrontArm(c.frontArmMidCube, 15)
+#     moveFrontClaw(c.frontClawCube, 15)
+#     moveFrontArm(c.frontArmUp, 15)
+#     driveTimed(80, 80, 400)
+#     msleep(500)
 
 # Turns to drop cube off on our side of the board
+
+def switch():
+    moveBackClaw(c.backClawOpen, 15)
+    moveBackArm(c.backArmSwitch, 15)
+    msleep(500)
+    moveFrontClaw(c.frontClawCube, 15)
+    msleep(200)
+    moveFrontArm(c.frontArmSwitch, 30)
+    msleep(200)
+    moveBackClaw(c.backClawClose, 15)
+    msleep(200)
+    moveFrontClaw(c.frontClawOpen, 15)
+    moveBackArm(c.backArmDown, 15)
+    
 def dropOffCube():
     print"dropOffCube"
     driveTimed(100, 0, 2400)

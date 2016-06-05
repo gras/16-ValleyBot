@@ -102,5 +102,25 @@ def timedLineFollowLeftBack(time):  # follows on starboard side
             driveTimed(-20, -90, 20)
         msleep(10)
         
+def lineFollowUntilEndLeftFront():
+    i = 0
+    while (i < 10):
+        if onBlackFront():
+            i = 0
+            driveTimed(20, 35, 20)
+        else:
+            i = i + 1
+            driveTimed(35, 20, 20)
+            
+def lineFollowUntilEndRightFront():
+    i = 0
+    while (i < 10):
+        if onBlackFront():
+            i = 0
+            driveTimed(45, 25, 20)
+        else:
+            i = i + 1
+            driveTimed(25, 45, 20)
+        
 def stop():
     ao()
