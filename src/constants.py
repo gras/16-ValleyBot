@@ -39,7 +39,7 @@ frontArmGrabBot = 550 #grabs BotGuy well
 frontArmMidPom = 700 #Arm at 30 degrees up
 frontArmMidDown = 325 #added during comp for crease
 frontArmDown = 100 #Arm forward on ground
-frontArmSwing = 750 #FIX THIS FOR PRIME
+frontArmSwing = 200
 frontClawOpen = 2000 #Claw open
 frontClawMid = 1400 # claw cube grab
 frontClawCube = 1150 
@@ -55,6 +55,8 @@ backArmBinGrab = 560 #when the backArm pulls bin
 backArmCompGrab = 580
 backArmMid = 730
 backArmUp = 1200
+frontArmSwitch = 1500
+backArmSwitch = 1700
 
 # PRIME analog sensor values
 frontLineFollowerGrey = 1000

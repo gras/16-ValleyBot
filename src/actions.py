@@ -100,7 +100,10 @@ def getOutOfStartBox():
 def goToComposter():
     print "goToComposter"
     driveTimed(-100, 100, 200)
-    drive(100, 85)
+    if c.isClone:
+        drive(100, 85)
+    else:
+        drive(100, 75)
     msleep(300)
     while not onBlackFront():
         pass
@@ -114,7 +117,7 @@ def goToComposter():
     moveFrontClaw(c.frontClawClose, 20)
     moveFrontArm(c.frontArmSwing, 20)
     msleep(300)
-    driveTimed(35, 0, 3500)
+    driveTimed(35, 0, 3700)
 
 #     drive(50, 0)
 #     while onBlackFront():
@@ -162,11 +165,20 @@ def goToGate():
     drive(-100, 0)
     while not onBlackFront():
         pass
-    timedLineFollowRight(2)
+    timedLineFollowRight(2.3)
     moveFrontArm(c.frontArmDown, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(200)
     lineFollowUntilEndRightFront()
+#     drive(-10, -10)
+#     while not onBlackFront():
+#         pass
+#     drive(0, -20)
+#     while onBlackFront():
+#         pass
+    driveTimed(-30, 0, 250)
+    
+    #driveTimed(-100, -100, 100)
     
     
     
@@ -178,7 +190,13 @@ def goToGate():
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
+    driveTimed(30, 0, 250)
     driveTimed(100, 100, 500)
+    moveFrontClaw(c.frontClawCube, 5)
+    msleep(200)
+    moveFrontArm(c.frontArmUp, 10)
+    driveTimed(-100, -100, 700)
+    driveTimed(0, -100, 500)
 #     drive(100, 100)
 #     while not onBlackBack():
 #         pass
@@ -207,7 +225,7 @@ def switch():
     moveBackClaw(c.backClawOpen, 15)
     moveBackArm(c.backArmSwitch, 15)
     msleep(500)
-    moveFrontClaw(c.frontClawCube, 15)
+    moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
     moveFrontArm(c.frontArmSwitch, 30)
     msleep(200)
@@ -218,13 +236,38 @@ def switch():
     
 def dropOffCube():
     print"dropOffCube"
-    driveTimed(100, 0, 2400)
-    moveFrontArm(c.frontArmMidCube, 15)
-    moveFrontClaw(c.frontClawOpen, 20)
-    msleep(500)
-    moveFrontArm(c.frontArmUp, 15)
+    moveFrontArm(c.frontArmUp, 10)
+    moveBackClaw(c.backClawOpen, 10)
+    msleep(300)
+    moveBackArm(c.backArmUp, 5)
+    drive(0, 30)
+    while not onBlackFront():
+        pass
+    timedLineFollowRight(.5)
+    lineFollowUntilEndRightFront()
+    driveTimed(-100, -100, 75)
+#     driveTimed(100, 0, 2400)
+#     moveFrontArm(c.frontArmMidCube, 15)
+#     moveFrontClaw(c.frontClawOpen, 20)
+#     msleep(500)
+#     moveFrontArm(c.frontArmUp, 15)
     
 # drives to and grabs gold poms
+
+
+def goToBotGuy():
+    driveTimed(100, 100, 500)
+    drive(50, 50)
+    crossBlackFront()
+    moveFrontClaw(c.frontClawClose, 10)
+    moveFrontArm(c.frontArmSwing, 10)
+    msleep(300)
+    drive(-50, 50)
+    crossBlackFront()
+    drive(50, 0)
+    crossBlackFront()
+    timedLineFollowRight(3)
+
 def getGoldPoms():
     print"getGoldPoms"
     driveTimed(-70, 0, 500)
