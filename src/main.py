@@ -24,6 +24,7 @@ def main():
     act.dropOffCube() 
     act.grabSolarArrays() 
     act.goToBotGuy()
+    act.goToRamp()
 #     act.getGoldPoms()
 #     act.getRedPoms()
 #     act.leaveValley()

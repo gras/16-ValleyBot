@@ -44,6 +44,7 @@ frontClawOpen = 2000 #Claw open
 frontClawMid = 1400 # claw cube grab
 frontClawCube = 1150 
 frontClawClose = 830 # Claw closed
+frontArmUpRamp = 850
 backClawOpen = 00
 backClawOpenComp = 350
 backClawMid = 1250
@@ -76,6 +77,7 @@ else:
     frontArmDown = 630 # Arm forward on ground
     frontArmMidDown = 1000 #added during comp for crease
     frontArmSwing = 750
+    frontArmUpRamp = 1350
     
     frontClawOpen = 1400 # Claw open
     frontClawMid = 600 

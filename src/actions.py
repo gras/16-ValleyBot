@@ -50,8 +50,6 @@ def init():
 #     disable_servos()
     #wait4light()
     
-    shut_down_in(119.9)
-    c.startTime = seconds()
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 25) 
     moveBackClaw(c.backClawOpen, 25)
@@ -59,6 +57,8 @@ def init():
     msleep(1000)
     disable_servos()
     waitForButton()
+    shut_down_in(119.9) 
+    c.startTime = seconds()
     enable_servos()
     moveBackClaw(c.backClawOpen, 15)
 
@@ -264,9 +264,35 @@ def goToBotGuy():
     msleep(300)
     drive(-50, 50)
     crossBlackFront()
+    driveTimed(-50, 50, 150)
     drive(50, 0)
     crossBlackFront()
-    timedLineFollowRight(3)
+    moveFrontArm(c.frontArmUp, 10)
+    moveFrontClaw(c.frontClawOpen, 10)
+    msleep(300)
+    timedLineFollowRight(2.5)
+    driveTimed(-50, 50, 100)
+    moveFrontArm(c.frontArmGrabBot, 5)
+    msleep(300)
+#     driveTimed(30, 40, 300)
+    moveFrontClaw(c.frontClawClose, 100)
+    msleep(300)
+    moveFrontArm(c.frontArmUp, 10)
+    msleep(1000)
+
+def goToRamp():
+    driveTimed(-100, -100, 2000)
+    driveTimed(0, 100, 650)
+    driveTimed(100, 100, 500)
+    drive(0, 50)
+    while not onBlackFront():
+        pass
+    driveTimed(60, 60, 800)
+    driveTimed(100, 0, 1500)
+    moveFrontArm(c.frontArmUpRamp, 10)
+    msleep(300)
+    driveTimed(100, 100, 3000)
+    timedLineFollowRight(8)
 
 def getGoldPoms():
     print"getGoldPoms"
