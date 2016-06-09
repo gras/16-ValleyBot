@@ -84,18 +84,21 @@ else:
     frontClawCube = 500
     frontClawClose = 200 # Claw closed     
     
-    backClawOpen = 100
+    backClawOpen = 500
     backClawOpenComp = 350
     backClawMid = 700
     backClawMidSolar = 1300
-    backClawClose = 1275
     backClawCompGrab = 1550
+    
+    backClawClose = 1450
+    backClawSmallSolar = 1122
     
     backArmDown = 440
     backArmBinGrab = 750
     backArmCompGrab = 780
     backArmMid = 1000
     backArmUp = 1400
+    backArmPushSolar = 600
     
     frontArmSwitch = 1950
     backArmSwitch = 2047

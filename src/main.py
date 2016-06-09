@@ -12,8 +12,10 @@ from actions import doALoop, dumpSolarArrays
 def main():
     print "I am ValleyBot"
     act.init()
-    act.grabSolarArrays()
+    act.grabSolarArraysInBox()
     act.getOutOfStartBox()
+    DEBUG()
+    
     act.goToComposter()
     act.removeDebris()
     act.dumpDebris()
@@ -22,7 +24,9 @@ def main():
     act.goToCube()
     act.switch()
     act.dropOffCube() 
-    act.grabSolarArrays() 
+    
+    act.grabSolarArraysInBox()
+     
     act.goToBotGuy()
     act.goToRamp()
 #     act.getGoldPoms()

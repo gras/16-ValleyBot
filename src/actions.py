@@ -51,48 +51,54 @@ def init():
     #wait4light()
     
     moveFrontClaw(c.frontClawClose, 25)
-    moveFrontArm(c.frontArmUp, 25) 
-    moveBackClaw(c.backClawOpen, 25)
-    moveBackArm(c.backArmUp, 25)
-    msleep(1000)
-    disable_servos()
+    moveFrontArm(c.frontArmUp, 5) 
+    moveBackClaw(c.backClawSmallSolar, 25)
+    moveBackArm(c.backArmDown, 5)
+#     msleep(1000)
+#     disable_servos()
     waitForButton()
     shut_down_in(119.9) 
     c.startTime = seconds()
     enable_servos()
-    moveBackClaw(c.backClawOpen, 15)
+    moveBackArm(c.backArmUp, 5)
+    waitForButton()
+    #moveBackClaw(c.backClawSmallSolar, 15)
 
-
-def grabSolarArrays():
-    moveBackArm(c.backArmMid, 20)
-    moveBackClaw(c.backClawOpen, 15)
+    
+def grabSolarArraysInBox():
+    moveBackArm(c.backArmPushSolar, 5)
     msleep(500)
+    moveBackClaw(c.backClawSmallSolar, 15)
+    msleep(500)
+    driveTimed(-50, -50, 1000)
     moveBackArm(c.backArmDown, 15)
     msleep(500)
-    moveBackClaw(c.backClawMidSolar, 15)
+    moveBackClaw(c.backClawClose, 15)
     msleep(500)
     moveBackArm(c.backArmUp, 15)
     msleep(500)
     
-def dumpSolarArrays():    
+def dumpSolarArrays():  
+    driveTimed(-50, -50, 400)  
     moveBackArm(c.backArmDown, 20)
     msleep(300)
     moveBackClaw(c.backClawOpen, 20)
     msleep(300)
     moveBackArm(c.backArmUp, 20)
     msleep(300)
+    driveTimed(50, 50, 400)  
     
 def doALoop():
     for x in range(0, 9):
-        grabSolarArrays()
+        grabSolarArraysInBox()
     
 # Raises cube holder
 # Backs out of start box and turns 
 # Moves backward until black tape
 def getOutOfStartBox():
     print "getOutOfStartBox"
-    driveTimed(-100, -100, 2000)
-    driveTimed(0, 100, 400)
+    driveTimed(-75, -100, 2000)
+    driveTimed(-100, 100, 400)
     driveTimed(70, 70, 600)
 
 # Follows line for 3.5 seconds
@@ -117,7 +123,7 @@ def goToComposter():
     moveFrontClaw(c.frontClawClose, 20)
     moveFrontArm(c.frontArmSwing, 20)
     msleep(300)
-    driveTimed(35, 0, 3700)
+    driveTimed(35, 0, 3550)
 
 #     drive(50, 0)
 #     while onBlackFront():
@@ -194,7 +200,7 @@ def goToCube():
     driveTimed(100, 100, 500)
     moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
-    moveFrontArm(c.frontArmUp, 10)
+    moveFrontArm(c.frontArmUpRamp, 10)
     driveTimed(-100, -100, 700)
     driveTimed(0, -100, 500)
 #     drive(100, 100)
@@ -227,7 +233,7 @@ def switch():
     msleep(500)
     moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
-    moveFrontArm(c.frontArmSwitch, 30)
+    moveFrontArm(c.frontArmSwitch, 60)
     msleep(200)
     moveBackClaw(c.backClawClose, 15)
     msleep(200)
