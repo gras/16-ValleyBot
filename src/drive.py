@@ -107,20 +107,20 @@ def lineFollowUntilEndLeftFront():
     while (i < 10):
         if onBlackFront():
             i = 0
-            driveTimed(20, 35, 20)
+            driveTimed(50, 90, 20)
         else:
             i = i + 1
-            driveTimed(35, 20, 20)
+            driveTimed(90, 50, 20)
             
 def lineFollowUntilEndRightFront():
     i = 0
     while (i < 10):
         if onBlackFront():
             i = 0
-            driveTimed(45, 25, 20)
+            driveTimed(40, 35, 20)
         else:
             i = i + 1
-            driveTimed(25, 45, 20)
+            driveTimed(30, 50, 20)
         
 def stop():
     ao()

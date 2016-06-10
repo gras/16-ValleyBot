@@ -79,15 +79,14 @@ def grabSolarArraysInBox():
     msleep(500)
     
 def dumpSolarArrays():  
-    driveTimed(-50, -50, 400)  
     moveBackArm(c.backArmDown, 20)
     msleep(300)
     moveBackClaw(c.backClawOpen, 20)
     msleep(300)
-    moveBackArm(c.backArmUp, 20)
+    moveBackArm(c.backArmUp, 5)
     msleep(300)
-    driveTimed(50, 50, 400)  
-    
+
+        
 def doALoop():
     for x in range(0, 9):
         grabSolarArraysInBox()
@@ -160,7 +159,10 @@ def dumpDebris():
     driveTimed(90, 0, 600)
     driveTimed(60, 90, 225)
     driveTimed(60, 70, 800)
-        
+
+def testLine():
+    lineFollowUntilEndRightFront()
+   
 # Drives backwards and follows line to reach gate
 def goToGate():
     print "goToGate"
@@ -171,18 +173,24 @@ def goToGate():
     drive(-100, 0)
     while not onBlackFront():
         pass
-    timedLineFollowRight(2.3)
+    timedLineFollowRight(1.5)
+    drive(0, 20)
+    while not onBlackFront():
+        pass
+    stop()
     moveFrontArm(c.frontArmDown, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(200)
     lineFollowUntilEndRightFront()
+    DEBUG()
 #     drive(-10, -10)
 #     while not onBlackFront():
 #         pass
 #     drive(0, -20)
 #     while onBlackFront():
 #         pass
-    driveTimed(-30, 0, 250)
+    
+#     driveTimed(-30, 0, 250) changed for new sequence 
     
     #driveTimed(-100, -100, 100)
     
@@ -196,13 +204,13 @@ def goToGate():
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
-    driveTimed(30, 0, 250)
+#     driveTimed(30, 0, 250) changed for new sequence 
     driveTimed(100, 100, 500)
     moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
-    moveFrontArm(c.frontArmUpRamp, 10)
-    driveTimed(-100, -100, 700)
-    driveTimed(0, -100, 500)
+    moveFrontArm(c.frontArmSwitch, 30)
+    driveTimed(-100, -100, 1200)
+    #driveTimed(0, -100, 500)
 #     drive(100, 100)
 #     while not onBlackBack():
 #         pass
@@ -239,7 +247,25 @@ def switch():
     msleep(200)
     moveFrontClaw(c.frontClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
-    
+
+def dropOff():
+    print "drop off"
+    driveTimed(0, 80, 500)
+    moveFrontArm(c.frontArmUp, 10)
+    moveBackArm(c.backArmDown, 10)
+    msleep(300)
+    moveBackClaw(c.backClawOpen, 5)
+    msleep(200)
+    moveBackArm(c.backArmUp, 5)
+    msleep(300)
+    driveTimed(0, -80, 500)
+    driveTimed(80, 0, 500)
+
+def getSolars():
+    moveBackArm(c.backArmUp, 20)
+    msleep(300)
+    driveTimed(-80, 0, 500)
+ 
 def dropOffCube():
     print"dropOffCube"
     moveFrontArm(c.frontArmUp, 10)

@@ -13,20 +13,16 @@ def main():
     print "I am ValleyBot"
     act.init()
     act.grabSolarArraysInBox()
-    act.getOutOfStartBox()
-    DEBUG()
-    
+    act.getOutOfStartBox()    
     act.goToComposter()
     act.removeDebris()
     act.dumpDebris()
     act.goToGate()
-    act.dumpSolarArrays() 
     act.goToCube()
+    act.dropOff() 
     act.switch()
-    act.dropOffCube() 
-    
-    act.grabSolarArraysInBox()
-     
+    act.getSolars()
+    DEBUG()
     act.goToBotGuy()
     act.goToRamp()
 #     act.getGoldPoms()
