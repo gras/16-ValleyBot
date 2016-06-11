@@ -97,9 +97,13 @@ else:
     backClawCompGrab = 1550
     
     backClawClose = 1450
+    backClawCloseBlock = 1675
     backClawSmallSolar = 1122
     
     backArmDown = 440
+
+    backArmDrop = 640
+
     backArmBinGrab = 750
     backArmCompGrab = 780
     backArmMid = 1000

@@ -57,11 +57,11 @@ def init():
 #     msleep(1000)
 #     disable_servos()
     waitForButton()
-    shut_down_in(119.9) 
     c.startTime = seconds()
     enable_servos()
     moveBackArm(c.backArmUp, 5)
     waitForButton()
+    shut_down_in(119.9) 
     #moveBackClaw(c.backClawSmallSolar, 15)
 
     
@@ -178,10 +178,12 @@ def goToGate():
     while not onBlackFront():
         pass
     stop()
-    moveFrontArm(c.frontArmDown, 15)
+    moveFrontArm(c.frontArmGrabBot, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(200)
     lineFollowUntilEndRightFront()
+    moveFrontArm(c.frontArmDown, 15)
+
 #     drive(-10, -10)
 #     while not onBlackFront():
 #         pass
@@ -208,7 +210,7 @@ def goToCube():
     moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
     moveFrontArm(c.frontArmSwitch, 30)
-    driveTimed(-100, -100, 1200)
+    driveTimed(-100, -100, 1300)
     #driveTimed(0, -100, 500)
 #     drive(100, 100)
 #     while not onBlackBack():
@@ -245,19 +247,20 @@ def switch():
     else:
         moveFrontArm(c.frontArmSwitch, 60)
     msleep(200)
-    moveBackClaw(c.backClawClose, 15)
+    moveBackClaw(c.backClawCloseBlock, 15)
     msleep(200)
     moveFrontClaw(c.frontClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
+    msleep(4000)
     moveBackClaw(c.backClawOpen, 15)
 
 def dropOff():
     print "drop off"
-    driveTimed(0, 80, 500)
-    moveFrontArm(c.frontArmUp, 10)
+    driveTimed(0, 80, 700)
+    moveFrontArm(c.frontArmGrabBot, 10)
     moveBackArm(c.backArmDown, 10)
     msleep(300)
-    moveBackClaw(c.backClawOpen, 5)
+    moveBackClaw(c.backClawOpen, 15)
     msleep(200)
     moveBackArm(c.backArmUp, 5)
     msleep(300)
@@ -269,14 +272,19 @@ def getSolars():
     msleep(300)
     driveTimed(-80, 0, 500)
     driveTimed(0, 80, 500)
-    driveTimed(50, 50, 150)
+    driveTimed(50, 50, 300)
+    moveBackArm(c.backArmPushSolar, 10)
+    msleep(200)
+    driveTimed(-50, -50, 400)
     moveBackArm(c.backArmDown, 10)
-    moveBackClaw(c.backClawClose, 20)
-    moveBackArm(c.backArmUp, 20)
+    msleep(200)
+    moveBackClaw(c.backClawClose, 5)
+    msleep(200)
+    moveBackArm(c.backArmUp, 10)
+    msleep(1000)
  
 def dropOffCube():
     print"dropOffCube"
-    moveFrontArm(c.frontArmUp, 10)
     moveBackClaw(c.backClawOpen, 10)
     msleep(300)
     moveBackArm(c.backArmUp, 5)
@@ -296,7 +304,11 @@ def dropOffCube():
 
 
 def goToBotGuy():
-    driveTimed(100, 100, 500)
+    drive(50, 0)
+    crossBlackFront()
+    timedLineFollowRight(.5)
+    lineFollowUntilEndRightFront()
+    driveTimed(100, 90, 500)
     drive(50, 50)
     crossBlackFront()
     moveFrontClaw(c.frontClawClose, 10)
@@ -319,6 +331,7 @@ def goToBotGuy():
     msleep(300)
     moveFrontArm(c.frontArmUp, 10)
     msleep(1000)
+    DEBUG()
 
 def goToRamp():
     driveTimed(-100, -100, 2000)
@@ -524,5 +537,19 @@ def crabDance():
     moveFrontClaw(c.frontClawClose, 15)
     msleep(200)
 
-
+def test():
+    enable_servos()
+    moveFrontArm(c.frontArmDown, 10)
+    moveBackArm(c.backArmDown, 10)
+    moveFrontClaw(c.frontArmMidCube, 10)
+    msleep(200)
+    waitForButton()
+    switch()
+    moveBackArm(c.backArmUp, 15)
+    msleep(200)
+    moveBackClaw(c.backClawOpen, 5)
+    msleep(200)
+    moveBackArm(c.backArmUp, 5)
+    driveTimed(50, 50, 500)
+    DEBUG()
     
