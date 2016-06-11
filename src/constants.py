@@ -33,30 +33,36 @@ CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 
 # PRIME servo positions
+frontArmSwitch = 1500
 frontArmUp = 1200 #Arm at 90 degrees up
-frontArmMidCube = 450 #Arm at 30 degrees up
-frontArmGrabBot = 550 #grabs BotGuy well
 frontArmMidPom = 700 #Arm at 30 degrees up
+frontArmGrabBot = 550 #grabs BotGuy well
+frontArmMidCube = 450 #Arm at 30 degrees up
 frontArmMidDown = 325 #added during comp for crease
-frontArmDown = 100 #Arm forward on ground
 frontArmSwing = 200
+frontArmDown = 100 #Arm forward on ground
+
+#Front Claw
 frontClawOpen = 2000 #Claw open
 frontClawMid = 1400 # claw cube grab
 frontClawCube = 1150 
-frontClawClose = 830 # Claw closed
 frontArmUpRamp = 850
+frontClawClose = 830 # Claw closed
+
+#Back Claw
 backClawOpen = 00
 backClawOpenComp = 350
 backClawMid = 1250
 backClawMidSolar = 1500
-backClawClose = 2000 
 backClawCompGrab = 1550
+backClawClose = 2000 
+
+#Back Arm
 backArmDown = 250
 backArmBinGrab = 560 #when the backArm pulls bin
 backArmCompGrab = 580
 backArmMid = 730
 backArmUp = 1200
-frontArmSwitch = 1500
 backArmSwitch = 1700
 
 # PRIME analog sensor values
@@ -100,7 +106,7 @@ else:
     backArmUp = 1400
     backArmPushSolar = 600
     
-    frontArmSwitch = 1950
+    frontArmSwitch = 2047 #1950
     backArmSwitch = 2047
     
         

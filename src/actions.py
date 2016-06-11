@@ -182,7 +182,6 @@ def goToGate():
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(200)
     lineFollowUntilEndRightFront()
-    DEBUG()
 #     drive(-10, -10)
 #     while not onBlackFront():
 #         pass
@@ -241,12 +240,16 @@ def switch():
     msleep(500)
     moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
-    moveFrontArm(c.frontArmSwitch, 60)
+    if c.isClone:
+        moveFrontArm(c.frontArmSwitch, 90)
+    else:
+        moveFrontArm(c.frontArmSwitch, 60)
     msleep(200)
     moveBackClaw(c.backClawClose, 15)
     msleep(200)
     moveFrontClaw(c.frontClawOpen, 15)
     moveBackArm(c.backArmDown, 15)
+    moveBackClaw(c.backClawOpen, 15)
 
 def dropOff():
     print "drop off"
@@ -265,6 +268,11 @@ def getSolars():
     moveBackArm(c.backArmUp, 20)
     msleep(300)
     driveTimed(-80, 0, 500)
+    driveTimed(0, 80, 500)
+    driveTimed(50, 50, 150)
+    moveBackArm(c.backArmDown, 10)
+    moveBackClaw(c.backClawClose, 20)
+    moveBackArm(c.backArmUp, 20)
  
 def dropOffCube():
     print"dropOffCube"
