@@ -210,7 +210,7 @@ def goToCube():
     moveFrontClaw(c.frontClawCube, 5)
     msleep(200)
     moveFrontArm(c.frontArmSwitch, 30)
-    driveTimed(-100, -100, 1800)
+    driveTimed(-100, -100, 1400)
     #driveTimed(0, -100, 500)
 #     drive(100, 100)
 #     while not onBlackBack():
@@ -258,16 +258,16 @@ def switch():
 
 def dropOff():
     print "drop off"
-    driveTimed(0, 80, 900)
-    moveFrontArm(c.frontArmGrabBot, 10)
-    moveBackArm(c.backArmDown, 10)
+    driveTimed(-80, 80, 1200)
+    moveFrontArm(c.frontArmDown, 10)
     msleep(300)
-    moveBackClaw(c.backClawOpen, 15)
-#     msleep(200)
-    moveBackArm(c.backArmUp, 5)
+    moveFrontClaw(c.frontClawOpen, 10)
     msleep(300)
-    driveTimed(0, -80, 900)
-    driveTimed(80, 0, 700)
+    moveFrontArm(c.frontArmUp,10)
+    msleep(300)
+    drive(80, -80)
+    crossBlackFront()
+    
 
 def getSolars():
     moveBackArm(c.backArmUp, 20)
@@ -306,8 +306,6 @@ def dropOffCube():
 
 
 def goToBotGuy():
-    drive(50, 0)
-    crossBlackFront()
     timedLineFollowRight(.5)
     lineFollowUntilEndRightFront()
     driveTimed(100, 90, 500)
@@ -324,7 +322,7 @@ def goToBotGuy():
     moveFrontArm(c.frontArmUp, 10)
     moveFrontClaw(c.frontClawOpen, 10)
     msleep(300)
-    timedLineFollowRight(2.5)
+    timedLineFollowRight(2.2)
     driveTimed(-50, 50, 100)
     moveFrontArm(c.frontArmGrabBot, 5)
     msleep(300)
@@ -333,7 +331,6 @@ def goToBotGuy():
     msleep(300)
     moveFrontArm(c.frontArmUp, 10)
     msleep(1000)
-    DEBUG()
 
 def goToRamp():
     driveTimed(-100, -100, 2000)
@@ -343,11 +340,12 @@ def goToRamp():
     while not onBlackFront():
         pass
     driveTimed(60, 60, 800)
-    driveTimed(100, 0, 1500)
-    moveFrontArm(c.frontArmUpRamp, 10)
+    driveTimed(100, 0, 1800)
+    #moveFrontArm(c.frontArmUpRamp, 10)
     msleep(300)
-    driveTimed(100, 100, 3000)
-    timedLineFollowRight(8)
+    driveTimed(85, 100, 3000)
+    driveTimed(100, 100, 6000)
+    msleep(1000)
 
 def getGoldPoms():
     print"getGoldPoms"
