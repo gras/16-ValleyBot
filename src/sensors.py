@@ -29,6 +29,9 @@ def crossBlackBack():
         pass
     ao()
 
+def waitTouch():
+    return digital(c.TOUCH)
+
 def onBlackFront():
     return analog(c.FRONT_TOPHAT) > c.frontLineFollowerGrey 
 

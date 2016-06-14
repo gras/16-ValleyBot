@@ -7,7 +7,6 @@ Created on Mar 13, 2016
 import actions as act
 
 from sensors import DEBUG
-from actions import doALoop, dumpSolarArrays
 
 def main():
     print "I am ValleyBot"
@@ -20,24 +19,13 @@ def main():
     act.goToGate()
     act.goToCube()
     act.dropOff() 
+    act.goToValley()
     act.goToBotGuy()
     act.goToRamp()
-    DEBUG()
-#     act.getGoldPoms()
-#     act.getRedPoms()
-#     act.leaveValley()
-#     act.waitForTater()
-#     act.goToHabitat()
-#     act.depositGoldPoms()
-#     act.depositRedPoms()
-#     act.getComposter()  
-#     act.deliverComposter()  
-#     act.depositComposter()
-#     act.goToCube2()
-#     act.scoreCube() 
-#     act.returnToValley()
-#     act.deliverBotGuy()
+    act.goUpRamp()
     DEBUG()    
+    
+    
     return 0
     
 if __name__ == "__main__":

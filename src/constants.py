@@ -29,6 +29,7 @@ REAR_TOPHAT = 1
 STARTLIGHT = 2
 
 # DIGITAL ports
+TOUCH = 0
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 
@@ -62,6 +63,7 @@ backArmDown = 250
 backArmBinGrab = 560 #when the backArm pulls bin
 backArmCompGrab = 580
 backArmMid = 730
+backArmWipe= 850 # gets red pom off solars
 backArmUp = 1200
 backArmSwitch = 1700
 
@@ -83,7 +85,7 @@ else:
     frontArmDown = 630 # Arm forward on ground
     frontArmMidDown = 1000 #added during comp for crease
     frontArmSwing = 750
-    frontArmUpRamp = 1350
+    frontArmUpRamp = 1400
     
     frontClawOpen = 1400 # Claw open
     frontClawMid = 600 
@@ -101,7 +103,8 @@ else:
     backClawSmallSolar = 1122
     
     backArmDown = 440
-
+    backArmWipe= 850 # gets red pom off solars
+    
     backArmDrop = 640
 
     backArmBinGrab = 750
