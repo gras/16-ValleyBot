@@ -211,26 +211,35 @@ def goToBotGuy():
 #drives up ramp
 def goToRamp():
     print "goToRamp"
-    driveTimed(-100, -100, 2000)
+    driveTimed(-100, -100, 2200)
     driveTimed(0, 100, 650)
     driveTimed(100, 100, 500)
     drive(0, 50)
     while not onBlackFront():
         pass
-    driveTimed(60, 60, 1000)
-    driveTimed(100, 0, 2000)
+    timedLineFollowRight(2)
+    stop()
+    lineFollowRightSmoothCount(1)
+#     driveTimed(60, 60, 1400)
+    driveTimed(100, 0, 1300)
+    
+    driveTimed(100, 100, 300)
+    DEBUG()
     
 #drives up ramp
 def goUpRamp():
     print "goUpRamp"
     moveFrontArm(c.frontArmUpRamp, 10)
     msleep(300)
-    drive(90, 100)
-    msleep(6000)
+    driveTimed(90, 100, 1000)
+    driveTimed(80, 100, 800)
+    driveTimed(100, 80, 3000)
+    drive(100, 95)
     while not waitTouch():
         pass
     stop()
-    msleep(1000)
+    msleep(5000)
+    DEBUG()
     driveTimed(-50,-50,200)
     driveTimed(100, -20, 2000)
     moveBackArm(c.backArmWipe, 10)
