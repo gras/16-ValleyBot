@@ -61,6 +61,12 @@ def DEBUG():
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
     exit(0)
     
+def DEBUGwithWait():
+    ao()
+    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
+    msleep(5000)
+    exit(0)
+    
 def wait4light():
     while not calibrate(c.STARTLIGHT):
         pass

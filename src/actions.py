@@ -38,6 +38,7 @@ from sensors import wait4light
 from sensors import testSensors
 from sensors import waitTouch
 from sensors import DEBUG
+from sensors import DEBUGwithWait
 
 # Tests all hardware
 def init():
@@ -67,16 +68,16 @@ def init():
     
 def grabSolarArraysInBox():
     moveBackArm(c.backArmPushSolar, 5)
-    msleep(500)
+    msleep(200)
     moveBackClaw(c.backClawSmallSolar, 15)
-    msleep(500)
+    msleep(200)
     driveTimed(-50, -50, 1000)
     moveBackArm(c.backArmDown, 15)
-    msleep(500)
+    msleep(200)
     moveBackClaw(c.backClawClose, 15)
-    msleep(500)
+    msleep(200)
     moveBackArm(c.backArmUp, 15)
-    msleep(500)
+    msleep(200)
     
 # Backs out of start box and turns 
 # Moves backward until black tape
@@ -183,11 +184,11 @@ def goToValley():
     driveTimed(100, 90, 500)
     drive(50, 50)
     crossBlackFront()
-    moveFrontClaw(c.frontClawClose, 10)
-    moveFrontArm(c.frontArmSwing, 10)
+    moveFrontClaw(c.frontClawClose, 200)
+    moveFrontArm(c.frontArmSwing, 200)
     msleep(300)
     
-#grabs BotGuy    
+# grabs BotGuy    
 def goToBotGuy():
     print "goToBotGuy"
     drive(-50, 50)
@@ -207,8 +208,8 @@ def goToBotGuy():
     moveFrontArm(c.frontArmUp, 10)
     msleep(1000)
 
-#Leaves rift valley
-#drives up ramp
+# Leaves rift valley
+# drives up ramp
 def goToRamp():
     print "goToRamp"
     driveTimed(-100, -100, 2200)
@@ -217,30 +218,31 @@ def goToRamp():
     drive(0, 50)
     while not onBlackFront():
         pass
-    timedLineFollowRight(2)
+    timedLineFollowRight(2.2)
     stop()
-    lineFollowRightSmoothCount(1)
+    timedLineFollowRightSmooth(1)
 #     driveTimed(60, 60, 1400)
-    driveTimed(100, 0, 1300)
+    driveTimed(100, 0, 1400)
     
     driveTimed(100, 100, 300)
-    DEBUG()
     
-#drives up ramp
+    
+# drives up ramp
 def goUpRamp():
     print "goUpRamp"
-    moveFrontArm(c.frontArmUpRamp, 10)
+    moveFrontArm(c.frontArmUp, 10)  # was frontArmUpRamp
     msleep(300)
-    driveTimed(90, 100, 1000)
-    driveTimed(80, 100, 800)
+    driveTimed(100, 80, 1000)
+    driveTimed(100, 100, 800)
+    moveFrontArm(c.frontArmUpRamp, 10)
     driveTimed(100, 80, 3000)
     drive(100, 95)
     while not waitTouch():
         pass
     stop()
-    msleep(5000)
-    DEBUG()
-    driveTimed(-50,-50,200)
+    moveFrontArm(c.frontArmUp, 10)
+    DEBUGwithWait()
+    driveTimed(-50, -50, 200)
     driveTimed(100, -20, 2000)
     moveBackArm(c.backArmWipe, 10)
     msleep(300)
@@ -249,7 +251,7 @@ def goUpRamp():
     # driveTimed(80, 0, 500)
     # driveTimed(0, -80, 600)
         
-def crabDance():
+def crabDance(): 
     print "crabDance"
     moveBackArm(c.backArmUp, 15)
     moveBackClaw(c.backClawOpen, 15)
@@ -269,10 +271,11 @@ def crabDance():
     moveFrontClaw(c.frontClawClose, 15)
     msleep(200)
 
+
 def dumpSolarArrays():  
     moveBackArm(c.backArmDown, 20)
     msleep(300)
-    moveBackClaw(c.backClawOpen, 20)
+    moveBackClaw(c.backClawOpen, 20) 
     msleep(300)
     moveBackArm(c.backArmUp, 5)
     msleep(300)
