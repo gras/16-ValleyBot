@@ -63,7 +63,7 @@ def init():
     enable_servos()
     moveBackArm(c.backArmUp, 5)
     waitForButton()
-    shut_down_in(119.9) 
+    shut_down_in(179.9) #119.9 DONT FORGET TO FIX 
     # moveBackClaw(c.backClawSmallSolar, 15)
     
 def grabSolarArraysInBox():
@@ -151,6 +151,9 @@ def goToGate():
     moveFrontArm(c.frontArmGrabBot, 15)
     moveFrontClaw(c.frontClawOpen, 15)
     msleep(200)
+    drive(0, 50)
+    while not onBlackFront():
+        pass
     lineFollowUntilEndRightFront()
     moveFrontArm(c.frontArmDown, 15)
     
@@ -222,7 +225,7 @@ def goToRamp():
     stop()
     timedLineFollowRightSmooth(1)
 #     driveTimed(60, 60, 1400)
-    driveTimed(100, 0, 1400)
+    driveTimed(100, 0, 1300)
     
     driveTimed(100, 100, 300)
     
@@ -241,7 +244,8 @@ def goUpRamp():
         pass
     stop()
     moveFrontArm(c.frontArmUp, 10)
-    DEBUGwithWait()
+    msleep(1000)
+'''
     driveTimed(-50, -50, 200)
     driveTimed(100, -20, 2000)
     moveBackArm(c.backArmWipe, 10)
@@ -250,6 +254,20 @@ def goUpRamp():
     driveTimed(-20, 20, 200)
     # driveTimed(80, 0, 500)
     # driveTimed(0, -80, 600)
+    '''
+def cleanSolarPanels():
+    drive(-50, 50)
+    while not onBlackFront():
+        pass
+    stop()
+    timedLineFollowRightSmooth(12)
+    driveTimed(-50, -50, 500)
+    driveTimed(-30,0,3000)
+    '''
+    driveTimed(-50, 50, 1200)
+    DEBUGwithWait()
+    driveTimed(35, 30, 8000)
+    '''
         
 def crabDance(): 
     print "crabDance"
