@@ -14,7 +14,6 @@ def main():
     act.grabSolarArraysInBox()
     act.getOutOfStartBox()
     act.goToComposter()
-    DEBUG()
     act.removeDebris()
     act.dumpDebris()
     act.goToGate()

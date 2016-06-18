@@ -121,7 +121,7 @@ def removeDebris():
         pass
     drive(-100, 0)
     crossBlackFront()
-    timedLineFollowLeftSmooth(4.5)
+    timedLineFollowLeftSmoothButton(4.5)
     moveFrontArm(c.frontArmDown, 15)
     msleep(500)
     
@@ -204,7 +204,10 @@ def goToBotGuy():
     moveFrontArm(c.frontArmUp, 10)
     moveFrontClaw(c.frontClawOpen, 10)
     msleep(300)
-    timedLineFollowRight(2.2)
+    if c.isPrime:
+        timedLineFollowRight(2.1)
+    else:
+        timedLineFollowRight(2.2)
     driveTimed(-50, 50, 100)
     moveFrontArm(c.frontArmGrabBot, 5)
     msleep(300)
@@ -220,15 +223,25 @@ def goToRamp():
     driveTimed(-100, -100, 2200)
     driveTimed(0, 100, 650)
     driveTimed(100, 100, 500)
-    drive(0, 50)
+    drive(0, 50) 
     while not onBlackFront():
         pass
+    
+    drive(0, 50)
+    while onBlackFront():
+        pass
+    timedLineFollowLeftButton(10)
+    driveTimed(0, -80, 1000)
+    DEBUG()
+    
     timedLineFollowRight(2.2)
     stop()
     timedLineFollowRightSmooth(1)
 #     driveTimed(60, 60, 1400)
-    driveTimed(100, 0, 1300)
-    
+    if c.isClone:
+        driveTimed(100, 0, 1300)
+    else:
+        driveTimed(100, 0, 1350)
     driveTimed(100, 100, 300)
     
     
@@ -255,9 +268,10 @@ def cleanSolarPanels():
     while not onBlackFront():
         pass
     stop()
-    timedLineFollowRightSmooth(12)
+    timedLineFollowRightSmooth(11.5)
     driveTimed(-50, -50, 500)
-    driveTimed(-60,0,6000)
+    driveTimed(-60, 0, 6000)
+    driveTimed(0, 60, 6000)
     
     '''
     driveTimed(-50, 50, 1200)
