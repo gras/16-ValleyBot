@@ -12,6 +12,9 @@ from wallaby import enable_servos
 from wallaby import msleep
 from wallaby import get_servo_position
 from wallaby import ao
+from wallaby import seconds
+
+time = 0
 
 def testServos():
     set_servo_position(c.frontArm, c.frontArmUp)
@@ -68,3 +71,9 @@ def PROGRAMMER_ERROR(msg, value) :
     ao()
     print msg, value
     exit()
+
+def setWait(delay):
+    time = seconds()
+    
+def getWait():
+    return seconds > time

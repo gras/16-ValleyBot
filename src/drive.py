@@ -14,7 +14,7 @@ from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
 
-from sensors import onBlackFront, onBlackBack
+from sensors import onBlackFront, onBlackBack, waitTouch
 
 def driveTimed(left, right, time):
     drive(left, right)
@@ -46,9 +46,9 @@ def testMotors():
     driveTimed(70, 0, 1200)
     msleep(1000)      
     
-def timedLineFollowLeft(time): 
+def timedLineFollowLeftButton(time): 
     sec = seconds() + time
-    while seconds() < sec :
+    while seconds() < sec and not waitTouch():
         if onBlackFront():
             driveTimed(20, 90, 20)
         else:
@@ -87,6 +87,15 @@ def lineFollowRightSmoothCount(amount):
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time
     while seconds() < sec :
+        if onBlackFront():
+            driveTimed(20, 40, 20)
+        else:
+            driveTimed(40, 20, 20)
+        msleep(10)
+
+def timedLineFollowLeftSmoothButton(time):
+    sec = seconds() + time
+    while seconds() < sec and not waitTouch():
         if onBlackFront():
             driveTimed(20, 40, 20)
         else:

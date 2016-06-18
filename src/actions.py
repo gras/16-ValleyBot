@@ -16,10 +16,11 @@ from wallaby import shut_down_in
 from drive import testMotors, stop
 from drive import driveTimed
 from drive import drive
-from drive import timedLineFollowLeft
+from drive import timedLineFollowLeftButton
 from drive import timedLineFollowRight
 from drive import timedLineFollowRightSmooth
 from drive import timedLineFollowLeftSmooth
+from drive import timedLineFollowLeftSmoothButton
 from drive import lineFollowRightSmoothCount
 from drive import timedLineFollowLeftBack
 from drive import lineFollowUntilEndLeftFront 
@@ -39,6 +40,7 @@ from sensors import testSensors
 from sensors import waitTouch
 from sensors import DEBUG
 from sensors import DEBUGwithWait
+from constants import backArmUp
 
 # Tests all hardware
 def init():
@@ -100,8 +102,8 @@ def goToComposter():
     while not onBlackFront():
         pass
     print "Sees line"
-    timedLineFollowLeft(1.7)
-    timedLineFollowLeftSmooth(3)
+    timedLineFollowLeftButton(1.7)
+    timedLineFollowLeftSmoothButton(3)
     driveTimed(0, -100, 950)
     driveTimed(60, 60, 1900)
     moveFrontClaw(c.frontClawClose, 20)
@@ -245,16 +247,9 @@ def goUpRamp():
     stop()
     moveFrontArm(c.frontArmUp, 10)
     msleep(1000)
-'''
-    driveTimed(-50, -50, 200)
-    driveTimed(100, -20, 2000)
-    moveBackArm(c.backArmWipe, 10)
-    msleep(300)
-    driveTimed(20, -20, 200)
-    driveTimed(-20, 20, 200)
-    # driveTimed(80, 0, 500)
-    # driveTimed(0, -80, 600)
-    '''
+    
+
+    
 def cleanSolarPanels():
     drive(-50, 50)
     while not onBlackFront():
@@ -262,7 +257,8 @@ def cleanSolarPanels():
     stop()
     timedLineFollowRightSmooth(12)
     driveTimed(-50, -50, 500)
-    driveTimed(-30,0,3000)
+    driveTimed(-60,0,6000)
+    
     '''
     driveTimed(-50, 50, 1200)
     DEBUGwithWait()
@@ -298,18 +294,4 @@ def dumpSolarArrays():
     moveBackArm(c.backArmUp, 5)
     msleep(300)
     
-def test():
-    enable_servos()
-    moveFrontArm(c.frontArmDown, 10)
-    moveBackArm(c.backArmDown, 10)
-    moveFrontClaw(c.frontArmMidCube, 10)
-    msleep(200)
-    waitForButton()
-    moveBackArm(c.backArmUp, 15)
-    msleep(200)
-    moveBackClaw(c.backClawOpen, 5)
-    msleep(200)
-    moveBackArm(c.backArmUp, 5)
-    driveTimed(50, 50, 500)
-    DEBUG()
     

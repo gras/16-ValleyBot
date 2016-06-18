@@ -55,6 +55,7 @@ backClawOpen = 00
 backClawOpenComp = 350
 backClawMid = 1250
 backClawMidSolar = 1500
+backClawSmallSolar = 900
 backClawCompGrab = 1550
 backClawClose = 2000 
 
@@ -66,6 +67,7 @@ backArmMid = 730
 backArmWipe= 850 # gets red pom off solars
 backArmUp = 1200
 backArmSwitch = 1700
+backArmPushSolar = 380
 
 # PRIME analog sensor values
 frontLineFollowerGrey = 1000

@@ -9,11 +9,12 @@ import actions as act
 from sensors import DEBUG
 
 def main():
-    print "I am ValleyBot"
+    print "I am ValleyBot"    
     act.init()
     act.grabSolarArraysInBox()
-    act.getOutOfStartBox()    
+    act.getOutOfStartBox()
     act.goToComposter()
+    DEBUG()
     act.removeDebris()
     act.dumpDebris()
     act.goToGate()
