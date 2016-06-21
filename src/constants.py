@@ -39,7 +39,7 @@ frontArmUp = 1200 #Arm at 90 degrees up
 frontArmMidPom = 700 #Arm at 30 degrees up
 frontArmGrabBot = 550 #grabs BotGuy well
 frontArmMidCube = 450 #Arm at 30 degrees up
-frontArmMidDown = 325 #added during comp for crease
+frontArmMidDown = 375 #added during comp for crease
 frontArmSwing = 200
 frontArmDown = 100 #Arm forward on ground
 
@@ -102,7 +102,7 @@ else:
     
     backClawClose = 1450
     backClawCloseBlock = 1675
-    backClawSmallSolar = 1122
+    backClawSmallSolar = 850
     
     backArmDown = 440
     backArmWipe= 850 # gets red pom off solars

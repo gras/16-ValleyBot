@@ -61,10 +61,10 @@ def init():
 #     msleep(1000)
 #     disable_servos()
     waitForButton()
-    c.startTime = seconds()
     enable_servos()
     moveBackArm(c.backArmUp, 5)
     waitForButton()
+    c.startTime = seconds()
     shut_down_in(179.9) #119.9 DONT FORGET TO FIX 
     # moveBackClaw(c.backClawSmallSolar, 15)
     
@@ -73,7 +73,10 @@ def grabSolarArraysInBox():
     msleep(200)
     moveBackClaw(c.backClawSmallSolar, 15)
     msleep(200)
-    driveTimed(-50, -50, 1000)
+    if c.isPrime:
+        driveTimed(-50, -50, 1000)
+    else:
+        driveTimed(-45, -50, 1000)
     moveBackArm(c.backArmDown, 15)
     msleep(200)
     moveBackClaw(c.backClawClose, 15)
@@ -105,11 +108,17 @@ def goToComposter():
     timedLineFollowLeftButton(1.7)
     timedLineFollowLeftSmoothButton(3)
     driveTimed(0, -100, 950)
-    driveTimed(60, 60, 1900)
+    if c.isPrime:
+        driveTimed(60, 60, 1800)
+    else:
+        driveTimed(60, 60, 1900)
     moveFrontClaw(c.frontClawClose, 20)
     moveFrontArm(c.frontArmSwing, 20)
     msleep(300)
-    driveTimed(35, 0, 3550)
+    if c.isPrime:
+        driveTimed(35, 5, 3600)
+    else:
+        driveTimed(35, 5, 3550)
 
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
@@ -132,7 +141,7 @@ def dumpDebris():
     driveTimed(0, -100, 1100)
     driveTimed(60, 70, 500)
     driveTimed(90, 0, 600)
-    driveTimed(60, 90, 225)
+    driveTimed(50, 100, 225)
     driveTimed(60, 70, 800)
    
 # Drives backwards and follows line to reach gate
@@ -157,13 +166,19 @@ def goToGate():
     while not onBlackFront():
         pass
     lineFollowUntilEndRightFront()
-    moveFrontArm(c.frontArmDown, 15)
+    if c.isPrime:
+        driveTimed(40, 0, 300)
+    else:
+        pass;
+    moveFrontArm(c.frontArmMidDown, 15)
     
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
-    driveTimed(100, 100, 500)
-    moveFrontClaw(c.frontClawCube, 5)
+    driveTimed(100, 100, 250)
+    moveFrontArm(c.frontArmDown, 15)
+    driveTimed(100, 100, 200)
+    moveFrontClaw(c.frontClawCube, 15)
     msleep(200)
     moveFrontArm(c.frontArmSwitch, 30)
     driveTimed(-100, -100, 1400)
@@ -176,6 +191,7 @@ def dropOff():
     msleep(300)
     moveFrontClaw(c.frontClawOpen, 10)
     msleep(300)
+    driveTimed(-50, 50, 50)
     moveFrontArm(c.frontArmUp, 10)
     msleep(300)
     drive(80, -80)
@@ -190,7 +206,7 @@ def goToValley():
     drive(50, 50)
     crossBlackFront()
     moveFrontClaw(c.frontClawClose, 200)
-    moveFrontArm(c.frontArmSwing, 200)
+    moveFrontArm(c.frontArmMidDown, 20)
     msleep(300)
     
 # grabs BotGuy    

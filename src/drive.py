@@ -101,7 +101,8 @@ def timedLineFollowLeftSmoothButton(time):
         else:
             driveTimed(40, 20, 20)
         msleep(10)
-        
+    msleep(100)
+    
 def timedLineFollowLeftBack(time):  # follows on starboard side
     sec = seconds() + time
     while seconds() < sec : 

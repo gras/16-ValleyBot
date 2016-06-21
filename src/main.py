@@ -21,6 +21,7 @@ def main():
     act.dropOff() 
     act.goToValley()
     act.goToBotGuy()
+    DEBUG()
     act.goToRamp()
     act.goUpRamp()
     act.cleanSolarPanels()
