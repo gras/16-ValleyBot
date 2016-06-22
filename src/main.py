@@ -6,7 +6,7 @@ Created on Mar 13, 2016
 '''
 import actions as act
 
-from sensors import DEBUG
+from sensors import DEBUG, DEBUGwithWait
 
 def main():
     print "I am ValleyBot"    
@@ -21,7 +21,6 @@ def main():
     act.dropOff() 
     act.goToValley()
     act.goToBotGuy()
-    DEBUG()
     act.goToRamp()
     act.goUpRamp()
     act.cleanSolarPanels()

@@ -97,10 +97,10 @@ def getOutOfStartBox():
 def goToComposter():
     print "goToComposter"
     driveTimed(-100, 100, 200)
-    if c.isClone:
-        drive(100, 85)
-    else:
+    if c.isPrime:
         drive(100, 75)
+    else:
+        drive(100, 85)
     msleep(300)
     while not onBlackFront():
         pass
@@ -205,6 +205,7 @@ def goToValley():
     driveTimed(100, 90, 500)
     drive(50, 50)
     crossBlackFront()
+    driveTimed(50, 50, 250)
     moveFrontClaw(c.frontClawClose, 200)
     moveFrontArm(c.frontArmMidDown, 20)
     msleep(300)
@@ -221,9 +222,10 @@ def goToBotGuy():
     moveFrontClaw(c.frontClawOpen, 10)
     msleep(300)
     if c.isPrime:
-        timedLineFollowRight(2.1)
+        timedLineFollowRight(1.5)
+        timedLineFollowRightSmooth(1.6)
     else:
-        timedLineFollowRight(2.2)
+        timedLineFollowRight(2.3)
     driveTimed(-50, 50, 100)
     moveFrontArm(c.frontArmGrabBot, 5)
     msleep(300)
@@ -247,18 +249,17 @@ def goToRamp():
     while onBlackFront():
         pass
     timedLineFollowLeftButton(10)
-    driveTimed(0, -80, 1000)
     DEBUG()
-    
-    timedLineFollowRight(2.2)
-    stop()
-    timedLineFollowRightSmooth(1)
-#     driveTimed(60, 60, 1400)
-    if c.isClone:
-        driveTimed(100, 0, 1300)
-    else:
-        driveTimed(100, 0, 1350)
-    driveTimed(100, 100, 300)
+    driveTimed(0, -80, 1800)
+    #timedLineFollowRight(2.2)
+    #stop()
+    #timedLineFollowRightSmooth(1)
+    #driveTimed(60, 60, 1400)
+    #if c.isPrime:
+    #    driveTimed(100, 0, 1350)
+    #else:
+    #    driveTimed(100, 0, 1300)
+    driveTimed(100, 100, 2800)
     
     
 # drives up ramp
@@ -267,14 +268,15 @@ def goUpRamp():
     moveFrontArm(c.frontArmUp, 10)  # was frontArmUpRamp
     msleep(300)
     driveTimed(100, 80, 1000)
-    driveTimed(100, 100, 800)
     moveFrontArm(c.frontArmUpRamp, 10)
+    driveTimed(100, 100, 800)
+    
     driveTimed(100, 80, 3000)
     drive(100, 95)
     while not waitTouch():
         pass
     stop()
-    moveFrontArm(c.frontArmUp, 10)
+    moveFrontArm(c.frontArmUp, 20)
     msleep(1000)
     
 
@@ -286,8 +288,14 @@ def cleanSolarPanels():
     stop()
     timedLineFollowRightSmooth(11.5)
     driveTimed(-50, -50, 500)
-    driveTimed(-60, 0, 6000)
-    driveTimed(0, 60, 6000)
+    if c.isPrime:
+        driveTimed(-60, 0, 3500)
+        driveTimed(0, 60, 2500)
+    else:
+        driveTimed(-60, 0, 2700)
+        driveTimed(0, 60, 3000)
+    DEBUG()
+   
     
     '''
     driveTimed(-50, 50, 1200)
