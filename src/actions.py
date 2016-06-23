@@ -49,9 +49,9 @@ def init():
     else:
         print "Running Valley - Clone"   
     testSensors()
-#     testServos()
-#     testMotors()
-#     disable_servos()
+    testServos()
+    testMotors()
+    disable_servos()
     # wait4light()
     
     moveFrontClaw(c.frontClawClose, 25)
@@ -60,9 +60,29 @@ def init():
     moveBackArm(c.backArmDown, 5)
 #     msleep(1000)
 #     disable_servos()
-    waitForButton()
+    print "press the touch sensor"
+    while not waitTouch():
+        pass
     enable_servos()
-    moveBackArm(c.backArmUp, 5)
+    moveFrontArm(c.frontArmUp, 5) 
+    msleep(200)
+    print "button"
+#     moveFrontClaw(c.frontClawOpen, 25)
+#     msleep(200)
+#     moveFrontArm(c.frontArmDown, 5) 
+#     msleep(200)
+#     moveBackClaw(c.backClawOpen, 25)
+#     msleep(200)
+#     moveBackArm(c.backArmUp, 5)
+#     msleep(500)
+#     moveFrontClaw(c.frontClawClose, 25)
+#     msleep(200)
+#     moveFrontArm(c.frontArmUp, 5) 
+#     msleep(200)
+#     moveBackClaw(c.backClawSmallSolar, 25)
+#     msleep(200)
+#     moveBackArm(c.backArmDown, 5)
+#     msleep(200)
     waitForButton()
     c.startTime = seconds()
     shut_down_in(179.9) #119.9 DONT FORGET TO FIX 
@@ -249,8 +269,26 @@ def goToRamp():
     while onBlackFront():
         pass
     timedLineFollowLeftButton(10)
-    DEBUG()
-    driveTimed(0, -80, 1800)
+    
+#ALTERNATIVE WAY TO DO IT
+    
+# #     if it breaks use this
+#     driveTimed(0, -100, 700)
+#     drive(0, -100)
+# #     while onBlackFront():
+# #         pass
+#     while not onBlackFront():
+#         pass
+#     drive(0, -30)
+#     while onBlackFront():
+#         pass
+    
+    
+    
+    if c.isPrime:
+        driveTimed(0, -80, 1700)
+    else:
+        driveTimed(0, -80, 1800)
     #timedLineFollowRight(2.2)
     #stop()
     #timedLineFollowRightSmooth(1)
@@ -259,8 +297,9 @@ def goToRamp():
     #    driveTimed(100, 0, 1350)
     #else:
     #    driveTimed(100, 0, 1300)
-    driveTimed(100, 100, 2800)
+    #driveTimed(100, 100, 2800)
     
+    driveTimed(98, 100, 2800)
     
 # drives up ramp
 def goUpRamp():
@@ -279,14 +318,12 @@ def goUpRamp():
     moveFrontArm(c.frontArmUp, 20)
     msleep(1000)
     
-
-    
 def cleanSolarPanels():
     drive(-50, 50)
     while not onBlackFront():
         pass
     stop()
-    timedLineFollowRightSmooth(11.5)
+    timedLineFollowRightSmooth(10.8)
     driveTimed(-50, -50, 500)
     if c.isPrime:
         driveTimed(-60, 0, 3500)
@@ -294,15 +331,21 @@ def cleanSolarPanels():
     else:
         driveTimed(-60, 0, 2700)
         driveTimed(0, 60, 3000)
+    driveTimed(-50, -50, 1200)
+    moveFrontArm(c.frontArmDown, 10)
+    msleep(100)
+    moveFrontClaw(c.frontClawOpen, 20)
+    msleep(100)
+    moveFrontArm(c.frontArmUp, 10)
+    driveTimed(50, 50, 1000)
+    if c.isPrime:
+        driveTimed(0, 60, 3500)
+        driveTimed(-60, 0, 2500)
+    else:
+        driveTimed(0, 60, 2700)
+        driveTimed(-60, 0, 3000)
     DEBUG()
-   
-    
-    '''
-    driveTimed(-50, 50, 1200)
-    DEBUGwithWait()
-    driveTimed(35, 30, 8000)
-    '''
-        
+
 def crabDance(): 
     print "crabDance"
     moveBackArm(c.backArmUp, 15)
@@ -323,7 +366,6 @@ def crabDance():
     moveFrontClaw(c.frontClawClose, 15)
     msleep(200)
 
-
 def dumpSolarArrays():  
     moveBackArm(c.backArmDown, 20)
     msleep(300)
@@ -331,5 +373,4 @@ def dumpSolarArrays():
     msleep(300)
     moveBackArm(c.backArmUp, 5)
     msleep(300)
-    
     
