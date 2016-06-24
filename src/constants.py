@@ -43,6 +43,8 @@ frontArmMidPom = 700 #Arm at 30 degrees up
 frontArmUpRamp = 900
 frontArmUp = 1200 #Arm at 90 degrees up
 frontArmSwitch = 1500
+frontArmGrabCube = 377
+frontArmSolarPanel = 535
 
 #Front Claw
 frontClawClose = 830 # Claw closed
@@ -57,7 +59,7 @@ backClawSmallSolar = 900
 backClawMid = 1250
 backClawMidSolar = 1500
 backClawCompGrab = 1550
-backClawClose = 2000 
+backClawClose = 1300 
 
 #Back Arm
 backArmDown = 250

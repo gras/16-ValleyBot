@@ -40,7 +40,7 @@ from sensors import testSensors
 from sensors import waitTouch
 from sensors import DEBUG
 from sensors import DEBUGwithWait
-from constants import backArmUp
+from constants import backArmUp, frontArmSolarPanel
 
 # Tests all hardware
 def init():
@@ -64,7 +64,7 @@ def init():
     while not waitTouch():
         pass
     enable_servos()
-    moveFrontArm(c.frontArmUp, 5) 
+    moveBackArm(c.backArmUp, 5) 
     msleep(200)
     print "button"
 #     moveFrontClaw(c.frontClawOpen, 25)
@@ -189,16 +189,16 @@ def goToGate():
     if c.isPrime:
         driveTimed(40, 0, 300)
     else:
-        pass;
+        pass
     moveFrontArm(c.frontArmMidDown, 15)
     
 # Drives to the rift valley cube
 def goToCube():
     print "goToCube"
     driveTimed(100, 100, 250)
-    moveFrontArm(c.frontArmDown, 15)
+    moveFrontArm(c.frontArmGrabCube, 15)
     driveTimed(100, 100, 200)
-    moveFrontClaw(c.frontClawCube, 15)
+    moveFrontClaw(c.frontClawCube, 45)
     msleep(200)
     moveFrontArm(c.frontArmSwitch, 30)
     driveTimed(-100, -100, 1400)
@@ -222,7 +222,7 @@ def goToValley():
     print "goToValley"
     timedLineFollowRight(.5)
     lineFollowUntilEndRightFront()
-    driveTimed(100, 90, 500)
+    driveTimed(100, 100, 500) #100, 90
     drive(50, 50)
     crossBlackFront()
     driveTimed(50, 50, 250)
@@ -272,34 +272,39 @@ def goToRamp():
     
 #ALTERNATIVE WAY TO DO IT
     
-# #     if it breaks use this
-#     driveTimed(0, -100, 700)
-#     drive(0, -100)
-# #     while onBlackFront():
-# #         pass
-#     while not onBlackFront():
-#         pass
-#     drive(0, -30)
-#     while onBlackFront():
-#         pass
+#     if it breaks use this
+    drive(0, -100)
+    while not onBlackFront():
+        pass
+    msleep(50)
+    while onBlackFront():
+        pass
+    while not onBlackFront():
+        pass
+    drive(0, -30)
+    while onBlackFront():
+        pass
+    driveTimed(100, 100, 3000)
+    driveTimed(0, 30, 200)
     
     
     
-    if c.isPrime:
-        driveTimed(0, -80, 1700)
-    else:
-        driveTimed(0, -80, 1800)
-    #timedLineFollowRight(2.2)
-    #stop()
-    #timedLineFollowRightSmooth(1)
-    #driveTimed(60, 60, 1400)
-    #if c.isPrime:
-    #    driveTimed(100, 0, 1350)
-    #else:
-    #    driveTimed(100, 0, 1300)
-    #driveTimed(100, 100, 2800)
     
-    driveTimed(98, 100, 2800)
+#     if c.isPrime:
+#         driveTimed(0, -80, 1700)
+#     else:
+#         driveTimed(0, -80, 1800)
+#     #timedLineFollowRight(2.2)
+#     #stop()
+#     #timedLineFollowRightSmooth(1)
+#     #driveTimed(60, 60, 1400)
+#     #if c.isPrime:
+#     #    driveTimed(100, 0, 1350)
+#     #else:
+#     #    driveTimed(100, 0, 1300)
+#     #driveTimed(100, 100, 2800)
+#     
+#     driveTimed(98, 100, 2800)
     
 # drives up ramp
 def goUpRamp():
@@ -336,14 +341,23 @@ def cleanSolarPanels():
     msleep(100)
     moveFrontClaw(c.frontClawOpen, 20)
     msleep(100)
+    driveTimed(100, 100, 100)
     moveFrontArm(c.frontArmUp, 10)
     driveTimed(50, 50, 1000)
-    if c.isPrime:
-        driveTimed(0, 60, 3500)
-        driveTimed(-60, 0, 2500)
-    else:
-        driveTimed(0, 60, 2700)
-        driveTimed(-60, 0, 3000)
+    
+    driveTimed(-60, 0, 3000)
+    waitForButton()
+    drive(0, 60)
+    while not onBlackBack():
+        pass
+    stop()
+    msleep(200)
+    drive(0, 60)
+    while onBlackBack():
+        pass
+    stop()
+    msleep(200)
+    moveFrontArm(frontArmSolarPanel, 15)
     DEBUG()
 
 def crabDance(): 
