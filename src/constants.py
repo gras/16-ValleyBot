@@ -55,6 +55,7 @@ frontClawOpen = 2000 #Claw open
 #Back Claw
 backClawOpen = 00
 backClawOpenComp = 350
+backClawDropSolar = 750
 backClawSmallSolar = 900
 backClawMid = 1250
 backClawMidSolar = 1500
@@ -110,7 +111,6 @@ else:
     #Back Arm
     backArmDown = 440
     backArmPushSolar = 600
-    backArmDrop = 640
     backArmBinGrab = 750
     backArmCompGrab = 780
     backArmWipe= 850 # gets red pom off solars

@@ -33,7 +33,15 @@ def waitTouch():
     return digital(c.TOUCH)
 
 def onBlackFront():
-    return analog(c.FRONT_TOPHAT) > c.frontLineFollowerGrey 
+    if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
+        return False
+    msleep(10)
+    if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
+        return False
+    msleep(10)
+    if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
+        return False
+    return True
 
 def onBlackBack():
     return analog(c.REAR_TOPHAT) > c.frontLineFollowerGrey 
