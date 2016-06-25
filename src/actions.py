@@ -7,7 +7,7 @@ Created on Mar 13, 2016
 import constants as c
 
 from wallaby import seconds
-from wallaby import ao
+#from wallaby import ao
 from wallaby import disable_servos
 from wallaby import enable_servos
 from wallaby import msleep
@@ -19,11 +19,11 @@ from drive import drive
 from drive import timedLineFollowLeftButton
 from drive import timedLineFollowRight
 from drive import timedLineFollowRightSmooth
-from drive import timedLineFollowLeftSmooth
+#from drive import timedLineFollowLeftSmooth
 from drive import timedLineFollowLeftSmoothButton
-from drive import lineFollowRightSmoothCount
-from drive import timedLineFollowLeftBack
-from drive import lineFollowUntilEndLeftFront 
+#from drive import lineFollowRightSmoothCount
+#from drive import timedLineFollowLeftBack
+#from drive import lineFollowUntilEndLeftFront 
 from drive import lineFollowUntilEndRightFront
 
 from servos import testServos
@@ -40,7 +40,7 @@ from sensors import testSensors
 from sensors import waitTouch
 from sensors import DEBUG
 from sensors import DEBUGwithWait
-from constants import backArmUp, frontArmSolarPanel
+#from constants import backArmUp, frontArmSolarPanel
 
 # Tests all hardware
 def init():
@@ -181,16 +181,24 @@ def goToGate():
     stop()
     moveFrontArm(c.frontArmGrabBot, 15)
     moveFrontClaw(c.frontClawOpen, 15)
-    msleep(200)
+#     msleep(2000)
     drive(0, 50)
     while not onBlackFront():
         pass
-    lineFollowUntilEndRightFront()
-    if c.isPrime:
-        driveTimed(40, 0, 300)
-    else:
+    
+############################    
+    drive(20, 0)
+    while onBlackFront():
         pass
+############################
+
+    lineFollowUntilEndRightFront()
+#     if c.isPrime:
+#         driveTimed(40, 0, 300)
+#     else:
+#         pass
     moveFrontArm(c.frontArmMidDown, 15)
+#     DEBUG()
     
 # Drives to the rift valley cube
 def goToCube():
@@ -206,7 +214,7 @@ def goToCube():
 # Drops off cube on start box line
 def dropOff():
     print "drop off"
-    driveTimed(-80, 80, 1200)
+    driveTimed(-80, 80, 1300) #was 1200
     moveFrontArm(c.frontArmDown, 10)
     msleep(300)
     moveFrontClaw(c.frontClawOpen, 10)
@@ -216,11 +224,14 @@ def dropOff():
     msleep(300)
     drive(80, -80)
     crossBlackFront()
-
+    stop()
+    
 # Goes into rift valley to grab BotGuy
 def goToValley():
     print "goToValley"
-    timedLineFollowRight(.5)
+    drive(0, 50)
+    while not onBlackFront():
+        pass
     lineFollowUntilEndRightFront()
     driveTimed(100, 100, 500) #100, 90
     drive(50, 50)
@@ -246,10 +257,10 @@ def goToBotGuy():
         timedLineFollowRightSmooth(1.6)
     else:
         timedLineFollowRight(2.3)
-    driveTimed(-50, 50, 100)
+    driveTimed(-50, 50, 50)
     moveFrontArm(c.frontArmGrabBot, 5)
     msleep(300)
-    moveFrontClaw(c.frontClawClose, 100)
+    moveFrontClaw(c.frontClawClose, 200) #was 100
     msleep(300)
     moveFrontArm(c.frontArmUp, 10)
     msleep(1000)
@@ -273,14 +284,16 @@ def goToRamp():
 #ALTERNATIVE WAY TO DO IT
     
 #     if it breaks use this
-    drive(0, -100)
+    drive(0, -80)
     while not onBlackFront():
         pass
     msleep(50)
     while onBlackFront():
         pass
+    msleep(50)
     while not onBlackFront():
         pass
+    msleep(50)
     drive(0, -30)
     while onBlackFront():
         pass
@@ -323,12 +336,16 @@ def goUpRamp():
     moveFrontArm(c.frontArmUp, 20)
     msleep(1000)
     
-def cleanSolarPanels():
+def moveSolarPanels():
+    print "moveSolarPanels"
     drive(-50, 50)
     while not onBlackFront():
         pass
     stop()
     timedLineFollowRightSmooth(10.8)
+    
+def deliverBotnaut():
+    print "deliverBotnaut"
     driveTimed(-50, -50, 500)
     if c.isPrime:
         driveTimed(-60, 0, 3500)
@@ -337,7 +354,7 @@ def cleanSolarPanels():
         driveTimed(-60, 0, 2700)
         driveTimed(0, 60, 3000)
     driveTimed(-50, -50, 1200)
-    moveFrontArm(c.frontArmDown, 10)
+    moveFrontArm(c.frontArmGrabBot, 10) #was frontArmDown
     msleep(100)
     moveFrontClaw(c.frontClawOpen, 20)
     msleep(100)
@@ -345,20 +362,27 @@ def cleanSolarPanels():
     moveFrontArm(c.frontArmUp, 10)
     driveTimed(50, 50, 1000)
     
+def deliverSolarArrays():
+    print "deliverSolarArrays"
     driveTimed(-60, 0, 3000)
-    waitForButton()
     drive(0, 60)
     while not onBlackBack():
         pass
-    stop()
+    driveTimed(-50, -50, 500)
+    moveBackArm(c.backArmDown, 20)
+    moveBackClaw(c.backClawOpen, 20)
+    driveTimed(50, 50, 500)
+    moveBackArm(c.backArmUp, 20)
+    waitForButton()
     msleep(200)
     drive(0, 60)
     while onBlackBack():
         pass
     stop()
     msleep(200)
-    moveFrontArm(frontArmSolarPanel, 15)
-    DEBUG()
+    moveFrontClaw(c.frontClawClose, 50)
+    moveFrontArm(c.frontArmSolarPanel, 15)
+    DEBUGwithWait()
 
 def crabDance(): 
     print "crabDance"

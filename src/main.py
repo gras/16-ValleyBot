@@ -23,7 +23,9 @@ def main():
     act.goToBotGuy()
     act.goToRamp()
     act.goUpRamp()
-    act.cleanSolarPanels()
+    act.moveSolarPanels()
+    act.deliverBotnaut()
+    act.deliverSolarArrays()
     DEBUG()    
     
     
