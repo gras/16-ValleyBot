@@ -92,7 +92,7 @@ def goToComposter():
         drive(100, 75)
     else:
         drive(100, 85)
-    msleep(300)
+    msleep(200)
     while not onBlackFront():
         pass
     print "Sees line"
@@ -200,22 +200,22 @@ def goToValley():
 # grabs BotGuy    
 def goToBotGuy():
     print "goToBotGuy"
-    drive(-50, 50)
+    drive(-50, 50)#sweep red poms
     crossBlackFront()
-    driveTimed(-50, 50, 150)
+    driveTimed(-50, 50, 150)#end of sweep
+    moveFrontArm(c.frontArmUp, 100)
     drive(50, 0)
     crossBlackFront()
-    moveFrontArm(c.frontArmUp, 100)
     moveFrontClaw(c.frontClawOpen, 100)
     msleep(300)
     if c.isPrime:
-        timedLineFollowRight(1.5)
-        timedLineFollowRightSmooth(1.2)#was 1.6
+        timedLineFollowRight(1.5)#was 1.5
+        timedLineFollowRightSmooth(.75)#was 1.6  
     else:
         timedLineFollowRight(2.3)
-    driveTimed(-50, 50, 50)
+    driveTimed(-50, 50, 75)
     moveFrontArm(c.frontArmGrabBot, 10)
-#     msleep(300)
+    msleep(300)
     moveFrontClaw(c.frontClawClose, 200) 
     msleep(300)
     moveFrontArm(c.frontArmUp, 10)
@@ -225,8 +225,8 @@ def goToBotGuy():
 # drives up ramp
 def goToRamp():
     print "goToRamp"
-    driveTimed(-100, -100, 2200)
-    driveTimed(0, 100, 650)
+    driveTimed(-100, -100, 2100)#**************Change this 1800
+    driveTimed(0, 100, 650)#was 650
     driveTimed(100, 100, 500)
     drive(0, 50) 
     while not onBlackFront():
@@ -275,10 +275,10 @@ def moveSolarPanels():
     while not onBlackFront():
         pass
     stop()
-    if isPrime:
-        timedLineFollowRightSmooth(10)
-    else:
-        timedLineFollowRightSmooth(11.5)
+   # if isPrime:
+    #    timedLineFollowRightSmooth(10.5)
+    #else:
+    timedLineFollowRightSmooth(11.5)
 def deliverBotnaut():
     print "deliverBotnaut"
     driveTimed(-50, -50, 500)
@@ -289,7 +289,7 @@ def deliverBotnaut():
         driveTimed(-60, 0, 2700)
         driveTimed(0, 60, 3000)
     if isPrime:
-        driveTimed(-50, -50, 1000)#was 1200
+        driveTimed(-50, -50, 2000)#was 1000
     else:
         driveTimed(-50, -50, 1200)
     moveFrontArm(c.frontArmGrabBot, 10)
@@ -308,6 +308,8 @@ def deliverSolarArrays():
     driveTimed(-50, -50, 500)
     moveBackArm(c.backArmDown, 20)
     moveBackClaw(c.backClawDropSolar, 20)
+    moveBackArm(c.backArmPushSolar,10)
+    driveTimed(40,-40,100)
     driveTimed(50, 50, 500)
     moveBackArm(c.backArmUp, 20)
 #     msleep(200)
@@ -317,8 +319,13 @@ def deliverSolarArrays():
     stop()
 #     msleep(200)
     moveFrontClaw(c.frontClawClose, 50)
-    moveFrontArm(c.frontArmSolarPanel, 15)
-    DEBUGwithWait()
+    moveFrontArm(c.frontArmMidPom, 15)
+    driveTimed(100, -100, 200)
+
+
+
+
+
 
 def crabDance(): 
     print "crabDance"

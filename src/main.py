@@ -26,7 +26,7 @@ def main():
     act.moveSolarPanels()
     act.deliverBotnaut()
     act.deliverSolarArrays()
-    DEBUG()    
+    DEBUGwithWait()()    
     
     
     return 0
