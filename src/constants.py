@@ -36,6 +36,7 @@ RIGHT_BUTTON = 13
 # PRIME servo positions
 frontArmDown = 100 #Arm forward on ground
 frontArmSwing = 200
+frontArmSweep = 275
 frontArmMidDown = 350 #added during comp for crease
 frontArmMidCube = 450 #Arm at 30 degrees up
 frontArmGrabBot = 485 #grabs BotGuy well
@@ -85,6 +86,7 @@ else:
     # servo positions
     frontArmDown = 630 # Arm forward on ground
     frontArmSwing = 750
+    frontArmSweep = 850
     frontArmMidDown = 1000 #added during comp for crease
     frontArmMidCube = 1100 #Arm at 30 degrees up
     frontArmGrabBot =  1200 #grabs BotGuy well
