@@ -20,6 +20,8 @@ from drive import timedLineFollowRight
 from drive import timedLineFollowRightSmooth
 from drive import timedLineFollowLeftSmoothButton
 from drive import lineFollowUntilEndRightFront
+from drive import timedLineFollowRightSmoothET
+from drive import freezeMotors
 
 from servos import testServos
 from servos import moveFrontArm
@@ -58,6 +60,7 @@ def init():
         pass
     enable_servos()
     moveBackArm(c.backArmUp, 5) 
+    moveBackClaw(c.backClawStart, 5)
     msleep(200)
     print "button"
     waitForButton()
@@ -65,8 +68,8 @@ def init():
     shut_down_in(179.9)  # 119.9 DONT FORGET TO FIX 
     
 def grabSolarArraysInBox():
+    moveBackClaw(c.backClawSmallSolar, 20)
     moveBackArm(c.backArmPushSolar, 5)
-    moveBackClaw(c.backClawSmallSolar, 15)
     if c.isPrime:
         driveTimed(-50, -50, 1000)
     else:
@@ -80,7 +83,7 @@ def grabSolarArraysInBox():
 def getOutOfStartBox():
     print "getOutOfStartBox"
     if c.isPrime:
-        driveTimed(-75, -100, 2000)
+        driveTimed(-75, -100, 1600)
     else:
         driveTimed(-75, -100, 1700)
     driveTimed(-100, 100, 400)
@@ -96,14 +99,16 @@ def goToComposter():
     else:
         drive(100, 85)
     msleep(200)
-    while not onBlackFront():
+    while not onBlackFront(1):
         pass
-    print "Sees line"
+    drive(-50, 0)
+    while onBlackFront(1):
+        pass
     timedLineFollowLeftButton(3)
     driveTimed(50, 50, 200)
     driveTimed(0, -100, 950)
     if c.isPrime:
-        driveTimed(60, 60, 1800)
+        driveTimed(60, 60, 1700)
     else:
         driveTimed(60, 60, 1900)
     moveFrontClaw(c.frontClawClose, 20)
@@ -150,10 +155,11 @@ def goToGate():
     moveFrontArm(c.frontArmGrabBot, 45)#was 15
     moveFrontClaw(c.frontClawOpen, 45)#was 15
     
-    drive(20, 0)
-    while onBlackFront():
-        pass
-    stop()
+    if onBlackFront():
+        drive(20, 0)
+        while onBlackFront():
+            pass
+        stop()
     
     drive(0, 20)
     while not onBlackFront():
@@ -184,14 +190,23 @@ def dropOff():
     moveFrontArm(c.frontArmUp, 10)
     drive(80, -80)
     crossBlackFront()
-    stop()
+    freezeMotors()
     
 # Goes into rift valley to grab BotGuy
 def goToValley():
     print "goToValley"
-    drive(0, 30)#was 50
+
+    if onBlackFront():
+        drive(20, 0)
+        while onBlackFront():
+            pass
+        stop()
+    
+    drive(0, 20)
     while not onBlackFront():
         pass
+    stop()
+
     lineFollowUntilEndRightFront()
     driveTimed(100, 100, 500) 
     drive(50, 50)
@@ -213,11 +228,11 @@ def goToBotGuy():
     moveFrontClaw(c.frontClawOpen, 100)
     msleep(300)
     if c.isPrime:
-        timedLineFollowRight(1.5)#was 1.5
-        timedLineFollowRightSmooth(.75)#was 1.6  
+        timedLineFollowRight(1)#was 1.5
+        timedLineFollowRightSmoothET(5)#was 1.6  
     else:
-        timedLineFollowRight(1.6)
-        timedLineFollowRightSmooth(1.0)
+        timedLineFollowRight(1)
+        timedLineFollowRightSmoothET(5)
     driveTimed(-50, 50, 75)
     moveFrontArm(c.frontArmGrabBot, 10)
     msleep(300)
@@ -246,20 +261,20 @@ def goToRamp():
     
 # turn to go up the ramp
     drive(0, -80)
-    while not onBlackFront():
+    while not onBlackFront(2):
         pass
     msleep(50)
-    while onBlackFront():
+    while onBlackFront(2):
         pass
     msleep(50)
-    while not onBlackFront():
+    while not onBlackFront(2):
         pass
     msleep(50)
     drive(0, -30)
-    while onBlackFront():
+    while onBlackFront(2):
         pass 
     if c.isPrime:
-        driveTimed(100, 100, 3000)
+        driveTimed(100, 97, 3000)
     else:
         driveTimed(100, 95, 3000)
     driveTimed(0, 30, 200)
@@ -312,6 +327,12 @@ def deliverBotnaut():
     driveTimed(100, 100, 100)
     moveFrontArm(c.frontArmUp, 10)
     #driveTimed(50, 50, 1000)
+
+def removeDirt():
+    print "removeDirt"
+    moveBackArm(c.backArmSweep, 20)
+    driveTimed(-30, -30, 1000)
+    driveTimed(30, -30, 1000)
     DEBUGwithWait()
     
 def deliverSolarArrays():

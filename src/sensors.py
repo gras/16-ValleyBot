@@ -14,37 +14,40 @@ from wallaby import digital
 from wallaby import seconds
 from wallaby import a_button_clicked
 from wallaby import b_button_clicked
+from wallaby import freeze
 
 def crossBlackFront():
     while not onBlackFront():  # wait for black
         pass
     while onBlackFront():  # wait for white
         pass
-    ao()
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
     
 def crossBlackBack():
-    while not onBlackBack():  # wait for black
+    while not onBlackBack(1):  # wait for black
         pass
-    while onBlackBack():  # wait for white
+    while onBlackBack(1):  # wait for white
         pass
-    ao()
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
 
 def waitTouch():
     return digital(c.TOUCH)
 
-def onBlackFront():
-    if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
-        return False
-    msleep(10)
-    if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
-        return False
-    msleep(10)
-    if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
-        return False
+def onBlackFront(repeat = 3):
+    for x in range(repeat):
+        if analog(c.FRONT_TOPHAT) < c.frontLineFollowerGrey: 
+            return False
+        if repeat > 1:
+            msleep(10)
     return True
 
 def onBlackBack():
     return analog(c.REAR_TOPHAT) > c.frontLineFollowerGrey 
+
+def seeBotGuy ():
+    return analog(c.ET) > c.ETbotGuy
 
 def waitForButton():
     print "Press Button..."
@@ -65,11 +68,15 @@ def testSensors():
         DEBUG()
 
 def DEBUG():
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
     ao()
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
     exit(0)
     
 def DEBUGwithWait():
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
     ao()
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
     msleep(5000)

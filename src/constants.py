@@ -9,6 +9,7 @@ import wallaby as w
 
 # Start light threshold
 startLightThresh = 2000
+ETbotGuy = 2900
 
 # TIME
 startTime = -1
@@ -27,6 +28,7 @@ backClaw = 3
 FRONT_TOPHAT = 0
 REAR_TOPHAT = 1
 STARTLIGHT = 2
+ET = 2
 
 # DIGITAL ports
 TOUCH = 0
@@ -51,7 +53,7 @@ frontArmSolarPanel = 535
 frontClawClose = 830 # Claw closed
 frontClawCube = 1150 
 frontClawMid = 1400 # claw cube grab
-frontClawOpen = 2000 #Claw open
+frontClawOpen = 1850 #Claw open
 
 #Back Claw
 backClawOpen = 00
@@ -62,9 +64,11 @@ backClawMid = 1250
 backClawMidSolar = 1500
 backClawCompGrab = 1550
 backClawClose = 1300 
+backClawStart = 450
 
 #Back Arm
 backArmDown = 250
+backArmSweep = 325
 backArmPushSolar = 380
 backArmBinGrab = 560 #when the backArm pulls bin
 backArmCompGrab = 580

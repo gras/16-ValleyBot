@@ -11,8 +11,9 @@ from wallaby import motor
 from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
+from wallaby import freeze
 
-from sensors import onBlackFront, onBlackBack, waitTouch
+from sensors import onBlackFront, onBlackBack, waitTouch, seeBotGuy
 
 def driveTimed(left, right, time):
     drive(left, right)
@@ -66,6 +67,15 @@ def timedLineFollowRight(time):
 def timedLineFollowRightSmooth(time):
     sec = seconds() + time
     while seconds() < sec:
+        if not onBlackFront():
+            driveTimed(20, 40, 20)
+        else:
+            driveTimed(40, 20, 20)
+        msleep(10)
+
+def timedLineFollowRightSmoothET(time):
+    sec = seconds() + time
+    while seconds() < sec and not seeBotGuy():
         if not onBlackFront():
             driveTimed(20, 40, 20)
         else:
@@ -132,3 +142,7 @@ def lineFollowUntilEndRightFront():
         
 def stop():
     ao()
+    
+def freezeMotors():
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
