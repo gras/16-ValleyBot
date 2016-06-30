@@ -45,7 +45,7 @@ frontArmGrabBot = 485 #grabs BotGuy well
 frontArmMidPom = 700 #Arm at 30 degrees up
 frontArmUpRamp = 900
 frontArmUp = 1200 #Arm at 90 degrees up
-frontArmSwitch = 1500
+frontArmSwitch = 1400
 frontArmGrabCube = 377
 frontArmSolarPanel = 535
 

@@ -49,7 +49,7 @@ def init():
     testServos()
     testMotors()
     disable_servos()
-    # wait4light()
+    # wait4light() not here
     
     moveFrontClaw(c.frontClawClose, 25)
     moveFrontArm(c.frontArmUp, 5) 
@@ -106,7 +106,10 @@ def goToComposter():
         pass
     timedLineFollowLeftButton(3)
     driveTimed(50, 50, 200)
-    driveTimed(0, -100, 950)
+    if c.isPrime:
+        driveTimed(0, -100, 850) #was 950
+    else:
+        driveTimed(0, -100, 950)
     if c.isPrime:
         driveTimed(60, 60, 1700)
     else:
@@ -239,6 +242,7 @@ def goToBotGuy():
     moveFrontClaw(c.frontClawClose, 200) 
     msleep(300)
     moveFrontArm(c.frontArmUp, 10)
+    msleep(500)
 #     msleep(1000)
 
 # Leaves rift valley
@@ -247,7 +251,7 @@ def goToRamp():
     print "goToRamp"
     driveTimed(-100, -100, 2100)#**************Change this 1800
     if c.isPrime:
-        driveTimed(0, 100, 650)#was 650
+        driveTimed(0, 100, 750)#was 650
     else:
         driveTimed(0, 100, 750)
     driveTimed(100, 100, 500)
@@ -274,7 +278,7 @@ def goToRamp():
     while onBlackFront(2):
         pass 
     if c.isPrime:
-        driveTimed(100, 97, 3000)
+        driveTimed(100, 98, 3000)
     else:
         driveTimed(100, 95, 3000)
     driveTimed(0, 30, 200)
@@ -294,6 +298,7 @@ def goUpRamp():
         pass
     stop()
     moveFrontArm(c.frontArmUp, 20)
+    msleep(500)
     
 def moveSolarPanels():
     print "moveSolarPanels"
@@ -305,7 +310,7 @@ def moveSolarPanels():
     #    timedLineFollowRightSmooth(10.5)
     #else:
     if c.isPrime:
-        timedLineFollowRightSmooth(11.5)
+        timedLineFollowRightSmooth(12.5)
     else:
         timedLineFollowRightSmooth(11.9)
     
@@ -313,7 +318,7 @@ def deliverBotnaut():
     print "deliverBotnaut"
     driveTimed(-50, -50, 500)
     if c.isPrime:
-        driveTimed(-60, 0, 3500)
+        driveTimed(-60, -20, 3500)
         driveTimed(0, 60, 2300)#was 2500
     else:
         driveTimed(-60, -10, 2800)
@@ -330,9 +335,17 @@ def deliverBotnaut():
 
 def removeDirt():
     print "removeDirt"
+    if c.isPrime:
+        driveTimed(-30, 30, 150)#33
+    else:
+        pass
     moveBackArm(c.backArmSweep, 20)
-    driveTimed(-30, -30, 1000)
+    if c.isPrime:
+        driveTimed(-33, -30, 1200)#33
+    else:
+        driveTimed(-33, -30,1200)
     driveTimed(30, -30, 1000)
+#     moveBackClaw(c.backClawStart, 30)
     DEBUGwithWait()
     
 def deliverSolarArrays():

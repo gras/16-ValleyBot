@@ -58,6 +58,15 @@ def waitForButton():
     msleep(1000)
 
 def testSensors():
+    print "trigger ET (make better print)"
+    while seeBotGuy():
+        pass
+    while not seeBotGuy():
+        pass
+    while seeBotGuy():
+        pass
+    print "thanks"
+    
     if onBlackFront():
         print "Problem with front tophat."
         print "Check for unplugged tophat or bad robot setup"
