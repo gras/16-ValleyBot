@@ -65,6 +65,7 @@ backClawMidSolar = 1500
 backClawCompGrab = 1550
 backClawClose = 1300 
 backClawStart = 450
+backClawSqueeze = 1600
 
 #Back Arm
 backArmDown = 250

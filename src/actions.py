@@ -11,6 +11,8 @@ from wallaby import disable_servos
 from wallaby import enable_servos
 from wallaby import msleep
 from wallaby import shut_down_in
+from wallaby import clear_motor_position_counter
+from wallaby import get_motor_position_counter
  
 from drive import testMotors, stop
 from drive import driveTimed
@@ -37,7 +39,7 @@ from sensors import testSensors
 from sensors import waitTouch
 from sensors import DEBUG
 from sensors import DEBUGwithWait
-#from constants import isPrime
+# from constants import isPrime
 
 # Tests all hardware
 def init():
@@ -65,7 +67,7 @@ def init():
     print "button"
     waitForButton()
     c.startTime = seconds()
-    shut_down_in(179.9)  # 119.9 DONT FORGET TO FIX 
+    shut_down_in(119.9)  # 119.9 DONT FORGET TO FIX 
     
 def grabSolarArraysInBox():
     moveBackClaw(c.backClawSmallSolar, 20)
@@ -83,7 +85,7 @@ def grabSolarArraysInBox():
 def getOutOfStartBox():
     print "getOutOfStartBox"
     if c.isPrime:
-        driveTimed(-75, -100, 1600)
+        driveTimed(-75, -100, 1300)
     else:
         driveTimed(-75, -100, 1700)
     driveTimed(-100, 100, 400)
@@ -93,7 +95,7 @@ def getOutOfStartBox():
 # Moves forward until robot reaches debris
 def goToComposter():
     print "goToComposter"
-    driveTimed(-100, 100, 200)
+    driveTimed(-100, 100, 100)
     if c.isPrime:
         drive(100, 75)
     else:
@@ -105,19 +107,20 @@ def goToComposter():
     while onBlackFront(1):
         pass
     timedLineFollowLeftButton(3)
-    driveTimed(50, 50, 200)
+    driveTimed(30, 60, 300)
     if c.isPrime:
-        driveTimed(0, -100, 850) #was 950
+        driveTimed(0, -100, 1000)  # was 950
     else:
         driveTimed(0, -100, 950)
-    if c.isPrime:
-        driveTimed(60, 60, 1700)
-    else:
-        driveTimed(60, 60, 1900)
+    freezeMotors()
     moveFrontClaw(c.frontClawClose, 20)
     moveFrontArm(c.frontArmSwing, 20)
     if c.isPrime:
-        driveTimed(35, 5, 3600)
+        driveTimed(60, 60, 1900)
+    else:
+        driveTimed(60, 60, 1900)
+    if c.isPrime:
+        driveTimed(35, 5, 3400)
     else:
         driveTimed(35, 5, 3550)
 
@@ -132,6 +135,7 @@ def removeDebris():
     drive(-100, 0)
     crossBlackFront()
     timedLineFollowLeftButton(2) 
+    driveTimed(30, 60, 150)
     moveFrontArm(c.frontArmDown, 15)
     
 # Dumps debris next to compost
@@ -155,8 +159,8 @@ def goToGate():
     while not onBlackFront():
         pass
     timedLineFollowRight(1.5)
-    moveFrontArm(c.frontArmGrabBot, 45)#was 15
-    moveFrontClaw(c.frontClawOpen, 45)#was 15
+    moveFrontArm(c.frontArmGrabBot, 45)  # was 15
+    moveFrontClaw(c.frontClawOpen, 45)  # was 15
     
     if onBlackFront():
         drive(20, 0)
@@ -170,7 +174,7 @@ def goToGate():
     stop()
     
     lineFollowUntilEndRightFront()
-    moveFrontArm(c.frontArmMidDown, 30)#was 15
+    moveFrontArm(c.frontArmMidDown, 30)  # was 15
     
 # Drives to the rift valley cube
 def goToCube():
@@ -178,7 +182,7 @@ def goToCube():
     driveTimed(100, 100, 250)
     moveFrontArm(c.frontArmGrabCube, 15)
     driveTimed(100, 100, 200)
-    moveFrontClaw(c.frontClawCube, 30)#was 45
+    moveFrontClaw(c.frontClawCube, 30)  # was 45
 #     msleep(200)
     moveFrontArm(c.frontArmSwitch, 30)
     driveTimed(-100, -100, 1400)
@@ -222,17 +226,18 @@ def goToValley():
 # grabs BotGuy    
 def goToBotGuy():
     print "goToBotGuy"
-    drive(-50, 50)#sweep red poms
+    drive(-50, 50)  # sweep red poms
     crossBlackFront()
-    driveTimed(-50, 50, 150)#end of sweep
+    driveTimed(-50, 50, 150)  # end of sweep
     moveFrontArm(c.frontArmUp, 100)
     drive(50, 0)
     crossBlackFront()
     moveFrontClaw(c.frontClawOpen, 100)
     msleep(300)
+    clear_motor_position_counter(c.RMOTOR)
     if c.isPrime:
-        timedLineFollowRight(1)#was 1.5
-        timedLineFollowRightSmoothET(5)#was 1.6  
+        timedLineFollowRight(1)  # was 1.5
+        timedLineFollowRightSmoothET(6)  # was 1.6  
     else:
         timedLineFollowRight(1)
         timedLineFollowRightSmoothET(5)
@@ -243,15 +248,21 @@ def goToBotGuy():
     msleep(300)
     moveFrontArm(c.frontArmUp, 10)
     msleep(500)
+    print get_motor_position_counter(c.RMOTOR)
 #     msleep(1000)
 
 # Leaves rift valley
 # drives up ramp
 def goToRamp():
     print "goToRamp"
-    driveTimed(-100, -100, 2100)#**************Change this 1800
+    
+    backToCounterRightMotor()
+    print get_motor_position_counter(c.RMOTOR)
+#     driveTimed(-100, -100, 2100)#**************Change this 1800
+#     driveTimed(-100, -100, 500)
+#     freezeMotors()    
     if c.isPrime:
-        driveTimed(0, 100, 750)#was 650
+        driveTimed(0, 100, 750)  # was 650
     else:
         driveTimed(0, 100, 750)
     driveTimed(100, 100, 500)
@@ -278,7 +289,7 @@ def goToRamp():
     while onBlackFront(2):
         pass 
     if c.isPrime:
-        driveTimed(100, 98, 3000)
+        driveTimed(100, 99, 3000)
     else:
         driveTimed(100, 95, 3000)
     driveTimed(0, 30, 200)
@@ -308,7 +319,7 @@ def moveSolarPanels():
     stop()
     # if c.isPrime:
     #    timedLineFollowRightSmooth(10.5)
-    #else:
+    # else:
     if c.isPrime:
         timedLineFollowRightSmooth(12.5)
     else:
@@ -319,34 +330,37 @@ def deliverBotnaut():
     driveTimed(-50, -50, 500)
     if c.isPrime:
         driveTimed(-60, -20, 3500)
-        driveTimed(0, 60, 2300)#was 2500
+        driveTimed(0, 60, 2300)  # was 2500
     else:
         driveTimed(-60, -10, 2800)
-        driveTimed(0, 60, 2500)#was 2600
+        driveTimed(0, 60, 2500)  # was 2600
+    drive(50, 50)
+    while not waitTouch():
+        pass
+    freezeMotors()
     if c.isPrime:
-        driveTimed(-50, -50, 2000)#was 1000
+        driveTimed(-50, -50, 2200)  # was 1000
     else:
         driveTimed(-50, -50, 1200)
     moveFrontArm(c.frontArmGrabBot, 10)
     moveFrontClaw(c.frontClawOpen, 20)
-    driveTimed(100, 100, 100)
+#     driveTimed(100, 100, 100)
     moveFrontArm(c.frontArmUp, 10)
-    #driveTimed(50, 50, 1000)
+    # driveTimed(50, 50, 1000)
 
 def removeDirt():
     print "removeDirt"
     if c.isPrime:
-        driveTimed(-30, 30, 150)#33
+        driveTimed(-30, 30, 150)  # 33
     else:
         pass
     moveBackArm(c.backArmSweep, 20)
     if c.isPrime:
-        driveTimed(-33, -30, 1200)#33
+        driveTimed(-33, -30, 1200)  # 33
     else:
-        driveTimed(-33, -30,1200)
+        driveTimed(-33, -30, 1200)
     driveTimed(30, -30, 1000)
-#     moveBackClaw(c.backClawStart, 30)
-    DEBUGwithWait()
+    moveBackClaw(c.backClawSqueeze, 30)
     
 def deliverSolarArrays():
     print "deliverSolarArrays"
@@ -357,8 +371,8 @@ def deliverSolarArrays():
     driveTimed(-50, -50, 500)
     moveBackArm(c.backArmDown, 20)
     moveBackClaw(c.backClawDropSolar, 20)
-    moveBackArm(c.backArmPushSolar,10)
-    driveTimed(40,-40,100)
+    moveBackArm(c.backArmPushSolar, 10)
+    driveTimed(40, -40, 100)
     driveTimed(50, 50, 500)
     moveBackArm(c.backArmUp, 20)
 #     msleep(200)
@@ -404,3 +418,10 @@ def dumpSolarArrays():
     moveBackArm(c.backArmUp, 5)
     msleep(300)
     
+def backToCounterRightMotor():
+#     count = get_motor_position_counter(c.RMOTOR)
+#     clear_motor_position_counter(c.RMOTOR)
+    drive(-100, -100)
+    while get_motor_position_counter(c.RMOTOR) >= -1200:
+        pass
+    freezeMotors()
