@@ -11,7 +11,7 @@ from sensors import DEBUG, DEBUGwithWait
 def main():
     print "I am ValleyBot"    
     act.init()
-    act.grabSolarArraysInBox()
+    act.grabSolarArrays()
     act.getOutOfStartBox()
     act.goToComposter()
     act.removeDebris()
@@ -21,7 +21,9 @@ def main():
     act.dropOff() 
     act.goToValley()
     act.goToBotGuy()
-    act.goToRamp()
+    act.leaveValley()
+    act.turnToRamp()
+    act.centerOnRamp()
     act.goUpRamp()
     act.moveSolarPanels()
     act.deliverBotnaut()

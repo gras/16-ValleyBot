@@ -12,7 +12,8 @@ from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
 from wallaby import freeze
-
+from wallaby import get_motor_position_counter
+ 
 from sensors import onBlackFront, onBlackBack, waitTouch, seeBotGuy
 
 def driveTimed(left, right, time):
@@ -139,6 +140,8 @@ def lineFollowUntilEndRightFront():
         else:
             i = i + 1
             driveTimed(30, 50, 20)
+            
+   
         
 def stop():
     ao()
@@ -146,3 +149,12 @@ def stop():
 def freezeMotors():
     freeze(c.LMOTOR)
     freeze(c.RMOTOR)
+    
+def backToCounterRightMotor():
+#     count = get_motor_position_counter(c.RMOTOR)
+#     clear_motor_position_counter(c.RMOTOR)
+    drive(-100, -100)
+    while get_motor_position_counter(c.RMOTOR) >= -1400:
+        pass
+    freezeMotors()
+

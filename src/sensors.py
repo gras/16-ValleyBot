@@ -49,6 +49,33 @@ def onBlackBack():
 def seeBotGuy ():
     return analog(c.ET) > c.ETbotGuy
 
+def seeRamp (repeat = 3):
+    for x in range(repeat):
+        if analog(c.ET) < c.ETramp: 
+            return False
+        if repeat > 1:
+            msleep(10)
+    return True
+
+def wait4Ramp(limit = 4):
+    b = 0
+    while b < limit:
+        if analog(c.ET) > c.ETramp:
+            b = b + 1
+        else:
+            b = 0
+        msleep(10)
+        
+def wait4RampLine(limit = 4):
+    b = 0
+    while b < limit:
+        if not analog(c.ET) < c.ETramp:
+            b = b + 1
+        else:
+            b = 0
+        msleep(10)
+        
+
 def waitForButton():
     print "Press Button..."
     while not digital(c.RIGHT_BUTTON): 

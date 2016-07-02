@@ -10,6 +10,7 @@ import wallaby as w
 # Start light threshold
 startLightThresh = 2000
 ETbotGuy = 2900
+ETramp = 600
 
 # TIME
 startTime = -1
@@ -88,16 +89,22 @@ if isPrime:
     print "running Prime"
 else:
     print "running Clone"
+    ETramp = 800
+    
     # servo positions
-    frontArmDown = 630 # Arm forward on ground
-    frontArmSwing = 750
-    frontArmSweep = 850
+    frontArmDown = 800 # Arm forward on ground
+    frontArmSwing = 900
+    frontArmSweep = 950
     frontArmMidDown = 1000 #added during comp for crease
+    frontArmGrabCube = 1050
     frontArmMidCube = 1100 #Arm at 30 degrees up
-    frontArmGrabBot =  1200 #grabs BotGuy well
-    frontArmMidPom = 1300
-    frontArmUpRamp = 1400
+    frontArmGrabBot =  1150 #grabs BotGuy well
+    frontArmSolarPanel = 1200
+    frontArmMidPom = 1400
+    frontArmUpRamp = 1600
     frontArmUp = 1900 # Arm at 90 degrees up
+    frontArmSwitch = 2000
+    
     
     #Front Claw
     frontClawClose = 200 # Claw closed     
@@ -117,6 +124,7 @@ else:
     
     #Back Arm
     backArmDown = 440
+    backArmSweep = 580
     backArmPushSolar = 600
     backArmBinGrab = 750
     backArmCompGrab = 780
