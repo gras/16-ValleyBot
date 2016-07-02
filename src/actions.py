@@ -77,7 +77,7 @@ def grabSolarArraysInBox():
     if c.isPrime:
         driveTimed(-50, -50, 1000)
     else:
-        driveTimed(-45, -50, 1000)
+        driveTimed(-50, -55, 1000)
     moveBackArm(c.backArmDown, 15)
     moveBackClaw(c.backClawClose, 15)
     moveBackArm(c.backArmUp, 15)
@@ -89,7 +89,7 @@ def getOutOfStartBox():
     if c.isPrime:
         driveTimed(-75, -100, 1300)
     else:
-        driveTimed(-75, -100, 1700)
+        driveTimed(-75, -100, 1700)  # 1700
     driveTimed(-100, 100, 400)
     driveTimed(70, 70, 600)
 
@@ -98,35 +98,26 @@ def getOutOfStartBox():
 def goToComposter():
     print "goToComposter"
     driveTimed(-100, 100, 100)
-    if c.isPrime:
-        drive(100, 75)
-    else:
-        drive(100, 85)
+    drive(100, 75)
     msleep(200)
     while not onBlackFront(1):
         pass
     drive(-50, 0)
     while onBlackFront(1):
         pass
-    timedLineFollowLeftButton(3)
-    driveTimed(30, 60, 300)
     if c.isPrime:
-        driveTimed(0, -100, 1000)  # was 950
+        timedLineFollowLeftButton(3)
     else:
-        driveTimed(0, -100, 950)
+        timedLineFollowLeftButton(5)
+    driveTimed(30, 60, 300)
+    driveTimed(0, -100, 1000)  # was 950
     freezeMotors()
     moveFrontClaw(c.frontClawClose, 20)
     moveFrontArm(c.frontArmSwing, 20)
-    if c.isPrime:
-        driveTimed(60, 60, 1900)
-    else:
-        driveTimed(60, 60, 1900)
-    if c.isPrime:
-        driveTimed(35, 5, 2800)
-        driveTimed(21, 3, 1500)
-    else:
-        driveTimed(35, 5, 3550)
-
+    driveTimed(60, 60, 1900)
+    driveTimed(35, 5, 2800)
+    driveTimed(21, 3, 1500)    
+            
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
     print "removeDebris"
