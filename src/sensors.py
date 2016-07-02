@@ -129,3 +129,20 @@ def wait4(port):
     while analog(port) > c.startLightThresh:
         pass
     
+def wait4BlackFront(limit = 4):
+    b = 0
+    while b < limit:
+        if onBlackFront():
+            b = b + 1
+        else:
+            b = 0
+        msleep(10)
+
+def wait4WhiteFront(limit = 4):
+    b = 0
+    while b < limit:
+        if not onBlackFront():
+            b = b + 1
+        else:
+            b = 0
+        msleep(10)

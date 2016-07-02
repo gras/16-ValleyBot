@@ -39,6 +39,8 @@ from sensors import testSensors
 from sensors import waitTouch
 from sensors import DEBUG
 from sensors import DEBUGwithWait
+from sensors import wait4WhiteFront
+from sensors import wait4BlackFront
 # from constants import isPrime
 
 # Tests all hardware
@@ -67,10 +69,10 @@ def init():
     print "button"
     waitForButton()
     c.startTime = seconds()
-    shut_down_in(119.9)  # 119.9 DONT FORGET TO FIX 
+    shut_down_in(119.9)  
     
 def grabSolarArraysInBox():
-    moveBackClaw(c.backClawSmallSolar, 20)
+    moveBackClaw(c.backClawSmallSolar, 200)
     moveBackArm(c.backArmPushSolar, 5)
     if c.isPrime:
         driveTimed(-50, -50, 1000)
@@ -120,7 +122,8 @@ def goToComposter():
     else:
         driveTimed(60, 60, 1900)
     if c.isPrime:
-        driveTimed(35, 5, 3400)
+        driveTimed(35, 5, 2800)
+        driveTimed(21, 3, 1500)
     else:
         driveTimed(35, 5, 3550)
 
@@ -195,7 +198,7 @@ def dropOff():
     moveFrontClaw(c.frontClawOpen, 10)
     driveTimed(-50, 50, 50)
     moveFrontArm(c.frontArmUp, 10)
-    drive(80, -80)
+    drive(50, -50)
     crossBlackFront()
     freezeMotors()
     
@@ -276,18 +279,11 @@ def goToRamp():
     
 # turn to go up the ramp
     drive(0, -80)
-    while not onBlackFront(2):
-        pass
-    msleep(50)
-    while onBlackFront(2):
-        pass
-    msleep(50)
-    while not onBlackFront(2):
-        pass
-    msleep(50)
+    wait4BlackFront(3)
+    wait4WhiteFront(3)
+    wait4BlackFront(3)
     drive(0, -30)
-    while onBlackFront(2):
-        pass 
+    wait4WhiteFront(3)
     if c.isPrime:
         driveTimed(100, 99, 3000)
     else:
@@ -355,11 +351,14 @@ def removeDirt():
     else:
         pass
     moveBackArm(c.backArmSweep, 20)
+    msleep(500)
     if c.isPrime:
-        driveTimed(-33, -30, 1200)  # 33
+        driveTimed(-33, -30, 200)  # 33
     else:
         driveTimed(-33, -30, 1200)
+    msleep(500)
     driveTimed(30, -30, 1000)
+    msleep(500)
     moveBackClaw(c.backClawSqueeze, 30)
     
 def deliverSolarArrays():
@@ -422,6 +421,6 @@ def backToCounterRightMotor():
 #     count = get_motor_position_counter(c.RMOTOR)
 #     clear_motor_position_counter(c.RMOTOR)
     drive(-100, -100)
-    while get_motor_position_counter(c.RMOTOR) >= -1200:
+    while get_motor_position_counter(c.RMOTOR) >= -1400:
         pass
     freezeMotors()
