@@ -9,7 +9,7 @@ import wallaby as w
 
 # Start light threshold
 startLightThresh = 2000
-ETbotGuy = 2900
+ETbotGuy = 2700
 ETramp = 600
 
 # TIME
@@ -124,7 +124,7 @@ else:
     
     #Back Arm
     backArmDown = 440
-    backArmSweep = 580
+    backArmSweep = 570 #580
     backArmPushSolar = 600
     backArmBinGrab = 750
     backArmCompGrab = 780

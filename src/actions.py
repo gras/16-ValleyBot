@@ -117,8 +117,8 @@ def goToComposter():
     moveFrontClaw(c.frontClawClose, 50)#20
     moveFrontArm(c.frontArmSwing, 30)#20
     driveTimed(60, 60, 1900)
-    driveTimed(35, 5, 2400)#2800
-    driveTimed(21, 3, 1500)    
+    driveTimed(35, 5, 2000)#2400
+    driveTimed(21, 3, 2000)#1500    
             
 # Moves claw arm down and drives backwards with debris
 def removeDebris():
@@ -243,9 +243,13 @@ def goToBotGuy():
 # Leaves rift valley
 def leaveValley():
     print "leaveValley"
-    backToCounterRightMotor()
+    drive(-98, -100)#-100, -100
+    backToCounterRightMotor()# drive back 
     print get_motor_position_counter(c.RMOTOR)  
-    driveTimed(0, 100, 750)
+    if c.isPrime:
+        driveTimed(0, 100, 800)#750
+    else:
+        driveTimed(0, 100, 1000)#750
     driveTimed(100, 100, 500)
     drive(0, 50) 
     while not onBlackFront():
@@ -273,11 +277,15 @@ def squareUpForRamp():
 def turnToRamp():
     drive(30, 0)
     wait4WhiteFront(3)
-    timedLineFollowRight(2)
-    driveTimed(75, -75, 550)
-    driveTimed(100, 100, 400)
-    driveTimed(60, -60, 300)
-    driveTimed(100, 100, 700)
+    timedLineFollowRight(1.9)#2
+    timedLineFollowRightSmooth(1.5)
+    driveTimed(75, -75, 850)#850
+    driveTimed(100, 100, 1000)#400
+    '''DEBUGwithWait()
+    driveTimed(60, -60, 300) 
+    msleep(1000)
+    driveTimed(100, 100, 700) 
+    DEBUGwithWait()'''
     
 #finds ramp 
 def centerOnRamp():
@@ -291,11 +299,15 @@ def centerOnRamp():
     wait4RampLine()
     wait4Ramp()
     stop()
+    #driveTimed(40, right, time)
     
 # drives up ramp
 def goUpRamp():
     print "goUpRamp"
-    driveTimed(100, 100, 1000)
+    if c.isPrime:
+        driveTimed(100, 98, 1000)# 100,100,1000
+    else:
+        driveTimed(100, 88, 1000)# 100,100,1000
     moveFrontArm(c.frontArmUp, 20)#10
     drive(100, 80)
     moveFrontArm(c.frontArmUpRamp, 10)
@@ -321,8 +333,9 @@ def moveSolarPanels():
     if c.isPrime:
         timedLineFollowRightSmooth(12.5)
     else:
-        timedLineFollowRightSmooth(11.9)
-    DEBUGwithWait()
+        timedLineFollowRightSmooth(13.3)#12.9
+    #DEBUGwithWait()
+    
     
 def deliverBotnaut():
     print "deliverBotnaut"
@@ -333,14 +346,14 @@ def deliverBotnaut():
     else:
         driveTimed(-60, -10, 2800)
         driveTimed(0, 60, 2300)  # was 2500
-    drive(50, 50)
+    drive(60, 50)#50
     while not waitTouch():
         pass
     freezeMotors()
     if c.isPrime:
         driveTimed(-50, -50, 2200)  # was 1000
     else:
-        driveTimed(-50, -50, 1200)
+        driveTimed(-50, -50, 2000) #2000
     moveFrontArm(c.frontArmGrabBot, 10)
     moveFrontClaw(c.frontClawOpen, 20)
     moveFrontArm(c.frontArmUp, 10)
@@ -348,15 +361,15 @@ def deliverBotnaut():
 def removeDirt():
     print "removeDirt"
     if c.isPrime:
-        driveTimed(-30, 30, 200)  # 33
+        driveTimed(-30, 30, 200) 
     else:
-        pass
+        driveTimed(-30, 30, 400) 
     moveBackArm(c.backArmSweep, 20)
     msleep(500)
     if c.isPrime:
-        driveTimed(-33, -30, 400)  # 33
+        driveTimed(-33, -30, 500)  #400
     else:
-        driveTimed(-33, -30, 1200)
+        driveTimed(-33, -30, 500) #1200
     msleep(500)#
     driveTimed(30, -30, 1000)
     msleep(500)#

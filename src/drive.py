@@ -140,6 +140,7 @@ def lineFollowUntilEndRightFront():
         else:
             i = i + 1
             driveTimed(30, 50, 20)
+            msleep(5)
             
    
         
@@ -153,7 +154,6 @@ def freezeMotors():
 def backToCounterRightMotor():
 #     count = get_motor_position_counter(c.RMOTOR)
 #     clear_motor_position_counter(c.RMOTOR)
-    drive(-100, -100)
     while get_motor_position_counter(c.RMOTOR) >= -1400:
         pass
     freezeMotors()
