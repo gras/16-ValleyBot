@@ -59,13 +59,13 @@ frontClawOpen = 1850 #Claw open
 #Back Claw
 backClawOpen = 00
 backClawOpenComp = 350
+backClawStart = 450
 backClawDropSolar = 750
 backClawSmallSolar = 900
 backClawMid = 1250
+backClawClose = 1300 
 backClawMidSolar = 1500
 backClawCompGrab = 1550
-backClawClose = 1300 
-backClawStart = 450
 backClawSqueeze = 1600
 
 #Back Arm
@@ -124,7 +124,7 @@ else:
     
     #Back Arm
     backArmDown = 440
-    backArmSweep = 570 #580
+    backArmSweep = 550 #580
     backArmPushSolar = 600
     backArmBinGrab = 750
     backArmCompGrab = 780

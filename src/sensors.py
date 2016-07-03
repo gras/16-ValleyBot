@@ -124,9 +124,14 @@ def wait4light():
     wait4(c.STARTLIGHT)
 
 def calibrate(port):
+    presses = 0
     print "Press A button with light on"
     while not a_button_clicked():
-        if digital(c.RIGHT_BUTTON):
+        if digital(13):
+            while digital(13):
+                pass
+            presses = presses + 1
+        if presses >= 2:
             DEBUG()
     lightOn = analog(port)
     print "On value =", lightOn
@@ -136,7 +141,11 @@ def calibrate(port):
     
     print "Press B button with light off"
     while not b_button_clicked():
-        if digital(c.RIGHT_BUTTON):
+        if digital(13):
+            while digital(13):
+                pass
+            presses = presses + 1
+        if presses >= 2:
             DEBUG()
     lightOff = analog(port)
     print "Off value =", lightOff
@@ -150,6 +159,7 @@ def calibrate(port):
     c.startLightThresh = (lightOff - lightOn) / 2
     print "Good calibration! ", c.startLightThresh 
     return True
+
 
 def wait4(port):
     print "waiting for light!! " 

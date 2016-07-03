@@ -8,6 +8,8 @@ import constants as c
 
 from wallaby import seconds
 from wallaby import disable_servos
+from wallaby import disable_servo
+from wallaby import enable_servo
 from wallaby import enable_servos
 from wallaby import msleep
 from wallaby import shut_down_in
@@ -66,9 +68,9 @@ def init():
     moveBackArm(c.backArmUp, 5) 
     moveBackClaw(c.backClawStart, 5)
     msleep(200)
-    print "button"
-    waitForButton()
-    #wait4light()
+    #print "button"
+    #waitForButton()
+    wait4light()
     c.startTime = seconds()
     shut_down_in(119.9)  
     
@@ -362,17 +364,29 @@ def removeDirt():
     print "removeDirt"
     if c.isPrime:
         driveTimed(-30, 30, 200) 
+        moveBackArm(c.backArmSweep, 20)
+        msleep(500)
+        driveTimed(-33, -30, 500)  #400
+        msleep(500)#
+        driveTimed(30, -30, 1000)
+        msleep(500)#
+        moveBackClaw(c.backClawSqueeze, 30)
+    
     else:
         driveTimed(-30, 30, 400) 
-    moveBackArm(c.backArmSweep, 20)
-    msleep(500)
-    if c.isPrime:
-        driveTimed(-33, -30, 500)  #400
-    else:
+        moveBackArm(c.backArmSweep, 20)
+        #msleep(500)
+        disable_servo(2)
+        msleep(500)
+        enable_servo(2)
+        msleep(500)
         driveTimed(-33, -30, 500) #1200
-    msleep(500)#
-    driveTimed(30, -30, 1000)
-    msleep(500)#
-    moveBackClaw(c.backClawSqueeze, 30)
-    
+        msleep(500)#
+        driveTimed(30, -30, 500)
+        moveBackClaw(c.backClawOpen,20)
+        driveTimed(30,-30, 500)
+        moveBackClaw(c.backClawSqueeze, 400)
+        msleep(500)#
+        #moveBackClaw(c.backClawSqueeze, 30)
+        
         

@@ -73,6 +73,7 @@ def PROGRAMMER_ERROR(msg, value) :
     exit()
 
 def setWait(delay):
+    global time
     time = seconds()
     
 def getWait():
